@@ -35,9 +35,9 @@ jobs:
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - save_cache:
-          paths:
-            - ./vendor/bundle
           key: v2-dependencies-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
 
       - run:
           name: Set up DB
@@ -57,7 +57,6 @@ jobs:
       - run:
           name: run rubopcop
           command: bundle exec rubocop
-
 
       - store_test_results:
           path: /tmp/test-results
