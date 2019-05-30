@@ -7,7 +7,7 @@ jobs:
       - image: circleci/ruby:2.6.1-node-browsers
         environment:
           RAILS_ENV: test
-      - image: circleci/postgres:10.8-alpine
+      - image: circleci/postgres:11.3-alpine
         environment:
           POSTGRES_USER: kolya
           POSTGRES_PASSWORD: 'qwerty123'
@@ -57,6 +57,15 @@ jobs:
       - run:
           name: run rubopcop
           command: bundle exec rubocop
+      - run:
+          name: run rails best practices
+          command: bundle exec rails_best_practices .
+      - run:
+          name: run brakeman
+          command: bundle exec brakeman -q
+      - run:
+          name: run rails best practices
+          command: bundle exec bundle-audit
 
       - store_test_results:
           path: /tmp/test-results
