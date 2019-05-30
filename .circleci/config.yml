@@ -4,7 +4,7 @@ jobs:
     working_directory: ~/repo
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.6.1-node-browsers
+      - image: circleci/ruby:2.6.0-node-browsers
         environment:
           RAILS_ENV: test
       - image: circleci/postgres:10.8-alpine
