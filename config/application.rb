@@ -6,6 +6,10 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+config.generators do |g|
+  g.test_framework :rspec
+end
+
 module Bookstore
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.

@@ -65,7 +65,7 @@ jobs:
           command: bundle exec brakeman -q
       - run:
           name: run rails best practices
-          command: bundle exec bundle-audit
+          command: bundle exec bundle-audit check --update
 
       - store_test_results:
           path: /tmp/test-results
