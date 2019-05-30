@@ -17,7 +17,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'rubocop', '~> 0.63.1'
+  gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rspec'
   gem 'rspec-rails', '~> 3.8'
