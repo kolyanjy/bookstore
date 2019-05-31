@@ -17,6 +17,7 @@ group :development, :test do
   gem 'brakeman'
   gem 'bundler-audit'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'devise'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rails_best_practices'
@@ -24,6 +25,7 @@ group :development, :test do
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rspec'
+  gem 'turbolinks'
 end
 
 group :development do

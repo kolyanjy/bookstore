@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
-  root 'home#index'
-=======
 
->>>>>>> develop
+  devise_for :users
+  root 'home#index'
 end
