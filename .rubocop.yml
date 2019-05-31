@@ -1,0 +1,34 @@
+require:
+  - rubocop-rspec
+  - rubocop-performance
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'spec/**/*'
+    - 'bin/*'
+    - 'app/channels/**/*'
+    - 'vendor/**/*'
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Style/Encoding:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/BlockLength:
+  ExcludedMethods: ['describe']
+  Max: 30
+
+Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Rails:
+  Enabled: true
