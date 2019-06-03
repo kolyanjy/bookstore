@@ -14,6 +14,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
+  gem 'bootstrap-sass'
   gem 'brakeman'
   gem 'bundler-audit'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

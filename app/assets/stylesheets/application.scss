@@ -14,9 +14,6 @@
  *= require_self
  */
 
- @import "custom/variables";
- @import "bootstrap";
- @import "custom/theme";
- @import "bookstore/general";
- @import "bookstore/utils/helpers";
- @import "overrides";
+
+@import "bootstrap-sprockets";
+@import "style.scss";
