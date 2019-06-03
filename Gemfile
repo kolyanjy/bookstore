@@ -5,20 +5,22 @@ ruby '2.6.1'
 
 gem 'activeadmin'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootstrap-sass'
+gem 'devise'
 gem 'font-awesome-rails'
 gem 'haml'
 gem 'pg'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.3'
 gem 'sass-rails', '~> 5.0'
+gem 'simple_form'
+gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
-  gem 'bootstrap-sass'
   gem 'brakeman'
   gem 'bundler-audit'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'devise'
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rails_best_practices'
@@ -26,7 +28,6 @@ group :development, :test do
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rspec'
-  gem 'turbolinks'
 end
 
 group :development do

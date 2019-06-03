@@ -15,6 +15,7 @@
   }
 }
 .navbar-nav .open .dropdown-menu {
+  float: right;
   left: -65px;
 }
 .dropdowns {
@@ -135,6 +136,9 @@
 .navbar-inverse {
   padding-top: 30px;
   padding-bottom: 30px;
+}
+.navbar-header {
+  width: 100%
 }
 .table {
   > thead,
@@ -560,4 +564,7 @@
       width: 80px;
     }
   }
+}
+.downdrop {
+  display: none;
 }

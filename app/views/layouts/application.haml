@@ -1,64 +1,81 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %meta{name: "viewport", content: "width=device-width"}
     %title Bookstore
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-  %header.navbar.navbar-default
     .container
-      .navbar-header
-        %button.navbar-toggle.pull-left{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
-          %span.sr-only
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %a.navbar-brand Bookstore
-        %a.shop-link.pull-right.visible-xs{href: "#"}
-          %span.shop-icon
-            %span.shop-quantity 3
-        %a.shop-link.pull-right.hidden-xs{href: "#"}
-          %span.shop-icon
-            %span.shop-quantity 3
-        #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
-          .visible-xs
-            %button.close{type: "button", 'aria-label': "Close"}
-              %span{'aria-hidden': "true"} &times;
+    - if notice
+      .alert.alert-info.text-center
+        - if notice.is_a?(Array)
+          - notice.each do |message|
+            %p
+              = message
+        - else
+          = notice
+    - if alert
+      .alert.alert-warning.text-center
+        - if alert.is_a?(Array)
+          - alert.each do |message|
+            %p
+              = message
+        - else
+          = alert
+    %header.navbar.navbar-default
+      .container
+        .navbar-header
+          %button.navbar-toggle.pull-left{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
+            %span.sr-only
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand
+            = t('sign.bookstore')
+          %a.shop-link.pull-right.visible-xs{href: "#"}
+            %span.shop-icon
+              %span.shop-quantity 3
+          %a.shop-link.pull-right.hidden-xs{href: "#"}
+            %span.shop-icon
+              %span.shop-quantity 3
+          #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
+            - if user_signed_in?
+              %ul.nav.navbar-nav
+                %li.dropdown
+                  %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+                    = t('sign.account')
+                  %ul.dropdown-menu
+                    %li
+                      = link_to t('sign.orders'), class: "collapse-link"
+                    %li
+                      = link_to t('sign.settings'), class: "collapse-link"
+                    %li.divider{role: "separator"}
+                    %li
+                      = link_to t('sign.out'), destroy_user_session_path, method: :delete, class: "collapse-link"
+            - else
+              %ul.nav.navbar-nav
+                %li.dropdown
+                  %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+                    = t('sign.account')
+                  %ul.dropdown-menu
+                    %li
+                      = link_to t('devise.login'), new_user_session_path, class: "collapse-link"
+                    %li
+                      = link_to t('devise.sign_up'), new_user_registration_path, class: "collapse-link"
+
             %ul.nav.navbar-nav
-              %li
-                %a{href: "#"} Home
-              %li
-                %a{type: "button", 'data-toggle': "collapse", href: "#menu", 'aria-expanded': "false", 'aria-controls': "menu"} Shop
-                %ul#menu.collapse.list-unstyled.pl-30.mb-10{'aria-expanded': "false"}
-                  %li
-                    %a.collapse-link{href: "#"} Mobile development
-                  %li
-                    %a.collapse-link{href: "#"} Photo
-                  %li
-                    %a.collapse-link{href: "#"} Web design
-              %li
-                %a{href: "#"} My account
-          .hidden-xs
-            %ul.nav.navbar-nav
-              %li
-                %a{href: "#"} Home
               %li.dropdown
-                %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"} Shop
-                %ul.dropdown-menu
-                  %li
-                    %a{href: "#"} Mobile development
-                  %li
-                    %a{href: "#"} Photo
-                  %li
-                    %a{href: "#"} Web design
-                  %li.divider{role: "separator"}
-                  %li
-                    %a{href: "#"} Log out
-              %li
-                %a{href: "#"} My account
+                %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+                  = t('sign.shop')
+                %ul.dropdown-menu(aria-labelledby="dropdown")
+            %ul.nav.navbar-nav
+              %li.dropdown
+                %a{href: "/", role: "button"}
+                  = t('sign.home')
     = yield
     %footer.navbar-inverse
       .container
@@ -66,16 +83,22 @@
           .col-sm-9
             %ul.list-inline.general-align.mb-25
               %li
-                %a.nav-link{href: "#"} Home
+                %a.nav-link{href: "#"}
+                  = t('sign.home')
               %li
-                %a.nav-link{href: "#"} Shop
+                %a.nav-link{href: "#"}
+                  = t('sign.shop')
               %li
-                %a.nav-link{href: "#"} Orders
+                %a.nav-link{href: "#"}
+                  = t('sign.orders')
               %li
-                %a.nav-link{href: "#"} Settings
+                %a.nav-link{href: "#"}
+                  = t('sign.settings')
           .col-sm-3
-            %p.general-nav-mail support@bookstore.com
-            %p.general-nav-number (555)-555-5555
+            %p.general-nav-mail
+              = t('contacts.email')
+            %p.general-nav-number
+              = t('contacts.number')
             %ul.list-inline.general-align
               %li
                 %a.nav-link{href: "#"}
