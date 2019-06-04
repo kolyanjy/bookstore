@@ -2,6 +2,26 @@
 
 en:
   devise:
+    login: "Log in"
+    sign_up: "Sign up"
+    email: "Enter Email"
+    password: "Password"
+    confirm: "Confirm Password"
+    set_password: "Set new password"
+    new_confirm: "Confirm new password"
+    no_account: "Have not account"
+    change: "Change"
+    cancel: "Cancel"
+    reset_message: "We'll email you instructions on how to reset it"
+    instructions: "Email Instructions"
+    login_with_password: "Log In with Password"
+    remember_me: "Remember Me"
+    forgot_password: "Forgot your password"
+    min_pass_length: "Password: 1 digit, 1 lower, 1 upper, minimum length:"
+    password_edit: "Password Edit"
+    change_password: "Change my Password"
+
+
     confirmations:
       confirmed: "Your email address has been successfully confirmed."
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."

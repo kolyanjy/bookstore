@@ -1,22 +1,29 @@
 %main.container.general-main-wrap
+  = devise_error_messages!
   .text-center
     %h3.general-login-title
-      = t('devise.login')
-    -# = render '/devise/shared/facebook_link'
+      = t('devise.sign_up')
+    .general-login-icon
     %p.general-login-text
-      = t('user.or')
-  .general-form.field
-    = simple_form_for(resource, validate: true, as: resource_name, defaults: { input_html: { class: "form-control" }}, url: registration_path(resource_name)) do |f|
+      = t('.or')
+  .general-form
+    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
       .form-group.mb-30
-        = f.input :email, autocomplete: "email", placeholder: t('devise.email')
+        %label.control-label.input-label{for: "user_email"}
+          = t('devise.email')
+        = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Email"
       .form-group.mb-30
-        = f.input :password, autocomplete: "current-password", placeholder: t('devise.password')
+        - if @minimum_password_length
+          %label.control-label.input-label{for: "user_password"}
+            = t('devise.min_pass_length')
+            = @minimum_password_length
+          = f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "Password", pattern: "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).{8,}$"
       .form-group.mb-30
-        = f.input :password_confirmation, autocomplete: "new-password", placeholder: t('devise.confirm')
+        %label.control-label.input-label{for: "user_password_confirmation"}
+          = t('devise.confirm')
+        = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Confirm Password", pattern: "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).{8,}$"
       .text-center
-        .actions
-          = f.submit t('devise.sign_up'), class: 'btn btn-default mb-20'
-      .text-center
-        %p.general-sign-text.text-center
-        = t('devise.have_account')
-        = link_to t('user.login.log_in'), new_session_path(resource_name), class: 'in-gold-500'
+        = f.submit t('devise.sign_up'), class: "btn btn-default mb-20"
+  %p.general-sign-text.text-center
+    = t('questions.account')
+    = link_to t('devise.login'), new_session_path(resource_name), class: "in-gold-500"
