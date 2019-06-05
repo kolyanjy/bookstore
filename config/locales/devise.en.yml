@@ -3,7 +3,7 @@
 en:
   devise:
     login: "Log in"
-    sign_up: "Sign up"
+    sign_up: "Registration"
     email: "Enter Email"
     password: "Password"
     confirm: "Confirm Password"

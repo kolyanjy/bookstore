@@ -49,4 +49,7 @@ en:
   questions:
     account: "Account?"
 
-    
+  user:
+    login: "login"
+    registration:
+      sign_up: "sign up"

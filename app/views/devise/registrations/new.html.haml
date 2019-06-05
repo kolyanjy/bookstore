@@ -23,7 +23,7 @@
           = t('devise.confirm')
         = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Confirm Password", pattern: "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).{8,}$"
       .text-center
-        = f.submit t('devise.sign_up'), class: "btn btn-default mb-20"
+        = f.submit t('user.registration.sign_up'), class: "btn btn-default mb-20"
   %p.general-sign-text.text-center
     = t('questions.account')
-    = link_to t('devise.login'), new_session_path(resource_name), class: "in-gold-500"
+    = link_to t('user.login'), new_session_path(resource_name), class: "in-gold-500"
