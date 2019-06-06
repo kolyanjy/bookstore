@@ -29,7 +29,6 @@ group :development, :test do
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rspec'
-  gem 'web-console', '>= 3.3.0'
 end
 
 group :development do
