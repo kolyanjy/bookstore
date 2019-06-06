@@ -3,7 +3,7 @@
     %h3.general-login-title
       = t('devise.login')
     %p.general-login-text
-      = t('devise.or')
+      = t('word.or')
   .general-form.field
     = simple_form_for(resource, as: resource_name, validate: true, defaults: { input_html: { class: "form-control" }}, url: session_path(resource_name)) do |f|
       .form-group.mb-30

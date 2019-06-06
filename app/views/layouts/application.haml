@@ -35,7 +35,7 @@
             %span.icon-bar
             %span.icon-bar
           %a.navbar-brand
-            = t('sign.bookstore')
+            = t('.bookstore')
           %a.shop-link.pull-right.visible-xs{href: "#"}
             %span.shop-icon
               %span.shop-quantity 3
@@ -47,7 +47,7 @@
               %ul.nav.navbar-nav
                 %li.dropdown
                   %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-                    = t('sign.account')
+                    = t('btn.account')
                   %ul.dropdown-menu
                     %li
                       = link_to t('sign.orders'), class: "collapse-link"
@@ -55,12 +55,12 @@
                       = link_to t('sign.settings'), class: "collapse-link"
                     %li.divider{role: "separator"}
                     %li
-                      = link_to t('sign.out'), destroy_user_session_path, method: :delete, class: "collapse-link"
+                      = link_to t('btn.out'), destroy_user_session_path, method: :delete, class: "collapse-link"
             - else
               %ul.nav.navbar-nav
                 %li.dropdown
                   %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-                    = t('sign.account')
+                    = t('btn.account')
                   %ul.dropdown-menu
                     %li
                       = link_to t('devise.login'), new_user_session_path, class: "collapse-link"
@@ -70,12 +70,12 @@
             %ul.nav.navbar-nav
               %li.dropdown
                 %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-                  = t('sign.shop')
+                  = t('btn.shop')
                 %ul.dropdown-menu(aria-labelledby="dropdown")
             %ul.nav.navbar-nav
               %li.dropdown
                 %a{href: "/", role: "button"}
-                  = t('sign.home')
+                  = t('btn.home')
     = yield
     %footer.navbar-inverse
       .container
@@ -84,16 +84,16 @@
             %ul.list-inline.general-align.mb-25
               %li
                 %a.nav-link{href: "#"}
-                  = t('sign.home')
+                  = t('btn.home')
               %li
                 %a.nav-link{href: "#"}
-                  = t('sign.shop')
+                  = t('btn.shop')
               %li
                 %a.nav-link{href: "#"}
-                  = t('sign.orders')
+                  = t('btn.orders')
               %li
                 %a.nav-link{href: "#"}
-                  = t('sign.settings')
+                  = t('btn.settings')
           .col-sm-3
             %p.general-nav-mail
               = t('contacts.email')

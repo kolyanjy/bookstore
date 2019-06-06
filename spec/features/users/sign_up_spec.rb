@@ -1,4 +1,3 @@
-require 'rails_helper'
 RSpec.feature 'Sign up', type: :feature do
   given(:user_attrs) { attributes_for(:user) }
   given(:invalid_email) { "0@gmail.com" }
