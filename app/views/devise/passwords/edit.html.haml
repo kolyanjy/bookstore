@@ -9,11 +9,11 @@
       .form-group.mb-30
         %label.control-label.input-label{for: "new_password"}
           = t('.password_edit.new_password')
-        = f.password_field :password, autofocus: true, autocomplete: "new_password", class: 'form-control', id: 'new_password'
+        = f.input_field :password, autofocus: true, class: 'form-control', id: 'new_password'
       .form-group.mb-30
         %label.control-label.input-label{for: "password_confirmation"}
           = t('.password_edit.confirm_new_password')
-        = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', id: 'password_confirmation'
+        = f.input_field :password_confirmation, class: 'form-control', id: 'password_confirmation'
       .text-center
         .actions
           = f.submit t('devise.change_password'), class: 'btn btn-default mb-20'

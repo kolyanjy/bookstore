@@ -8,7 +8,7 @@
   .general-form
     = simple_form_for(@user, url: password_path(@user), html: { method: :post }) do |f|
       .form-group.mb-25
-        = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: t('devise.email')
+        = f.input_field :email, autofocus: true, class: "form-control", placeholder: t('devise.email')
       = f.submit t('devise.instructions'), class: "btn btn-default center-block mb-20"
       .text-center
         %a.in-gold-500.mb-20

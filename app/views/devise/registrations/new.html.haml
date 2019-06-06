@@ -7,21 +7,21 @@
     %p.general-login-text
       = t('word.or')
   .general-form
-    = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = simple_form_for(@user, url: registration_path(@user)) do |f|
       .form-group.mb-30
         %label.control-label.input-label{for: "user_email"}
           = t('devise.email')
-        = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Email"
+        = f.input_field :email, autofocus: true, class: "form-control", placeholder: t('devise.email')
       .form-group.mb-30
         - if @minimum_password_length
           %label.control-label.input-label{for: "user_password"}
             = t('devise.min_pass_length')
             = @minimum_password_length
-          = f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "Password", pattern: "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).{8,}$"
+          = f.input_field :password, class: "form-control", placeholder: t('devise.password'), pattern: "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).{8,}$"
       .form-group.mb-30
         %label.control-label.input-label{for: "user_password_confirmation"}
           = t('devise.confirm')
-        = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Confirm Password", pattern: "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).{8,}$"
+        = f.input_field :password_confirmation, class: "form-control", placeholder: t('devise.confirm'), pattern: "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).{8,}$"
       .text-center
         = f.submit t('user.registration.sign_up'), class: "btn btn-default mb-20"
   %p.general-sign-text.text-center
