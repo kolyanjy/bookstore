@@ -5,7 +5,7 @@
     %p.general-login-text
       = t('word.or')
   .general-form.field
-    = simple_form_for(resource, as: resource_name, validate: true, defaults: { input_html: { class: "form-control" }}, url: session_path(resource_name)) do |f|
+    = simple_form_for(@user, validate: true, defaults: { input_html: { class: "form-control" }}, url: session_path(@user)) do |f|
       .form-group.mb-30
         = f.input :email, autocomplete: "email", placeholder: t('devise.email')
       .form-group.mb-30

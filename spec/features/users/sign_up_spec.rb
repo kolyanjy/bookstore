@@ -1,10 +1,10 @@
-RSpec.feature 'Sign up', type: :feature do
+RSpec.feature 'Sign up' do
   given(:user_attrs) { attributes_for(:user) }
   given(:invalid_email) { "0@gmail.com" }
   given(:invalid_password) { "123" }
   before(:each) { visit root_path }
 
-  scenario 'User try to sign uo with valid data' do
+  scenario 'User try to sign up with valid data' do
     find('a', text: I18n.t('devise.sign_up')).click
     expect(page).to have_content I18n.t('devise.sign_up')
     within('.general-form') do

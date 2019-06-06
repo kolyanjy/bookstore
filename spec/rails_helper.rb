@@ -49,7 +49,6 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Capybara::DSL
 
-  DatabaseCleaner.strategy = :truncation
   config.before(:each) do
     DatabaseCleaner.start
   end

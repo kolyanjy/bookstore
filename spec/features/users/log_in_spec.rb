@@ -1,4 +1,4 @@
-RSpec.feature 'Log in', type: :feature do
+RSpec.feature 'Log in' do
   given(:user) { create(:user) }
   given(:user_attrs) { attributes_for(:user) }
 
