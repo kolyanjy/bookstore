@@ -5,16 +5,17 @@ Rails.application.configure do
   config.cache_classes = true
   config.action_mailer.default_url_options = {:host => 'lit-bayou-80373.herokuapp.com/'}
   config.action_mailer.delivery_method = :smtp
-
+  config.action_mailer.perform_caching = false
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    domain: "gmail.com",
-    port: 587,
-    user_name: "bbabitin@gmail.com",
-    password: "Test1234test",
-    authentication: 'plain',
-    enable_starttls_auto: true
+    :user_name => 'kolyanjy',
+    :password => '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',
+    :domain => 'lit-bayou-80373.herokuapp.com',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
   }
+
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
@@ -75,7 +76,6 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "bookstore_#{Rails.env}"
 
-  config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

@@ -1,4 +1,3 @@
-require 'database_cleaner'
 require 'rails_helper'
 
 RSpec.configure do |config|
