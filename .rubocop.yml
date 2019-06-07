@@ -35,13 +35,13 @@ Documentation:
 
 RSpec/ExampleLength:
   Exclude:
-    - 'spec/features/*/**'
+    - 'spec/features/**/*'
 RSpec/DescribeClass:
   Exclude:
-    - 'spec/features/*/**'
+    - 'spec/features/**/*'
 RSpec/MultipleExpectations:
   Exclude:
-    - 'spec/features/*/**'
+    - 'spec/features/**/*'
 
 Style/FrozenStringLiteralComment:
   Enabled: false
