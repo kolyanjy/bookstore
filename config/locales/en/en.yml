@@ -33,6 +33,8 @@ en:
   word:
     bookstore: "Bookstore"
     or: "Or"
+    hello: "Hello"
+    welcome: "Welcome"
 
   btn:
     account: "My account"

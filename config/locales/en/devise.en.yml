@@ -23,6 +23,8 @@ en:
 
 
     confirmations:
+      account: "Confirm my account"
+      account_desc: "You can confirm your account email through the link below:"
       confirmed: "Your email address has been successfully confirmed."
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions for how to confirm your email address in a few minutes."
@@ -51,6 +53,9 @@ en:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
     passwords:
+      reset_password_mailer_header: "Someone has requested a link to change your password. You can do this through the link below."
+      reset_password_mailer: "If you didn't request this, please ignore this email. Your password won't change until you access the link above and create a new one."
+      change: "We're contacting you to notify you that your password has been changed."
       no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
       send_instructions: "You will receive an email with instructions on how to reset your password in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
