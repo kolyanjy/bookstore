@@ -2,10 +2,11 @@ Rails.application.configure do
   config.cache_classes = true
   config.action_mailer.default_url_options = { host: 'lit-bayou-80373.herokuapp.com/' }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_caching = false
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.perform_caching = true
   config.action_mailer.smtp_settings = {
-    user_name: Rails.application.credentials[:sand_grid][:username],
-    password: Rails.application.credentials[:sand_grid][:password],
+    user_name: ENV['SENDGRID_USERNAME'],
+    password: ENV['SENDGRID_PASSWORD'],
     domain: 'lit-bayou-80373.herokuapp.com',
     address: 'smtp.sendgrid.net',
     port: 587,
@@ -17,8 +18,6 @@ Rails.application.configure do
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
-  config.action_controller.perform_caching = true
-
   config.require_master_key = true
 
   # Disable serving static files from the `/public` folder by default since
