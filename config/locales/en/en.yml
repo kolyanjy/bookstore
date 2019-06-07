@@ -44,6 +44,9 @@ en:
     shop: "Shop"
     edit: "edit"
 
+  interpolation:
+    hello: "Hello %{email}"
+    wellcome: "Welcome %{email}"
 
   contacts:
     email: "support@bookstore.com"
