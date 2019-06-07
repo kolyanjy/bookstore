@@ -147,7 +147,9 @@ Devise.setup do |config|
   # db field (see migrations). Until confirmed, new email is stored in
   # unconfirmed_email column, and copied to email column on successful confirmation.
   config.reconfirmable = false
-
+  config.omniauth(:facebook, Rails.application.credentials[:facebook][:app_id],
+                  Rails.application.credentials[:facebook][:app_secret],
+                  callback_url: 'http://localhost:3000/users/auth/facebook/callback')
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [:email]
 

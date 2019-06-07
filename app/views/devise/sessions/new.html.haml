@@ -2,6 +2,7 @@
   .text-center
     %h3.general-login-title
       = t('devise.login')
+    = render '/devise/shared/facebook_link'
     %p.general-login-text
       = t('word.or')
   .general-form.field
