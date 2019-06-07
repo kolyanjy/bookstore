@@ -1,10 +1,11 @@
-RSpec.feature 'Sign up' do
-  given(:user_attrs) { attributes_for(:user) }
-  given(:invalid_email) { "0@gmail.com" }
-  given(:invalid_password) { "123" }
-  before(:each) { visit root_path }
+RSpec.describe 'Sign up' do
+  let(:user_attrs) { attributes_for(:user) }
+  let(:invalid_email) { '0@gmail.com' }
+  let(:invalid_password) { '123' }
 
-  scenario 'User try to sign up with valid data' do
+  before { visit root_path }
+
+  it 'User try to sign up with valid data' do
     find('a', text: I18n.t('devise.sign_up')).click
     expect(page).to have_content I18n.t('devise.sign_up')
     within('.general-form') do
@@ -16,7 +17,7 @@ RSpec.feature 'Sign up' do
     expect(User.count).to eq(1)
   end
 
-  scenario 'User try to sign up with invalid data' do
+  it 'User try to sign up with invalid data' do
     find('a', text: I18n.t('devise.sign_up')).click
     expect(page).to have_content I18n.t('devise.sign_up')
     within('.general-form') do
@@ -30,5 +31,4 @@ RSpec.feature 'Sign up' do
     expect(page).not_to have_content I18n.t('devise.registration.signed_up')
     expect(User.count).to eq(0)
   end
-
 end

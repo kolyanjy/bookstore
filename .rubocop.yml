@@ -5,11 +5,11 @@ require:
 AllCops:
   Exclude:
     - 'db/**/*'
-    - 'config/**/*'
-    - 'spec/**/*'
     - 'bin/*'
     - 'app/channels/**/*'
     - 'vendor/**/*'
+    - config/initializers/simple_form_bootstrap.rb
+    - config/application.rb
 
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
@@ -18,10 +18,10 @@ Style/Encoding:
   Enabled: false
 
 Metrics/LineLength:
-  Max: 120
+  Max: 160
 
 Metrics/BlockLength:
-  ExcludedMethods: ['describe']
+  ExcludedMethods: ['describe', 'configure']
   Max: 30
 
 Documentation:
@@ -32,3 +32,12 @@ Style/FrozenStringLiteralComment:
 
 Rails:
   Enabled: true
+
+RSpec/ExampleLength:
+  Max: 15
+
+RSpec/MultipleExpectations:
+  Max: 3
+
+RSpec/DescribeClass:
+  Enabled: false
