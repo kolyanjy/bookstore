@@ -149,7 +149,7 @@ Devise.setup do |config|
   config.reconfirmable = false
   config.omniauth(:facebook, Rails.application.credentials[:facebook][:app_id],
                   Rails.application.credentials[:facebook][:app_secret],
-                  scope: 'email', info_fields: 'name,email')
+                  info_fields: 'first_name,last_name,email')
   # Defines which key will be used when confirming an account
   # config.confirmation_keys = [:email]
 
