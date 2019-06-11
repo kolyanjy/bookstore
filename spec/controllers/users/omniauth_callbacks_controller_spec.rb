@@ -8,15 +8,15 @@ RSpec.describe Users::OmniauthCallbacksController do
   let(:call_interactor) { OmniauthFacebook.call(auth_hash: auth_hash) }
   let(:invalid_hash) { {} }
 
-  context 'sign up or log in with facebook' do
+  context 'when user try to sign up or log in with facebook' do
     it 'user sign up' do
-      expect{ call_interactor }.to change{User.count}.by(1)
+      expect { call_interactor }.to change(User, :count).by(1)
     end
 
     it 'user log in' do
       call_interactor
-      expect{ call_interactor }.to change{User.count}.by(0)
-      expect(response).to have_http_status(200)
+      expect { call_interactor }.to change(User, :count).by(0)
+      expect(response).to have_http_status(:ok)
     end
   end
 end

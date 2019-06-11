@@ -17,6 +17,11 @@ Style/ClassAndModuleChildren:
 Style/Encoding:
   Enabled: false
 
+Metrics/AbcSize:
+  Exclude:
+    - 'app/interactors/omniauth_facebook.rb'
+    - 'app/controllers/users/omniauth_callbacks_controller.rb'
+
 Metrics/LineLength:
   Max: 120
   Exclude:
@@ -41,6 +46,8 @@ RSpec/DescribeClass:
 RSpec/MultipleExpectations:
   Exclude:
     - 'spec/features/**/*'
+    - 'spec/controllers/users/omniauth_callbacks_controller_spec.rb'
+
 
 Style/FrozenStringLiteralComment:
   Enabled: false
