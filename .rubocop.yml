@@ -37,6 +37,13 @@ Metrics/BlockLength:
 Documentation:
   Enabled: false
 
+RSpec/NamedSubject:
+  Exclude:
+    - 'spec/interactors/users/create_from_omniauth_spec.rb'
+    - 'spec/controllers/users/omniauth_callbacks_controller_spec.rb'
+RSpec/VerifiedDoubles:
+  Exclude:
+    - 'spec/controllers/users/omniauth_callbacks_controller_spec.rb'
 RSpec/ExampleLength:
   Exclude:
     - 'spec/features/**/*'
