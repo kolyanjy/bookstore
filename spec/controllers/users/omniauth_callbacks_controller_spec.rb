@@ -1,22 +1,34 @@
 RSpec.describe Users::OmniauthCallbacksController do
-  let(:auth_hash) do
-    { 'provider' => 'facebook',
-      'uid' => '2337086219864242',
-      'info' => { 'email' => 'kolyan654d@gmail.com', 'first_name' => 'Kolyunya',
-                  'last_name' => 'Kolesnikov', 'image' => 'http://graph.facebook.com/v2.10/2337086219864242/picture' } }
+  let(:auth_hash) { OmniAuth.config.mock_auth[:facebook] }
+
+  before do
+    request.env['devise.mapping'] = Devise.mappings[:user]
+
+    request.env['omniauth.auth'] = auth_hash
   end
-  let(:call_interactor) { OmniauthFacebook.call(auth_hash: auth_hash) }
-  let(:invalid_hash) { {} }
 
-  context 'when user try to sign up or log in with facebook' do
-    it 'user sign up' do
-      expect { call_interactor }.to change(User, :count).by(1)
-    end
+  context 'call omniauth callback with success result' do
+    let(:user) { build(:user) }
+    let(:result) { double(:result, success?: true, user: user) }
 
-    it 'user log in' do
-      call_interactor
-      expect { call_interactor }.to change(User, :count).by(0)
-      expect(response).to have_http_status(:ok)
+    it 'redirects to root' do
+      expect(Users::CreateFromOmniauth).to receive(:call).with(auth_hash: auth_hash).and_return(result)
+
+      get 'facebook'
     end
   end
+
+  context 'call omniauth callback with fail result' do
+    let(:user) { build(:user) }
+    let(:result) { double(:result, success?: false, user: user) }
+    before do
+    end
+    it 'redirects to root' do
+      expect(Users::CreateFromOmniauth).to receive(:call).with(auth_hash: auth_hash).and_return(result)
+      get 'facebook'
+      expect(subject).to redirect_to(new_user_registration_url)
+      expect(session['devise.facebook_data']).to eq(request.env['omniauth.auth'])
+    end
+  end
+
 end
