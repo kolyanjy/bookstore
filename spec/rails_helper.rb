@@ -47,8 +47,6 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
   config.include Capybara::DSL
-  # config.include Warden::Test::ControllerHelpers, type: :controller
-
   #
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
