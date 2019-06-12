@@ -4,7 +4,6 @@
       = t('.password_edit')
   .general-form.field
     = simple_form_for(@user, url: password_path(@user), html: { method: :put }) do |f|
-      = devise_error_messages!
       = f.hidden_field :reset_password_token
       .form-group.mb-30
         %label.control-label.input-label{for: "new_password"}

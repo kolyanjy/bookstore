@@ -1,10 +1,10 @@
-RSpec.describe Users::OmniauthCallbacksController do
+RSpec.describe Users::OmniauthCallbacksController do # rubocop:disable Metrics/BlockLength:
+  subject(:callback) { described_class.new }
+
   let(:auth_hash) { OmniAuth.config.mock_auth[:facebook] }
-  let(:sign_in_url) { '/users/sign_in' }
 
   before do
     request.env['devise.mapping'] = Devise.mappings[:user]
-
     request.env['omniauth.auth'] = auth_hash
   end
 
@@ -13,9 +13,10 @@ RSpec.describe Users::OmniauthCallbacksController do
     let(:result) { double(:result, success?: true, user: user) }
 
     it 'redirects to root' do
-      allow(Users::CreateFromOmniauth).to receive(:call).with(auth_hash: auth_hash).and_return(result)
+      expect(Users::CreateFromOmniauth).to receive(:call).with(auth_hash: auth_hash).and_return(result)
       get 'facebook'
-      expect(subject).to redirect_to(sign_in_url)
+      expect(flash[:alert]).to be_present
+      expect(callback).to redirect_to(new_user_session_path)
     end
   end
 
@@ -26,8 +27,8 @@ RSpec.describe Users::OmniauthCallbacksController do
     it 'redirects to root' do
       allow(Users::CreateFromOmniauth).to receive(:call).with(auth_hash: auth_hash).and_return(result)
       get 'facebook'
-      expect(subject).to redirect_to(new_user_registration_url)
-      expect(session['devise.facebook_data']).to eq(request.env['omniauth.auth'])
+      expect(callback).to redirect_to(new_user_registration_url)
+      expect(session['devise.facebook_data']).to eq(auth_hash)
     end
   end
 end
