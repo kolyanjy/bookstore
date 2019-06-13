@@ -1,11 +1,12 @@
 %main.container.general-main-wrap
+  = render "devise/shared/error_messages", resource: resource
   .text-center
     %h1.mb-30
       = t('questions.change?')
     %p.general-password-text
       = t('devise.reset_message')
   .general-form
-    = simple_form_for(@user, url: password_path(@user), html: { method: :post }) do |f|
+    = simple_form_for(@user, url: password_path(@user), validate: true, html: { method: :post }) do |f|
       .form-group.mb-25
         = f.input_field :email, autofocus: true, class: "form-control", placeholder: t('devise.email')
       = f.submit t('devise.instructions'), class: "btn btn-default center-block mb-20"

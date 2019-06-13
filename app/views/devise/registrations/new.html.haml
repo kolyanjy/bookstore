@@ -1,4 +1,5 @@
 %main.container.general-main-wrap
+  = render "devise/shared/error_messages", resource: resource
   .text-center
     %h3.general-login-title
       = t('devise.sign_up')
@@ -7,7 +8,7 @@
     %p.general-login-text
       = t('word.or')
   .general-form
-    = simple_form_for(@user, url: registration_path(@user)) do |f|
+    = simple_form_for(@user, url: registration_path(@user), validate: true) do |f|
       .form-group.mb-30
         %label.control-label.input-label{for: "user_email"}
           = t('devise.email')

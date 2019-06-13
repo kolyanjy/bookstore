@@ -18,12 +18,10 @@ Style/Encoding:
   Enabled: false
 
 RSpec/MessageSpies:
-  Exclude:
-    - 'spec/controllers/users/omniauth_callbacks_controller_spec.rb'
+  EnforcedStyle: receive
 
 Metrics/AbcSize:
   Exclude:
-    - 'app/interactors/omniauth_facebook.rb'
     - 'app/controllers/users/omniauth_callbacks_controller.rb'
 
 Metrics/LineLength:
@@ -40,10 +38,6 @@ Metrics/BlockLength:
 
 Documentation:
   Enabled: false
-
-RSpec/VerifiedDoubles:
-  Exclude:
-    - 'spec/controllers/users/omniauth_callbacks_controller_spec.rb'
 
 RSpec/ExampleLength:
   Exclude:

@@ -1,9 +1,10 @@
 %main.container.general-main-wrap
+  = render "devise/shared/error_messages", resource: resource
   .text-center.mb-25
     %h2
       = t('.password_edit')
   .general-form.field
-    = simple_form_for(@user, url: password_path(@user), html: { method: :put }) do |f|
+    = simple_form_for(@user, url: password_path(@user), validate: true, html: { method: :put }) do |f|
       = f.hidden_field :reset_password_token
       .form-group.mb-30
         %label.control-label.input-label{for: "new_password"}
