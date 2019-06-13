@@ -1,13 +1,13 @@
 RSpec.describe Users::CreateFromOmniauth do
-  subject(:interactor) { described_class.new.context }
+  subject(:result) { described_class.call(auth_hash: auth_hash) }
+
+  let(:auth_hash) { OmniAuth.config.mock_auth[:facebook] }
 
   describe 'when use omniauth with valid data' do
-    subject(:interactor_valid_call) { described_class.call(auth_hash: OmniAuth.config.mock_auth[:facebook]) }
-
     context 'when user try to sign up' do
       it 'user sign up' do
-        expect { interactor_valid_call }.to change(User, :count).by(1)
-        expect(interactor.success?).to eq(true)
+        expect { result }.to change(User, :count).by(1)
+        expect(result).to be_success
       end
     end
 
@@ -15,18 +15,18 @@ RSpec.describe Users::CreateFromOmniauth do
       before { create(:user, :with_facebook) }
 
       it 'user log in' do
-        expect { interactor_valid_call }.to change(User, :count).by(0)
-        expect(interactor.success?).to eq(true)
+        expect { result }.to change(User, :count).by(0)
+        expect(result).to be_success
       end
     end
   end
 
   context 'when user try to use omniauth with invalid data' do
-    subject(:interactor_invalid_call) { described_class.call(auth_hash: OmniAuth.config.mock_auth[:facebook_invalid]) }
+    let(:auth_hash) { OmniAuth.config.mock_auth[:facebook_invalid] }
 
     it 'sign up' do
-      expect { interactor_invalid_call }.to change(User, :count).by(0)
-      expect(interactor_invalid_call.success?).to eq(false)
+      expect { result }.to change(User, :count).by(0)
+      expect(result).to be_failure
     end
   end
 end

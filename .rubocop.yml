@@ -20,10 +20,6 @@ Style/Encoding:
 RSpec/MessageSpies:
   EnforcedStyle: receive
 
-Metrics/AbcSize:
-  Exclude:
-    - 'app/controllers/users/omniauth_callbacks_controller.rb'
-
 Metrics/LineLength:
   Max: 120
   Exclude:

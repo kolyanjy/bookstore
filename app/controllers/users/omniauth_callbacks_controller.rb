@@ -1,5 +1,5 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  def facebook
+  def facebook # rubocop:disable Metrics/AbcSize
     auth_hash = request.env['omniauth.auth']
     result = Users::CreateFromOmniauth.call(auth_hash: auth_hash)
     if result.success?
