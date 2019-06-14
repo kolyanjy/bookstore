@@ -1,5 +1,5 @@
 ActiveAdmin.register Book do # rubocop:disable Metrics/BlockLength
-  permit_params :category, :caption, :description, :price, :image, :date_of_publication, :height, :width,
+  permit_params :category_id, :caption, :description, :price, :image, :date_of_publication, :height, :width,
                 :depth, :material, author_ids: []
   index do
     selectable_column

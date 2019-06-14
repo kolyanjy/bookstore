@@ -9,4 +9,8 @@ RSpec.describe Book, type: :model do
     it { expect(build(:book, caption: nil)).not_to be_valid }
     it { expect(build(:book, description: nil)).not_to be_valid }
   end
+
+  context 'when valid' do
+    it { expect(build(:book)).to be_valid }
+  end
 end

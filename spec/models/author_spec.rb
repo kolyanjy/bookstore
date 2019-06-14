@@ -9,4 +9,8 @@ RSpec.describe Author, type: :model do
   context 'when invalid without a name' do
     it { expect(build(:author, name: nil)).not_to be_valid }
   end
+
+  context 'when valid' do
+    it { expect(build(:author)).to be_valid }
+  end
 end
