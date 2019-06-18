@@ -233,7 +233,6 @@ ActiveAdmin.setup do |config|
   #       admin.add_logout_button_to_menu menu
   #     end
   #   end
-  #
   # If you wanted to add a static menu item to the default menu provided:
   #
   #   config.namespace :admin do |admin|

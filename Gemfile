@@ -8,6 +8,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap-sass'
 gem 'carrierwave'
 gem 'devise'
+gem 'draper'
 gem 'font-awesome-rails'
 gem 'haml'
 gem 'interactor'
@@ -28,7 +29,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
-  gem 'pry'
+  gem 'pry-byebug'
   gem 'rails_best_practices'
   gem 'rspec-rails', '~> 3.8'
   gem 'rubocop'
