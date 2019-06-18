@@ -7,7 +7,6 @@ ActiveAdmin.register Book do # rubocop:disable Metrics/BlockLength
   index do
     selectable_column
     column :image do |book|
-      # binding.pry
       image_tag(book.image ? book.image : 'default.png', alt: 'design-book')
     end
     column :authors do |book|
