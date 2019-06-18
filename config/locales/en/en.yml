@@ -44,6 +44,10 @@ en:
     shop: "Shop"
     edit: "edit"
 
+  activeadmin:
+    book_article: 'Add/Edit Article'
+    upload_image: 'Upload book image'
+
   interpolation:
     hello: "Hello %{email}"
     wellcome: "Welcome %{email}"

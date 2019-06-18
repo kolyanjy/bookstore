@@ -6,7 +6,7 @@ RSpec.describe Book, type: :model do
   end
 
   context 'without a caption or description' do
-    it { expect(build(:book, caption: nil)).not_to be_valid }
+    it { expect(build(:book, name: nil)).not_to be_valid }
     it { expect(build(:book, description: nil)).not_to be_valid }
   end
 

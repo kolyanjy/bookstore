@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_13_141819) do
+ActiveRecord::Schema.define(version: 2019_06_18_085517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,7 +42,8 @@ ActiveRecord::Schema.define(version: 2019_06_13_141819) do
   end
 
   create_table "authors", force: :cascade do |t|
-    t.string "name"
+    t.string "first_name"
+    t.string "last_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -56,23 +57,36 @@ ActiveRecord::Schema.define(version: 2019_06_13_141819) do
     t.index ["book_id"], name: "index_book_authors_on_book_id"
   end
 
-  create_table "books", force: :cascade do |t|
-    t.string "caption"
-    t.text "description"
-    t.float "price"
-    t.datetime "date_of_publication"
+  create_table "book_images", force: :cascade do |t|
     t.string "image"
-    t.float "height"
-    t.float "width"
-    t.float "depth"
-    t.string "material"
+    t.bigint "book_id"
+    t.index ["book_id"], name: "index_book_images_on_book_id"
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.decimal "price", precision: 10, scale: 2
+    t.date "date_of_publication"
+    t.string "image"
+    t.integer "height"
+    t.integer "width"
+    t.integer "depth"
+    t.bigint "material_id"
     t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_books_on_category_id"
+    t.index ["material_id"], name: "index_books_on_material_id"
   end
 
   create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "materials", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -101,5 +115,5 @@ ActiveRecord::Schema.define(version: 2019_06_13_141819) do
 
   add_foreign_key "book_authors", "authors"
   add_foreign_key "book_authors", "books"
-  add_foreign_key "books", "categories"
+  add_foreign_key "book_images", "books"
 end

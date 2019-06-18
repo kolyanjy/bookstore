@@ -1,16 +1,16 @@
 class CreateBooks < ActiveRecord::Migration[5.2]
   def change
     create_table :books do |t|
-      t.string :caption
+      t.string :name
       t.text :description
-      t.float :price
-      t.datetime :date_of_publication
+      t.decimal :price,  precision: 10, scale: 2
+      t.date :date_of_publication
       t.string :image
-      t.float :height
-      t.float :width
-      t.float :depth
-      t.string :material
-      t.references :category, foreign_key: true
+      t.integer :height
+      t.integer :width
+      t.integer :depth
+      t.references :material
+      t.references :category
       t.timestamps
     end
   end
