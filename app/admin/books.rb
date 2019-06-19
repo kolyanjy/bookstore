@@ -7,7 +7,7 @@ ActiveAdmin.register Book do
   index do
     selectable_column
     column :image do |book|
-      image_tag(book.image || 'default.png', alt: 'design-book')
+      image_tag(book.image || default_url)
     end
     column :authors do |book|
       book.authors.map do |author|

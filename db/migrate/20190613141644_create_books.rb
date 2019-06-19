@@ -9,7 +9,6 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.integer :height
       t.integer :width
       t.integer :depth
-      t.references :material
       t.references :category
       t.timestamps
     end
