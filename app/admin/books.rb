@@ -2,12 +2,12 @@ ActiveAdmin.register Book do
   decorate_with BookDecorator
 
   permit_params :category_id, :name, :description, :price, :image, :date_of_publication, :height, :width,
-                :depth, :material_id, author_ids: []
+                :depth, material_ids: [], author_ids: []
 
   index do
     selectable_column
     column :image do |book|
-      image_tag(book.image || default_url)
+      image_tag(book.image_url(:small_img))
     end
     column :authors do |book|
       book.authors.map do |author|
@@ -33,7 +33,7 @@ ActiveAdmin.register Book do
       f.input :depth
       f.input :materials, as: :check_boxes
       f.inputs t('activeadmin.upload_image') do
-        f.input :image, required: true, as: :file
+        f.input :image, as: :file
       end
     end
     actions

@@ -1,24 +1,27 @@
 class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
+  storage :file
+
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
   version :small_img do
-    process resize_to_fit: [200, 200]
+    process resize_to_fit: [150, 200]
   end
 
   version :medium_img do
-    process resize_to_fit: [300, 300]
+    process resize_to_fit: [225, 300]
   end
 
   version :big_img do
-    process resize_to_fit: [550, nil]
+    process resize_to_fit: [550, 733]
   end
-
-  def default_url(*args)
-    "/images/fallback/" + [version_name, "default.png"].compact.join('_')
+  #
+  def default_url(*_args)
+    # ActionController::Base.helpers.image_path('fallback/default.png')
+    return ActionController::Base.helpers.asset_path([version_name].compact.join('_')) if version_name
   end
 
   def extension_whitelist

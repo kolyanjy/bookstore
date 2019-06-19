@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_18_085517) do
+ActiveRecord::Schema.define(version: 2019_06_19_101117) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,15 @@ ActiveRecord::Schema.define(version: 2019_06_18_085517) do
     t.string "image"
     t.bigint "book_id"
     t.index ["book_id"], name: "index_book_images_on_book_id"
+  end
+
+  create_table "book_materials", force: :cascade do |t|
+    t.bigint "material_id"
+    t.bigint "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_book_materials_on_book_id"
+    t.index ["material_id"], name: "index_book_materials_on_material_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -101,4 +110,6 @@ ActiveRecord::Schema.define(version: 2019_06_18_085517) do
 
   add_foreign_key "book_authors", "authors"
   add_foreign_key "book_authors", "books"
+  add_foreign_key "book_materials", "books"
+  add_foreign_key "book_materials", "materials"
 end
