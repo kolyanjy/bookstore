@@ -1,4 +1,4 @@
-ActiveAdmin.register Book do # rubocop:disable Metrics/BlockLength
+ActiveAdmin.register Book do
   decorate_with BookDecorator
 
   permit_params :category_id, :name, :description, :price, :image, :date_of_publication, :height, :width,
@@ -31,7 +31,7 @@ ActiveAdmin.register Book do # rubocop:disable Metrics/BlockLength
       f.input :height
       f.input :width
       f.input :depth
-      f.input :material, as: :radio
+      f.input :materials, as: :check_boxes
       f.inputs t('activeadmin.upload_image') do
         f.input :image, required: true, as: :file
       end

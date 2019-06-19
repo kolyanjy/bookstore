@@ -6,14 +6,10 @@ RSpec.describe Material, type: :model do
   end
 
   context 'when invalid without a name' do
-    it { expect(build(:material, name: nil)).not_to be_valid }
+    it { is_expected.to validate_presence_of(:name) }
   end
 
   context 'when same names' do
     it { is_expected.to validate_uniqueness_of(:name) }
-  end
-
-  context 'when valid' do
-    it { expect(build(:material)).to be_valid }
   end
 end

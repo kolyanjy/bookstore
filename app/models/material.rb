@@ -1,5 +1,5 @@
 class Material < ApplicationRecord
-  has_many :books # rubocop:disable Rails/HasManyOrHasOneDependent
+  belongs_to :book
 
   validates :name, presence: true, uniqueness: true
 end

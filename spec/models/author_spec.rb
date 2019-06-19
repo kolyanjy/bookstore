@@ -4,12 +4,8 @@ RSpec.describe Author, type: :model do
     it { is_expected.to have_many :books }
   end
 
-  context 'when invalid without a name' do
-    it { expect(build(:author, first_name: nil)).not_to be_valid }
-    it { expect(build(:author, last_name: nil)).not_to be_valid }
-  end
-
-  context 'when valid' do
-    it { expect(build(:author)).to be_valid }
+  context 'when invalid without a first or last name' do
+    it { is_expected.to validate_presence_of(:first_name) }
+    it { is_expected.to validate_presence_of(:last_name) }
   end
 end

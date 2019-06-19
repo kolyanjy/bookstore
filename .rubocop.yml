@@ -28,6 +28,7 @@ Metrics/LineLength:
 
 Metrics/BlockLength:
   Exclude:
+    - 'app/admin/**/*'
     - 'spec/features/**/*'
     - 'config/initializers/simple_form_bootstrap.rb'
     - 'config/environments/*'

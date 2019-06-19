@@ -4,14 +4,10 @@ RSpec.describe Category, type: :model do
   end
 
   context 'without a name must be invalid' do
-    it { expect(build(:category, name: nil)).not_to be_valid }
+    it { is_expected.to validate_presence_of(:name) }
   end
 
   context 'when same names' do
     it { is_expected.to validate_uniqueness_of(:name) }
-  end
-
-  context 'when valid' do
-    it { expect(build(:category)).to be_valid }
   end
 end
