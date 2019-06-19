@@ -18,7 +18,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   version :big_img do
     process resize_to_fit: [550, 733]
   end
-  #
   def default_url(*_args)
     # ActionController::Base.helpers.image_path('fallback/default.png')
     return ActionController::Base.helpers.asset_path([version_name].compact.join('_')) if version_name
