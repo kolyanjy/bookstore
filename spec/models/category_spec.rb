@@ -1,5 +1,5 @@
 RSpec.describe Category, type: :model do
-  describe 'with assosiations' do
+  describe 'assosiations' do
     it { is_expected.to have_many(:books).dependent(:destroy) }
   end
 

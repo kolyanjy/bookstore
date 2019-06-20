@@ -1,5 +1,5 @@
 RSpec.describe Material, type: :model do
-  describe 'with assosiations' do
+  describe 'assosiations' do
     it { is_expected.to have_many(:book_materials).dependent(:destroy) }
     it { is_expected.to have_many(:books) }
   end
