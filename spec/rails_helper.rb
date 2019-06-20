@@ -6,6 +6,7 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
+require 'shoulda/matchers'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -31,13 +32,6 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
-end
-
-Shoulda::Matchers.configure do |config|
-  config.integrate do |with|
-    with.test_framework :rspec
-    with.library :rails
-  end
 end
 
 RSpec.configure do |config|

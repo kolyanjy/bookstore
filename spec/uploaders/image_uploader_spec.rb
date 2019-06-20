@@ -1,6 +1,6 @@
 require 'carrierwave/test/matchers'
 
-RSpec.describe ImageUploader do # rubocop:disable Metrics/BlockLength
+RSpec.describe ImageUploader do
   include CarrierWave::Test::Matchers
   let(:book) { build(:book) }
   let(:path_to_file) { 'spec/fixtures/1.jpg' }

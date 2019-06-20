@@ -1,7 +1,7 @@
 RSpec.describe Author, type: :model do
-  context 'with associations' do
-    it { is_expected.to have_many :book_authors }
-    it { is_expected.to have_many :books }
+  describe 'with associations' do
+    it { is_expected.to have_many(:book_authors).dependent(:destroy) }
+    it { is_expected.to have_many(:books).dependent(:destroy) }
   end
 
   context 'when invalid without a first or last name' do

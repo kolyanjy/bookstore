@@ -8,8 +8,18 @@ FactoryBot.define do
     height { rand(200..300) }
     width { rand(50..200) }
     depth { rand(10..50) }
-    # materials
-    # author
     category
+
+    trait :with_author do
+      after(:create) do |book|
+        create(:author, books: [book])
+      end
+    end
+
+    trait :with_material do
+      after(:create) do |book|
+        create(:material, book: [book])
+      end
+    end
   end
 end
