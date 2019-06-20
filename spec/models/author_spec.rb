@@ -1,5 +1,5 @@
 RSpec.describe Author, type: :model do
-  describe 'with associations' do
+  describe 'associations' do
     it { is_expected.to have_many(:book_authors).dependent(:destroy) }
     it { is_expected.to have_many(:books).dependent(:destroy) }
   end

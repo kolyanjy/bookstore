@@ -5,7 +5,6 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.text :description
       t.decimal :price,  precision: 10, scale: 2
       t.date :date_of_publication
-      t.string :image
       t.integer :height
       t.integer :width
       t.integer :depth

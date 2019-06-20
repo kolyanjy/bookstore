@@ -2,9 +2,9 @@ require 'carrierwave/test/matchers'
 
 RSpec.describe ImageUploader do
   include CarrierWave::Test::Matchers
-  let(:book) { build(:book) }
+  let(:book) { build(:book, :with_image) }
   let(:path_to_file) { 'spec/fixtures/1.jpg' }
-  let(:uploader) { described_class.new(book, :image) }
+  let(:uploader) { described_class.new(book, :book_images) }
 
   before do
     described_class.enable_processing = true
@@ -40,6 +40,10 @@ RSpec.describe ImageUploader do
       expect { uploader.store!(file) }.to raise_error(CarrierWave::IntegrityError)
       file.close
     end
+  end
+
+  it 'call default url' do
+    expect(uploader.default_url).not_to be(nil)
   end
 
   it 'has the correct format' do

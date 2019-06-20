@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(version: 2019_06_20_094307) do
     t.text "description"
     t.decimal "price", precision: 10, scale: 2
     t.date "date_of_publication"
-    t.string "image"
     t.integer "height"
     t.integer "width"
     t.integer "depth"
@@ -110,6 +109,7 @@ ActiveRecord::Schema.define(version: 2019_06_20_094307) do
 
   add_foreign_key "book_authors", "authors"
   add_foreign_key "book_authors", "books"
+  add_foreign_key "book_images", "books"
   add_foreign_key "book_materials", "books"
   add_foreign_key "book_materials", "materials"
 end
