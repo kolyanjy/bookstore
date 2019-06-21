@@ -43,7 +43,7 @@ RSpec.describe ImageUploader do
   end
 
   it 'call default url' do
-    expect(uploader.default_url).to eq(ActionController::Base.helpers.asset_path('fallback/default.png'))
+    expect(uploader.extension_whitelist.any?(uploader.default_url.split('.').last)).to eq(true)
   end
 
   it 'has the correct format' do
