@@ -42,7 +42,7 @@ RSpec.describe ImageUploader do
     end
   end
 
-  it 'call default url' do
+  it 'check format of default img' do
     expect(uploader.extension_whitelist.any?(uploader.default_url.split('.').last)).to eq(true)
   end
 
