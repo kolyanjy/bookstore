@@ -1,8 +1,8 @@
 ActiveAdmin.register Book do
   decorate_with BookDecorator
-  includes(:authors, :materials, :book_images, :category)
-  permit_params(:category_id, :name, :description, :price, :image, :date_of_publication, :height, :width,
-                :depth, material_ids: [], author_ids: [], book_images_attributes: %i[image id _destroy])
+  includes :authors, :materials, :book_images, :category
+  permit_params :category_id, :name, :description, :price, :image, :date_of_publication, :height, :width,
+                :depth, material_ids: [], author_ids: [], book_images_attributes: %i[image id _destroy]
 
   index do
     selectable_column
