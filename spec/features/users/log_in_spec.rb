@@ -1,10 +1,14 @@
 RSpec.describe 'Log in' do
   let(:user) { create(:user) }
   let(:user_attrs) { attributes_for(:user) }
+  let(:categories) { create(:category) }
 
-  before { visit root_path }
+  before do
+    visit root_path
+  end
 
   it 'User try to login' do
+    binding.pry
     find('a', text: I18n.t('devise.login')).click
     within('.general-form') do
       fill_in 'user_email', with: user.email

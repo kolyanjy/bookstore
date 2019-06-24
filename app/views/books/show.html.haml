@@ -1,0 +1,53 @@
+- book = @book.decorate.first
+%main.container
+  = link_to url_for(:back), class: "general-back-link" do
+    %i.fa.fa-long-arrow-left.mr-15
+      = t('book.go_back')
+  .row
+    .col-sm-6
+      .product-gallery
+        .mb-20.d-flex-center
+          = image_tag(book.first_book_image(:big_img))
+        .images.clearfix
+        - book.book_images.drop(1).each do |book_image|
+          %a.img-link.d-flex-center
+            = image_tag(book_image.image.url(:small_img))
+    .col-sm-6
+      %h1.mt-res-0
+        = book.name
+      %p.lead.small
+        = book.authors_title
+      .row
+        .col-xs-12.col-md-4
+          %p.h1.in-gold-500.mt-10
+            = t('book.price', price: book.price)
+      .general-info-wrap.divider-lg
+        %p= t('book.description')
+        %p.lead.small.line-height-2
+          %span#small_text
+            = book.short_description
+          - if book.long_description?
+            %span#block_more
+              = book.full_description
+            %a.in-gold-500.ml-10.cursor-pointer#btn_read_more
+              = t('book.read_more')
+            %a.in-gold-500.ml-10.cursor-pointer#btn_hide_read_more
+              = t('book.hide_read_more')
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left
+            = t('book.date_of_publication')
+          %p.lead.small.pull-right
+            = book.date_of_publication
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left= t('book.dimensions')
+          %p.lead.small.pull-right
+            = book.dimensions
+      .general-info-wrap.divider-lg
+        .clearfix
+          %p.pull-left
+            = t('book.materials')
+          %p.lead.small.pull-right
+            - book.materials.each do |material|
+              = material.name

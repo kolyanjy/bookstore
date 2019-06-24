@@ -1,0 +1,10 @@
+%a.dropdown-toggle.lead.small{'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+  - if sort
+    = t("categories.#{sort}")
+  - else
+    = t('categories.title_asc')
+  %i.fa.fa-angle-down.dropdown-icon.pull-right
+%ul.dropdown-menu
+  -BooksQuery::FILTERS.each do |filter, filter_name|
+    %li
+      = link_to filter_name, url_for(sort: filter_name, category: category)

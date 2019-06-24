@@ -1,0 +1,12 @@
+en:
+  book:
+    all: 'All Books'
+    go_back: Back to results
+    description: Description
+    date_of_publication: Date of publication
+    dimensions: Dimensions
+    materials: Materials
+    read_more: Read More
+    hide_read_more: Hide read more
+    add_to_card: Add to Cart
+    price: "€ %{price}"
