@@ -40,10 +40,12 @@
           %p.lead.small.pull-right
             = book.date_of_publication
       .general-info-wrap.divider-lg
+      -unless book.dimensions.empty?
         .clearfix
           %p.pull-left= t('book.dimensions')
           %p.lead.small.pull-right
             = book.dimensions
+    -unless book.materials.empty?
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left

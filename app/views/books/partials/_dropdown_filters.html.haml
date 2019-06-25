@@ -1,6 +1,6 @@
 %a.dropdown-toggle.lead.small{'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-  - if sort
-    = t("filters.#{sort}")
+  - if params[:sort]
+    = t("filters.#{params[:sort]}")
   - else
     = t('filters.title_asc')
   %i.fa.fa-angle-down.dropdown-icon.pull-right
