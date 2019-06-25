@@ -1,10 +1,19 @@
 %a.dropdown-toggle.lead.small{'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
   - if sort
-    = t("categories.#{sort}")
+    = t("filters.#{sort}")
   - else
-    = t('categories.title_asc')
+    = t('filters.title_asc')
   %i.fa.fa-angle-down.dropdown-icon.pull-right
 %ul.dropdown-menu
-  -BooksQuery::FILTERS.each do |filter, filter_name|
-    %li
-      = link_to filter_name, url_for(sort: filter_name, category: category)
+  %li
+    = link_to t('filters.title_asc'), url_for(sort: :title_asc, category: category), class: "collapse-link"
+  %li
+    = link_to t('filters.title_desc'), url_for(sort: :title_desc, category: category), class: "collapse-link"
+  %li
+    = link_to t('filters.created_at'), url_for(sort: :created_at, category: category), class: "collapse-link"
+  %li
+    = link_to t('filters.price_asc'), url_for(sort: :price_asc, category: category), class: "collapse-link"
+  %li
+    = link_to t('filters.price_desc'), url_for(sort: :price_desc, category: category), class: "collapse-link"
+  %li
+    = link_to t('filters.popular'), url_for(sort: :created_at, category: category), class: "collapse-link"

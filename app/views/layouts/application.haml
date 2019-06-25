@@ -3,7 +3,8 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
     %meta{name: "viewport", content: "width=device-width"}
-    %title Bookstore
+    %title
+      = t('word.bookstore')
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -26,93 +27,6 @@
               = message
         - else
           = alert
-    %header.navbar.navbar-default
-      .container
-        .navbar-header
-          %button.navbar-toggle.pull-left{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
-            %span.sr-only
-            %span.icon-bar
-            %span.icon-bar
-            %span.icon-bar
-          %a.navbar-brand
-            = t('.bookstore')
-          %a.shop-link.pull-right.visible-xs{href: "#"}
-            %span.shop-icon
-              %span.shop-quantity 3
-          %a.shop-link.pull-right.hidden-xs{href: "#"}
-            %span.shop-icon
-              %span.shop-quantity 3
-          #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
-            - if user_signed_in?
-              %ul.nav.navbar-nav
-                %li.dropdown
-                  %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-                    = t('btn.account')
-                  %ul.dropdown-menu
-                    %li
-                      = link_to t('sign.orders'), class: "collapse-link"
-                    %li
-                      = link_to t('sign.settings'), class: "collapse-link"
-                    %li.divider{role: "separator"}
-                    %li
-                      = link_to t('btn.out'), destroy_user_session_path, method: :delete, class: "collapse-link"
-            - else
-              %ul.nav.navbar-nav
-                %li.dropdown
-                  %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-                    = t('btn.account')
-                  %ul.dropdown-menu
-                    %li
-                      = link_to t('devise.login'), new_user_session_path, class: "collapse-link"
-                    %li
-                      = link_to t('devise.sign_up'), new_user_registration_path, class: "collapse-link"
-
-            %ul.nav.navbar-nav
-              %li
-                = link_to t('header.home'), root_path
-              %li.dropdown
-                %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-                  = t('header.shop')
-                %ul.dropdown-menu
-                  %li
-                    = link_to t('header.all_books'), books_path
-                  - @categories.each do |category|
-                    %li
-                      = link_to  class: 'filter-link' do
-                        = category.name
+    = render partial: 'layouts/partials/header', locals: { categories: @categories }
     = yield
-    %footer.navbar-inverse
-      .container
-        .row
-          .col-sm-9
-            %ul.list-inline.general-align.mb-25
-              %li
-                %a.nav-link{href: "#"}
-                  = t('btn.home')
-              %li
-                %a.nav-link{href: "#"}
-                  = t('btn.shop')
-              %li
-                %a.nav-link{href: "#"}
-                  = t('btn.orders')
-              %li
-                %a.nav-link{href: "#"}
-                  = t('btn.settings')
-          .col-sm-3
-            %p.general-nav-mail
-              = t('contacts.email')
-            %p.general-nav-number
-              = t('contacts.number')
-            %ul.list-inline.general-align
-              %li
-                %a.nav-link{href: "#"}
-                  %i.fa.fa-facebook{'aria-hidden': "true"}
-              %li
-                %a.nav-link{href: "#"}
-                  %i.fa.fa-twitter{'aria-hidden': "true"}
-              %li
-                %a.nav-link{href: "#"}
-                  %i.fa.fa-google-plus{'aria-hidden': "true"}
-              %li
-                %a.nav-link{href: "#"}
-                  %i.fa.fa-instagram{'aria-hidden': "true"}
+    = render 'layouts/partials/footer'

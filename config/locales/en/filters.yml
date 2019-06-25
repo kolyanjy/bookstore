@@ -1,6 +1,5 @@
 en:
-  categories:
-    catalog: Сatalog
+  filters:
     title_asc: "Titile: A - Z"
     title_desc: "Titile: Z - A"
     created_at_desc: Newest first

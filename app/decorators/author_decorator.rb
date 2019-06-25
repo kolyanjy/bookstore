@@ -4,5 +4,4 @@ class AuthorDecorator < Draper::Decorator
   def full_name
     "#{first_name} #{last_name}"
   end
-  
 end
