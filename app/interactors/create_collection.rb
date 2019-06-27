@@ -3,6 +3,8 @@ class CreateCollection
 
   def call
     params = context.params
-    context.books = BooksSortQuery.new.books_sort(BooksCategoryQuery.new.call(params[:category]), params[:sort])
+    books = Books::CategoryQuery.new.call(params[:category])
+    books = Books::SortQuery.new.call(books, params[:sort])
+    context.books = books
   end
 end

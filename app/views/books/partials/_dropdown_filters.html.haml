@@ -1,4 +1,4 @@
-%a.dropdown-toggle.lead.small{'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+%a#filter-dropdown.dropdown-toggle.lead.small{'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
   - if params[:sort]
     = t("filters.#{params[:sort]}")
   - else

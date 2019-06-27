@@ -8,6 +8,6 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.where(id: params[:id])
+    @book = Book.find_by!(id: params[:id])
   end
 end

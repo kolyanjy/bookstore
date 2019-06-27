@@ -1,4 +1,4 @@
-RSpec.describe BooksCategoryQuery do
+RSpec.describe Books::CategoryQuery do
   subject(:query_obj) { described_class.new }
 
   describe 'call query obj' do
