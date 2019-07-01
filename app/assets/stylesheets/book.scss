@@ -4,3 +4,9 @@
 .book_in_catalog {
   max-height: 544px;
 }
+#block_more {
+  display: none;
+}
+#btn_read_more, #btn_hide_read_more {
+  cursor: pointer;
+}

@@ -27,12 +27,12 @@
           %span#small_text
             = book.short_description
           - if book.long_description?
-            %span#block_more
-              = book.full_description
             %a.in-gold-500.ml-10.cursor-pointer#btn_read_more
               = t('book.read_more')
-            %a.in-gold-500.ml-10.cursor-pointer#btn_hide_read_more
-              = t('book.hide_read_more')
+            %span#block_more
+              = book.full_description
+              %a.in-gold-500.ml-10.cursor-pointer#btn_hide_read_more
+                = t('book.hide_read_more')
       .general-info-wrap.divider-lg
         .clearfix
           %p.pull-left
