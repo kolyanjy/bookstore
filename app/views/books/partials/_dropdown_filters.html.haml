@@ -1,5 +1,5 @@
 %a#filter-dropdown.dropdown-toggle.lead.small{'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-  = t(@presenter.check_filter(params[:sort]), scope: [:filters])
+  = t(presenter.check_filter(params[:sort]), scope: [:filters])
   %i.fa.fa-angle-down.dropdown-icon.pull-right
 %ul.dropdown-menu
   %li

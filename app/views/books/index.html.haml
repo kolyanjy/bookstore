@@ -4,7 +4,7 @@
   .hidden-xs.clearfix
     .dropdowns.pull-right
       .dropdown.width-240.dropdown-filter
-        = render partial: 'books/partials/dropdown_filters', locals: { sort: @current_sort, category: params[:category] }
+        = render partial: 'books/partials/dropdown_filters', locals: { sort: @current_sort, category: params[:category], presenter: @presenter }
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-15
         = link_to books_path, class: 'filter-link' do

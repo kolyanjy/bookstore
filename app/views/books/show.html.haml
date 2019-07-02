@@ -44,9 +44,9 @@
           %p.pull-left= t('book.dimension')
           %p.lead.small.pull-right
             = t('book.dimensions', height: @book.height, width: @book.width, depth: @book.depth)
-    -unless @book.materials.empty?
       .general-info-wrap.divider-lg
-        .clearfix
+      -unless @book.materials.empty?
+        .clearfix.desc-item
           %p.pull-left
             = t('book.materials')
           %p.lead.small.pull-right
