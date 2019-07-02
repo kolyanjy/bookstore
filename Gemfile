@@ -36,6 +36,7 @@ group :development, :test do
   gem 'rubocop'
   gem 'rubocop-performance'
   gem 'rubocop-rspec'
+  gem 'webdrivers'
 end
 
 group :development do
@@ -48,7 +49,6 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
-  gem 'chromedriver-helper'
   gem 'database_cleaner'
   gem 'rails-controller-testing'
   gem 'rspec', '~> 3.8'

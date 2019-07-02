@@ -19,7 +19,7 @@
       .row
         .col-xs-12.col-md-4
           %p.h1.in-gold-500.mt-10
-            = t('book.price', price: @book.price)
+            = number_to_currency(@book.price)
       .general-info-wrap.divider-lg
         %p= t('book.description')
         %p.lead.small.line-height-2

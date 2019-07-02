@@ -10,9 +10,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each, type: :feature) do
-    driver_shares_db_connection_with_specs = Capybara.current_driver == :rack_test
-
-    DatabaseCleaner.strategy = :truncation unless driver_shares_db_connection_with_specs
+    DatabaseCleaner.strategy = :truncation unless Capybara.current_driver == :rack_test
   end
 
   config.before do

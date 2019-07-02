@@ -4,15 +4,9 @@ RSpec.describe BooksController, type: :controller do
   describe '#index' do
     before { get :index }
 
-    it 'renders the homepage template' do
+    it 'check renders the homepage template, status and variable' do
       expect(controller).to render_template(:index)
-    end
-
-    it 'have status 200' do
       expect(response).to have_http_status(:ok)
-    end
-
-    it 'set valid data to instance variables' do
       expect(assigns(:books)).to be_kind_of(Draper::CollectionDecorator)
     end
   end

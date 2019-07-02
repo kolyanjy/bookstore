@@ -11,11 +11,11 @@ RSpec.describe Books::CategoryQuery do
     end
 
     context 'with category' do
-      subject(:result) { query_obj.call(category.id) }
+      let(:category) { create(:category, :with_books, amount: book_quantity) }
 
-      let(:category) { create(:category, :with_books, amount: 5) }
+      before { create(:book) }
 
-      it { expect(query_obj.call(category.id)).to eq(result.each(&:category_id)) }
+      it { expect(query_obj.call(category.id).map(&:category_id)).to eq([category.id] * book_quantity) }
     end
   end
 end

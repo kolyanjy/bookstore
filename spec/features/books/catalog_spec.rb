@@ -13,6 +13,17 @@ RSpec.describe 'catalog', type: :feature do
     end
   end
 
+  describe 'book_in_catalog' do
+    let!(:book) { create(:book) }
+
+    before { visit books_path }
+
+    it 'check book items' do
+      expect(page).to have_selector('.title', text: book.name)
+      expect(page).to have_content(book.price)
+    end
+  end
+
   describe 'pagination' do
     before do
       create_list(:book, book_amount)
