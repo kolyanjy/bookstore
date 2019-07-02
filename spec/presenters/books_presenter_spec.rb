@@ -8,4 +8,24 @@ RSpec.describe BooksPresenter do
 
     it { expect(presenter.books_count).to eq(BOOKS_QUANTITY) }
   end
+
+  describe 'check_filter' do
+    context 'when filter nil' do
+      let(:filter) { nil }
+
+      it { expect(presenter.check_filter(filter)).to eq(Books::SortQuery::DEFAULT_FILTER) }
+    end
+
+    context 'when invalid filter' do
+      let(:filter) { :lol }
+
+      it { expect(presenter.check_filter(filter)).to eq(Books::SortQuery::DEFAULT_FILTER) }
+    end
+
+    context 'when valid filter' do
+      let(:filter) { :title_asc }
+
+      it { expect(presenter.check_filter(filter)).to eq(filter) }
+    end
+  end
 end
