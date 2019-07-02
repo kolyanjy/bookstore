@@ -17,7 +17,7 @@ class BookDecorator < Draper::Decorator
   end
 
   def dimensions_empty?
-    (book.height || book.width || book.depth).nil?
+    (book.height && book.width && book.depth).nil?
   end
 
   def first_book_image(version)
