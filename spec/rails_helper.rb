@@ -9,7 +9,6 @@ require 'capybara/rspec'
 require 'shoulda/matchers'
 require 'selenium-webdriver'
 
-
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 # require 'capybara/poltergeist'
@@ -24,7 +23,6 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-
   Capybara.default_driver = :selenium_chrome
 
   config.include Devise::Test::ControllerHelpers, type: :controller

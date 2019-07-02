@@ -1,4 +1,4 @@
-RSpec.describe 'log in facebook', type: :feature  do
+RSpec.describe 'log in facebook', type: :feature do
   before do
     visit root_path
   end

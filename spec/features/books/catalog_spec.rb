@@ -2,7 +2,7 @@ RSpec.describe 'catalog', type: :feature do
   let(:book_amount) { 15 }
 
   describe 'filter' do
-    before(:each) { visit books_path }
+    before { visit books_path }
 
     it 'cahnge filter' do
       within '.dropdown-filter' do
@@ -14,8 +14,10 @@ RSpec.describe 'catalog', type: :feature do
   end
 
   describe 'pagination' do
-    before { create_list(:book, book_amount) }
-    before { visit books_path }
+    before do
+      create_list(:book, book_amount)
+      visit books_path
+    end
 
     it 'check books quantity on first page' do
       expect(page).to have_selector('.book_in_catalog', count: 12)

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :load_categories
+  before_action :loaded_categories
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   private
@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     render file: Rails.root.join('public', '404.html'), layout: false, status: 404
   end
 
-  def load_categories
+  def loaded_categories
     @loaded_categories ||= Category.all
   end
 end

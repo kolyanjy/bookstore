@@ -1,4 +1,4 @@
-RSpec.describe 'Sign up', type: :feature  do
+RSpec.describe 'Sign up', type: :feature do
   let(:user_attrs) { attributes_for(:user) }
   let(:invalid_email) { '0@gmail.com' }
   let(:invalid_password) { '123' }

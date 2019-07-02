@@ -48,12 +48,12 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
+  gem 'chromedriver-helper'
   gem 'database_cleaner'
   gem 'rails-controller-testing'
   gem 'rspec', '~> 3.8'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
-  gem 'chromedriver-helper'
   gem 'simplecov'
 end
 
