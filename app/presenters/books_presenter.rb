@@ -1,6 +1,6 @@
 class BooksPresenter
   def category_books_count(id)
-    Book.by_category(id).count
+    Books::CategoryQuery.new.call(id).count
   end
 
   def books_count

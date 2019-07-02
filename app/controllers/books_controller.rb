@@ -1,13 +1,12 @@
 class BooksController < ApplicationController
-  include Pagy::Backend
-  BOOKS_ON_PAGE = 12
-
   def index
-    @pagy, @books = pagy(CreateCollection.call(params: params).books, items: BOOKS_ON_PAGE)
+    interector_call = CreateCollection.call(params: params)
+    @pagy = interector_call.pagy
+    @books = interector_call.books
     @presenter = BooksPresenter.new
   end
 
   def show
-    @book = Book.find_by!(id: params[:id])
+    @book = Book.find_by!(id: params[:id]).decorate
   end
 end

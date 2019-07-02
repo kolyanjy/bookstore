@@ -6,7 +6,6 @@ RSpec.describe Books::SortQuery do
   let!(:book_c) { create(:book, name: 'cccc', price: 3) }
   let!(:book_d) { create(:book, name: 'dddd', price: 4) }
   let(:books) { Book.all }
-  let(:params) {}
 
   describe 'title sort' do
     context 'when asc' do
@@ -46,7 +45,7 @@ RSpec.describe Books::SortQuery do
 
   describe 'created at sort' do
     context 'when desc' do
-      let(:filter) { 'created_at_desc' }
+      let(:filter) { 'created_at' }
 
       it do
         expect(query_obj.call(books, filter)).to eq([book_d, book_c, book_b, book_a])

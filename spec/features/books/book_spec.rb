@@ -8,6 +8,7 @@ RSpec.describe 'Books page', type: :feature do
 
   it 'Click book link' do
     visit books_path
+    find('.book_in_catalog').hover
     first('a.thumb-hover-link').click
     expect(page).to have_text(book.name)
   end

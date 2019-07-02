@@ -1,14 +1,14 @@
-module Books # rubocop:disable Style/ClassAndModuleChildren
+module Books
   class SortQuery
     FILTERS = {
-      created_at_desc: ->(relation) { relation.order('created_at DESC') },
+      created_at: ->(relation) { relation.order('created_at DESC') },
       popular: ->(relation) { relation.order('created_at DESC') },
       title_asc: ->(relation) { relation.order('name ASC') },
       title_desc: ->(relation) { relation.order('name DESC') },
       price_asc: ->(relation) { relation.order('price ASC') },
       price_desc: ->(relation) { relation.order('price DESC') }
     }.freeze
-    DEFAULT_FILTER = :created_at_desc
+    DEFAULT_FILTER = :title_asc
 
     def call(books, filter)
       return books if filter.nil?

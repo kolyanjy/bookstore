@@ -7,9 +7,7 @@ class Book < ApplicationRecord
   has_many :book_images, dependent: :destroy
 
   accepts_nested_attributes_for :book_images, allow_destroy: true
-
-  scope :by_category, ->(id) { where(category_id: id) }
-
+  
   validates :name, presence: true, length: { in: 0..50 }
   validates :description, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal: 0, less_than_or_equal: 10_000 }

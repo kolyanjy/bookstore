@@ -10,7 +10,7 @@ AllCops:
     - 'vendor/**/*'
 
 Style/ClassAndModuleChildren:
-  EnforcedStyle: compact
+  EnforcedStyle: nested
   Exclude:
     - 'config/application.rb'
 

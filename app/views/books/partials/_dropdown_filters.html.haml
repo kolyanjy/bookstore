@@ -1,8 +1,11 @@
 %a#filter-dropdown.dropdown-toggle.lead.small{'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-  - if params[:sort]
-    = t("filters.#{params[:sort]}")
+  - sort = params[:sort]
+  - if sort
+    - unless Books::SortQuery::FILTERS.include?(sort.to_sym)
+      - sort = t("filters.#{Books::SortQuery::DEFAULT_FILTER}")
   - else
-    = t('filters.title_asc')
+    - sort = t("filters.#{Books::SortQuery::DEFAULT_FILTER}")
+  = t(sort, scope: [:filters])
   %i.fa.fa-angle-down.dropdown-icon.pull-right
 %ul.dropdown-menu
   %li

@@ -1,10 +1,16 @@
 class CreateCollection
   include Interactor
+  include Pagy::Backend
+  BOOKS_ON_PAGE = 12
+
+  delegate :params, to: :context
 
   def call
-    params = context.params
     books = Books::CategoryQuery.new.call(params[:category])
     books = Books::SortQuery.new.call(books, params[:sort])
-    context.books = books
+    pagy, books = pagy(books, items: BOOKS_ON_PAGE)
+
+    context.books = books.decorate
+    context.pagy = pagy
   end
 end

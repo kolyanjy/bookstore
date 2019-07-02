@@ -1,9 +1,8 @@
 en:
   filters:
-    sort: "%{sort}"
-    title_asc: "Titile: A - Z"
-    title_desc: "Titile: Z - A"
-    created_at_desc: Newest first
+    title_asc: "Title: A - Z"
+    title_desc: "Title: Z - A"
+    created_at: Newest first
     price_asc: "Price: Low to hight"
     price_desc: "Price: Hight to low"
     all_books: All books

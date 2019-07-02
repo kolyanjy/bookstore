@@ -1,4 +1,4 @@
-RSpec.describe 'Log in' do
+RSpec.describe 'Log in', type: :feature  do
   let(:user) { create(:user) }
   let(:user_attrs) { attributes_for(:user) }
 
@@ -7,6 +7,7 @@ RSpec.describe 'Log in' do
   end
 
   it 'User try to login' do
+    find('a.dropdown-toggle', text: I18n.t('btn.account')).click
     find('a', text: I18n.t('devise.login')).click
     within('.general-form') do
       fill_in 'user_email', with: user.email
@@ -17,6 +18,7 @@ RSpec.describe 'Log in' do
   end
 
   it 'User try to login with nonexistent mail and password' do
+    find('a.dropdown-toggle', text: I18n.t('btn.account')).click
     find('a', text: I18n.t('devise.login')).click
     within('.general-form') do
       fill_in 'user_email', with: user_attrs[:email]
@@ -27,6 +29,7 @@ RSpec.describe 'Log in' do
   end
 
   it 'User after login try to log out' do
+    find('a.dropdown-toggle', text: I18n.t('btn.account')).click
     find('a', text: I18n.t('devise.login')).click
     within('.general-form') do
       fill_in 'user_email', with: user.email

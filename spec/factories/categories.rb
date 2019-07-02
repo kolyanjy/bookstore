@@ -4,14 +4,11 @@ FactoryBot.define do
   end
 
   trait :with_books do
-    after(:create) do |book|
-      create_list(:book, 5, :with_author, category: book)
+    transient do
+      amount { 1 }
     end
-  end
-
-  trait :with_book do
-    after(:create) do |book|
-      create(:book, :with_author, category: book)
+    after(:create) do |category, evaluator|
+      create_list(:book, evaluator.amount, :with_author, category: category)
     end
   end
 end

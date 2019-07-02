@@ -13,7 +13,7 @@ RSpec.describe BooksController, type: :controller do
     end
 
     it 'set valid data to instance variables' do
-      expect(assigns(:books)).to be_kind_of(ActiveRecord::Relation)
+      expect(assigns(:books)).to be_kind_of(Draper::CollectionDecorator)
     end
   end
 

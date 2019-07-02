@@ -4,9 +4,10 @@ en:
     go_back: Back to results
     description: Description
     date_of_publication: Date of publication
-    dimensions: Dimensions
+    dimension: Dimensions
     materials: Materials
     read_more: Read More
     hide_read_more: Hide read more
     add_to_card: Add to Cart
     price: "€ %{price}"
+    dimensions: "H:%{height} x W:%{width} x D:%{depth}"

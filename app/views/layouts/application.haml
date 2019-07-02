@@ -27,6 +27,6 @@
               = message
         - else
           = alert
-    = render partial: 'layouts/partials/header', locals: { categories: @load_categories }
+    = render partial: 'layouts/partials/header', locals: { categories: @loaded_categories }
     = yield
     = render 'layouts/partials/footer'

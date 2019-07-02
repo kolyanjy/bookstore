@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
   end
 
   def load_categories
-    @load_categories ||= Category.all
+    @loaded_categories ||= Category.all
   end
 end
