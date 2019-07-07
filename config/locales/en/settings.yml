@@ -1,0 +1,30 @@
+en:
+  settings:
+    settings: "Settings"
+    billing_address: "Billing Address"
+    shipping_address: "Shipping Address"
+    please_remove: "Please Remove My Account"
+    title_remove_form: "Remove Account"
+    confirmation_text: "I understand that all data will be lost"
+    password: "Password"
+    old_password: "Old Password"
+    new_password: "New Password"
+    confirm_password: "Confirm Password"
+    email: "Email"
+    enter_email: "Enter your email"
+    success_update_email: "Email has been updated"
+    danger_update_email: "Email hasn't been updated"
+    success_update_password: "Password has been updated"
+    danger_update_password: "Password hasn't been updated"
+    success_delete: "User has been deleted"
+    danger_delete: "User hasn't been deleted"
+    address:
+      first_name: First Name
+      last_name: Last Name
+      address: Address
+      privacy: Privacy
+      city: City
+      zip: Zip
+      phone: Phone
+      success_update: Address has been updated
+      danger_update: "Address hasn't been updated"

@@ -15,6 +15,7 @@ en:
     home: "Home"
     shop: "Shop"
     edit: "edit"
+    save: "Save"
 
   interpolation:
     hello: "Hello %{email}"

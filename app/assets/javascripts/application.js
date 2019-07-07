@@ -15,3 +15,7 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+//= require flash
+//= require rails.validations
+//= require rails.validations.simple_form
+//= require rails.validations.simple_form.bootstrap4

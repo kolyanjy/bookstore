@@ -11,22 +11,10 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     .container
-    - if notice
-      .alert.alert-info.text-center
-        - if notice.is_a?(Array)
-          - notice.each do |message|
-            %p
-              = message
-        - else
-          = notice
-    - if alert
-      .alert.alert-warning.text-center
-        - if alert.is_a?(Array)
-          - alert.each do |message|
-            %p
-              = message
-        - else
-          = alert
+      .flash.text-center
+        - flash.each do |message_type, message|
+          %div{ class: "alert alert-#{message_type}" }
+            = message
     = render partial: 'layouts/partials/header', locals: { categories: @loaded_categories }
     = yield
     = render 'layouts/partials/footer'

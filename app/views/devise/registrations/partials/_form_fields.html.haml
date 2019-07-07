@@ -1,0 +1,18 @@
+= f.simple_fields_for address_type  do |address_form|
+
+  = address_form.input :first_name, placeholder: t('settings.address.first_name')
+
+  = address_form.input :last_name, placeholder: t('settings.address.last_name')
+
+  = address_form.input :address, placeholder: t('settings.address.address')
+
+  = address_form.input :city, placeholder: t('settings.address.city')
+
+  = address_form.input :zip, placeholder: t('settings.address.zip')
+
+  - if address[:country]
+    = address_form.input(:country, priority: ["#{address[:country]}"])
+  - else
+    = address_form.input(:country, priority: ["UA"])
+
+  = address_form.input :phone, placeholder: t('settings.address.phone')
