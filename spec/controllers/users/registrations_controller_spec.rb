@@ -15,12 +15,12 @@ RSpec.describe Users::RegistrationsController, type: :controller do
     end
 
     describe 'update email' do
-      let(:old_email) { user.email }
+      let!(:old_email) { user.email }
       let(:params) { { email: 'lolkek@gmail.com' } }
 
       it do
         controller.update_resource(user, params)
-        expect(user.email).to eq(old_email)
+        expect(user.email).not_to eq(old_email)
       end
     end
   end
