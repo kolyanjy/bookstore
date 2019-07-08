@@ -9,7 +9,6 @@ FactoryBot.define do
     country { Faker::Address.country_code }
     phone { '+380636472129' }
   end
-  factory :billing_address, parent: :address, class: 'BillingAddress' do;end
-  factory :shipping_address, parent: :address, class: 'ShippingAddress' do;end
-
+  factory :billing_address, parent: :address, class: 'BillingAddress'
+  factory :shipping_address, parent: :address, class: 'ShippingAddress'
 end

@@ -1,6 +1,7 @@
-RSpec.describe AddressesPresenter  do
-  let!(:user) { create(:user) }
+RSpec.describe AddressesPresenter do
   subject(:presenter) { described_class.new(user) }
+
+  let!(:user) { create(:user) }
 
   describe 'presenter' do
     it 'check shipping address' do

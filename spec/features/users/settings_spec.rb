@@ -4,7 +4,7 @@ RSpec.describe 'Settings', type: :feature do
   let(:valid_str) { 'testTest' }
   let(:valid_zip) { 123 }
   let(:valid_phone) { '+380636472129' }
-  let(:empty) { }
+  let(:empty) {}
 
   before do
     login_as(user, scope: :user)
@@ -17,8 +17,6 @@ RSpec.describe 'Settings', type: :feature do
       find('ul', class: 'dropdown-menu').find('a', text: I18n.t('settings.settings')).click
       expect(page).to have_content I18n.t('settings.settings')
       expect(page).to have_current_path edit_user_registration_path
-      expect(BillingAddress.count(1))
-      expect(ShippingAddress.count(1))
     end
   end
 
@@ -40,7 +38,7 @@ RSpec.describe 'Settings', type: :feature do
     context 'when invalid input' do
       it do
         visit edit_user_registration_path
-        fill_in 'user_billing_address_attributes_first_name', with:empty
+        fill_in 'user_billing_address_attributes_first_name', with: empty
         fill_in 'user_billing_address_attributes_last_name', with: empty
         fill_in 'user_billing_address_attributes_address', with: empty
         fill_in 'user_billing_address_attributes_city', with: empty
@@ -70,7 +68,7 @@ RSpec.describe 'Settings', type: :feature do
     context 'when invalid input' do
       it do
         visit edit_user_registration_path
-        fill_in 'user_shipping_address_attributes_first_name', with:empty
+        fill_in 'user_shipping_address_attributes_first_name', with: empty
         fill_in 'user_shipping_address_attributes_last_name', with: empty
         fill_in 'user_shipping_address_attributes_address', with: empty
         fill_in 'user_shipping_address_attributes_city', with: empty
@@ -83,7 +81,6 @@ RSpec.describe 'Settings', type: :feature do
   end
 
   describe 'privacy' do
-
     describe 'Change email' do
       context 'when valid' do
         it do
@@ -124,6 +121,7 @@ RSpec.describe 'Settings', type: :feature do
           expect(page).to have_selector 'div', text: I18n.t('settings.danger_update_password')
         end
       end
+
       context 'when valid' do
         it do
           visit edit_user_registration_path

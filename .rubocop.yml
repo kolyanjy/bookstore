@@ -41,6 +41,8 @@ RSpec/ExampleLength:
 RSpec/DescribeClass:
   Exclude:
     - 'spec/features/**/*'
+RSpec/NestedGroups:
+  Enabled: false
 
 RSpec/MultipleExpectations:
   Enabled: false
@@ -50,7 +52,7 @@ Style/FrozenStringLiteralComment:
 
 Rails:
   Enabled: true
-  
+
 Layout/ClassStructure:
   Enabled: true
   Categories:
