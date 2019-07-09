@@ -1,5 +1,6 @@
 RSpec.describe Users::AddressesController, type: :controller do
   let!(:user) { create(:user) }
+  # subject(:controller) { described_class.new }
 
   describe '#update' do
     before { sign_in user }
@@ -13,9 +14,8 @@ RSpec.describe Users::AddressesController, type: :controller do
           } }
         }
         expect(response.status).to eq 302
-        expect(subject).to set_flash[:success] # rubocop:disable RSpec/NamedSubject
-          .to I18n.t('settings.address.success_update')
-        expect(subject).to redirect_to(edit_user_registration_path) # rubocop:disable RSpec/NamedSubject
+        expect(controller).to set_flash[:success].to I18n.t('settings.address.success_update')
+        expect(controller).to redirect_to(edit_user_registration_path)
       end
     end
 
@@ -28,9 +28,8 @@ RSpec.describe Users::AddressesController, type: :controller do
           } }
         }
         expect(response.status).to eq 302
-        expect(subject).to set_flash[:danger] # rubocop:disable RSpec/NamedSubject
-          .to I18n.t('settings.address.danger_update')
-        expect(subject).to redirect_to(edit_user_registration_path) # rubocop:disable RSpec/NamedSubject
+        expect(controller).to set_flash[:danger].to I18n.t('settings.address.danger_update')
+        expect(controller).to redirect_to(edit_user_registration_path)
       end
     end
   end

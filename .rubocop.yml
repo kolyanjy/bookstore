@@ -41,8 +41,9 @@ RSpec/ExampleLength:
 RSpec/DescribeClass:
   Exclude:
     - 'spec/features/**/*'
+
 RSpec/NestedGroups:
-  Enabled: false
+  Max: 4
 
 RSpec/MultipleExpectations:
   Enabled: false

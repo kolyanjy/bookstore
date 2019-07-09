@@ -6,14 +6,19 @@ ruby '2.6.1'
 gem 'activeadmin'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap-sass'
-gem 'bootstrap_validator_rails'
 gem 'carrierwave'
+
+# form helpers
 gem 'simple_form'
 gem 'client_side_validations' # rubocop:disable Bundler/OrderedGems
 gem 'client_side_validations-simple_form'
 gem 'country_select'
+
 gem 'devise'
+
+# decorators
 gem 'draper'
+
 gem 'font-awesome-rails'
 gem 'haml'
 gem 'interactor'

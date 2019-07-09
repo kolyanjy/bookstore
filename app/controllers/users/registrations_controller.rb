@@ -1,7 +1,5 @@
 module Users
   class RegistrationsController < Devise::RegistrationsController
-    before_action only: :create
-
     def create
       ActiveRecord::Base.transaction do
         super do |user|
@@ -22,21 +20,17 @@ module Users
     private
 
     def password_update(user, params)
-      if user.update_with_password(params)
-        true
-      else
-        flash[:danger] = I18n.t('settings.danger_update_password')
-        false
-      end
+      return true if user.update_with_password(params)
+
+      flash[:danger] = I18n.t('settings.danger_update_password')
+      false
     end
 
     def email_update(user, params)
-      if user.update_without_password(params)
-        true
-      else
-        flash[:danger] = I18n.t('settings.danger_update_email')
-        false
-      end
+      return true if user.update_without_password(params)
+
+      flash[:danger] = I18n.t('settings.danger_update_email')
+      false
     end
   end
 end

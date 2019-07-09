@@ -11,7 +11,7 @@
   = address_form.input :zip, placeholder: t('settings.address.zip')
 
   - if address[:country]
-    = address_form.input(:country, priority: ["#{address[:country]}"])
+    = address_form.input(:country)
   - else
     = address_form.input(:country, priority: ["UA"])
 
