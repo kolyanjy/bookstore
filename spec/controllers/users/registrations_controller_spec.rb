@@ -1,6 +1,4 @@
 RSpec.describe Users::RegistrationsController, type: :controller do
-  subject(:controller) { described_class.new }
-
   let!(:user) { create(:user) }
   let!(:old_password) { user.encrypted_password }
 

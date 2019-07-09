@@ -3,32 +3,43 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.1'
 
-gem 'activeadmin'
-gem 'bootsnap', '>= 1.1.0', require: false
-gem 'bootstrap-sass'
-gem 'carrierwave'
-
 # form helpers
 gem 'simple_form'
 gem 'client_side_validations' # rubocop:disable Bundler/OrderedGems
 gem 'client_side_validations-simple_form'
 gem 'country_select'
 
+# authentication
 gem 'devise'
+gem 'omniauth-facebook'
 
 # decorators
 gem 'draper'
+gem 'interactor'
 
+# html css
+gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'haml'
-gem 'interactor'
+gem 'sass-rails', '~> 5.0'
+
+# for images
+gem 'carrierwave'
 gem 'mini_magick'
-gem 'omniauth-facebook'
+
+# pagynation
 gem 'pagy'
+
+# DB
 gem 'pg'
+
+# admin-panel
+gem 'activeadmin'
+
+# system gems
+gem 'bootsnap', '>= 1.1.0', require: false
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.3'
-gem 'sass-rails', '~> 5.0'
 gem 'sendgrid-ruby'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'

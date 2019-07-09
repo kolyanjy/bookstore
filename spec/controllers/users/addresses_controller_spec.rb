@@ -1,6 +1,5 @@
 RSpec.describe Users::AddressesController, type: :controller do
   let!(:user) { create(:user) }
-  # subject(:controller) { described_class.new }
 
   describe '#update' do
     before { sign_in user }
@@ -8,10 +7,7 @@ RSpec.describe Users::AddressesController, type: :controller do
     context 'when valid' do
       it 'valid' do # rubocop:disable  RSpec/ExampleLength
         patch :update, params: {
-          user: { "billing_address_attributes": {
-            first_name: 'valid_input', last_name: 'valid_input', address: 'valid_input', city: 'valid_input', zip: 123,
-            country: 'valid_input', phone: '1231928379'
-          } }
+          user: { "billing_address_attributes": build(:address) }
         }
         expect(response.status).to eq 302
         expect(controller).to set_flash[:success].to I18n.t('settings.address.success_update')
@@ -23,8 +19,8 @@ RSpec.describe Users::AddressesController, type: :controller do
       it 'valid' do # rubocop:disable  RSpec/ExampleLength
         patch :update, params: {
           user: { "billing_address_attributes": {
-            first_name: '', last_name: '', address: '', city: '', zip: 123,
-            country: '', phone: '1231928379'
+            first_name: '', last_name: '', address: '', city: '', zip: '',
+            country: '', phone: ''
           } }
         }
         expect(response.status).to eq 302
