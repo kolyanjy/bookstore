@@ -1,0 +1,47 @@
+$stars: 5;
+$star-size: 20px;
+$star-spacing: 2px;
+$star-off-color: #CCCCCC;
+
+.rating {
+  display: inline-block;
+
+	label {
+		float: right;
+		cursor: pointer;
+
+		&:not(:first-of-type) {
+      padding-right: $star-spacing;
+		}
+
+		&:before {
+      content: "\2605";
+      font-size: $star-size;
+      color: $grey-350;
+		}
+  }
+
+  .star-show {
+    &:before {
+      content: "\2605";
+      font-size: 20px;
+    }
+  }
+
+	input {
+    display: none;
+	}
+
+	input:checked ~ label:before,
+	&:not(:checked) > label:hover:before,
+	&:not(:checked) > label:hover ~ label:before {
+    color: $gold-500
+	}
+}
+.img-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $grey-900;
+  color: $grey-100;
+}

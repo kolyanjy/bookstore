@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_20_094307) do
+ActiveRecord::Schema.define(version: 2019_07_09_085912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "address"
+    t.string "city"
+    t.integer "zip"
+    t.string "country"
+    t.string "phone"
+    t.string "type"
+    t.string "addressable_type"
+    t.bigint "addressable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
+  end
 
   create_table "admin_users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -78,6 +94,19 @@ ActiveRecord::Schema.define(version: 2019_06_20_094307) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "mark", default: 0
+    t.boolean "verified", default: false
+    t.bigint "user_id"
+    t.bigint "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_comments_on_book_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "materials", force: :cascade do |t|
     t.string "name"
     t.bigint "book_id"
@@ -112,4 +141,6 @@ ActiveRecord::Schema.define(version: 2019_06_20_094307) do
   add_foreign_key "book_images", "books"
   add_foreign_key "book_materials", "books"
   add_foreign_key "book_materials", "materials"
+  add_foreign_key "comments", "books"
+  add_foreign_key "comments", "users"
 end

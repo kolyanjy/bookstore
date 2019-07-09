@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
-  resources :books, only: %i[index show]
+  resources :books, only: %i[index show] do
+    resources :comments, only: :create
+  end
+
   resources :categories do
     resources :books, only: :index
   end
