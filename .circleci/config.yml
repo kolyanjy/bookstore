@@ -56,6 +56,9 @@ jobs:
       - run:
           name: run brakeman
           command: bundle exec brakeman -q
-          
+      - run:
+          name: run bundle audit
+          command: bundle exec bundle-audit check --update --ignore CVE-2015-9284
+
       - store_test_results:
           path: /tmp/test-results
