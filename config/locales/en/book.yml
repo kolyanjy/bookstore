@@ -10,3 +10,14 @@ en:
     hide_read_more: Hide read more
     add_to_card: Add to Cart
     dimensions: "H:%{height} x W:%{width} x D:%{depth}"
+
+  comment:
+    review: "Review (%{count})"
+    verified_reviewer: Verified Reviewer
+    write_a_review: Write a Review
+    score: Score
+    title: Title
+    review_input: Review
+    comment_created: Comment successfully created
+    enter_title: Enter Title
+    enter_description: Enter Description
