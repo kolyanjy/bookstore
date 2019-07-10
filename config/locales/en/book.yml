@@ -19,5 +19,6 @@ en:
     title: Title
     review_input: Review
     comment_created: Comment successfully created
+    comment_failed_create: Comment hasn't created
     enter_title: Enter Title
     enter_description: Enter Description

@@ -6,13 +6,14 @@ class CommentsController < ApplicationController
     if create_comment.success?
       flash[:success] = t('comment.comment_created')
     else
-      flash[:danger] = create_comment.errors.full_messages.to_sentence
+      flash[:danger] = t('comment.comment_failed_create')
     end
     redirect_to book_path(create_comment.book_id)
   end
 
+  private
+
   def comment_params
     params.require(:comment).permit(%i[mark title description user_id book_id])
   end
-
 end
