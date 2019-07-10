@@ -9,11 +9,6 @@ module Users
       end
     end
 
-    # def update
-    #   binding.pry
-    #   super
-    # end
-
     protected
 
     def update_resource(user, params)

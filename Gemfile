@@ -13,7 +13,7 @@ gem 'country_select'
 gem 'devise'
 gem 'omniauth-facebook'
 
-#interactors
+# interactors
 gem 'interactor'
 
 # decorators
