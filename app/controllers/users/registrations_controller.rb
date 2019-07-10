@@ -9,6 +9,13 @@ module Users
       end
     end
 
+    # def update
+    #   binding.pry
+    #   super
+    # end
+
+    protected
+
     def update_resource(user, params)
       params[:password].present? ? password_update(user, params) : email_update(user, params)
     end

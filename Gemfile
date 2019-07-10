@@ -13,9 +13,11 @@ gem 'country_select'
 gem 'devise'
 gem 'omniauth-facebook'
 
+#interactors
+gem 'interactor'
+
 # decorators
 gem 'draper'
-gem 'interactor'
 
 # html css
 gem 'bootstrap-sass'
@@ -27,7 +29,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'carrierwave'
 gem 'mini_magick'
 
-# pagynation
+# pagination
 gem 'pagy'
 
 # DB
