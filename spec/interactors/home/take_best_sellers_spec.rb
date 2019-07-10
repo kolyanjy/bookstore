@@ -12,5 +12,4 @@ RSpec.describe Home::TakeBestSellers do
       expect(result.best_sellers).to be_kind_of(Draper::CollectionDecorator)
     end
   end
-
 end

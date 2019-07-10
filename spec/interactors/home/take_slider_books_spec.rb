@@ -12,5 +12,4 @@ RSpec.describe Home::TakeSliderBooks do
       expect(result.slider_books).to be_kind_of(Draper::CollectionDecorator)
     end
   end
-
 end
