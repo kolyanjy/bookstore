@@ -20,8 +20,10 @@ RSpec.describe 'Index page', type: :feature do
 
   it 'click All books in home page' do
     visit root_path
-    find('a', class: 'navbar-brand', text: I18n.t('word.bookstore')).click
-    expect(page).to have_selector 'h2', text: I18n.t('home.welcome')
+    find('a', text: I18n.t('header.shop')).click
+    find('a', text: I18n.t('header.all_books')).click
+    expect(page).to have_selector 'h1', text: I18n.t('word.catalog')
+    expect(page).to have_current_path books_path
   end
 
   it 'click shop in header' do
@@ -39,5 +41,6 @@ RSpec.describe 'Index page', type: :feature do
     categories.each do |category|
       expect(page).to have_content category.name
     end
+    expect(page).to have_current_path books_path
   end
 end
