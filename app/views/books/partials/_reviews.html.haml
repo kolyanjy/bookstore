@@ -1,14 +1,14 @@
 .mb-80
-  %h3.in-gold-500.mb-25= t('comment.review', count: @presenter.comments_count)
-  - @presenter.comments.each do |comment|
+  %h3.in-gold-500.mb-25= t('comment.review', count: presenter.comments_count)
+  - presenter.comments.each do |comment|
     .general-message-wrap.divider-lg
       .clearfix
         %span.img-circle.logo-size.pull-left
-          = @presenter.first_char_user_email(comment)
+          = presenter.first_char_user_email(comment)
         .ml-70
           %div
             .general-message-date.hidden-xs
-              = @presenter.date_created_at(comment)
+              = presenter.date_created_at(comment)
             .max-240
               .general-message-verified
                 = t('comment.verified_reviewer')
@@ -17,7 +17,7 @@
           .rating
             - comment.mark.times do
               %span.star-show.in-gold-500
-            - @presenter.gray_stars_count(comment.mark).times do
+            - presenter.gray_stars_count(comment.mark).times do
               %span.star-show.in-grey-350
           %p.font-18
             = comment.description

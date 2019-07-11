@@ -54,4 +54,4 @@
               = material.name
   - if user_signed_in?
     = render partial: 'books/partials/review_form', locals: { book: @book }
-  = render partial: 'books/partials/reviews', locals: { book: @book }
+  = render partial: 'books/partials/reviews', locals: { book: @book, presenter: @presenter }
