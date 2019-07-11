@@ -9,9 +9,7 @@ class BookPresenter
     @comments.where(verified: true).order(created_at: :desc)
   end
 
-  def comments_count
-    comments.count
-  end
+  delegate :count, to: :comments, prefix: true
 
   def gray_stars_count(mark_num)
     COUNT_STARTS - mark_num
