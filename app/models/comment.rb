@@ -2,7 +2,7 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :book
 
-  delegate :email, :to => :user, :prefix => true
+  delegate :email, to: :user, prefix: true
 
   validates :title, :mark, :description, presence: true
   validates :title, length: { in: 2..50 }
