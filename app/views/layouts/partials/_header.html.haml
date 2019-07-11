@@ -24,7 +24,7 @@
                 %li
                   = link_to t('sign.orders'), class: "collapse-link"
                 %li
-                  = link_to t('sign.settings'), class: "collapse-link"
+                  = link_to t('sign.settings'), edit_user_registration_path, class: "collapse-link"
                 %li.divider{role: "separator"}
                 %li
                   = link_to t('btn.out'), destroy_user_session_path, method: :delete, class: "collapse-link"

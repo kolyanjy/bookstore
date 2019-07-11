@@ -9039,3 +9039,25 @@ img {
 .mb-120 {
   margin-bottom: 120px !important;
 }
+
+/*flash*/
+
+.alert-alert, .alert-danger  {
+  background-color: #f2dede;
+  border-color: #eed3d7;
+  color: #b94a48;
+  width: 70%;
+  margin: 30px auto;
+}
+
+.alert-notice, .alert-success {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #468847;
+  width: 70%;
+  margin: 30px auto;
+}
+.invalid-feedback {
+  color: #ED4337;
+  font-style: italic;
+}
