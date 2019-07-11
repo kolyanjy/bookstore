@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations'
   }
-  
+
   resources :books, only: %i[index show] do
     resources :comments, only: :create
   end
