@@ -9,8 +9,6 @@ class BookPresenter
     @comments.where(verified: true).order(created_at: :desc)
   end
 
-  delegate :count, to: :comments, prefix: true
-
   def gray_stars_count(mark_num)
     COUNT_STARTS - mark_num
   end
@@ -20,6 +18,6 @@ class BookPresenter
   end
 
   def first_char_user_email(comment)
-    comment.user.email.first
+    comment.user_email.first
   end
 end

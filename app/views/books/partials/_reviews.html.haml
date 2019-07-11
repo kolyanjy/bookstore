@@ -1,5 +1,5 @@
 .mb-80
-  %h3.in-gold-500.mb-25= t('comment.review', count: presenter.comments_count)
+  %h3.in-gold-500.mb-25= t('comment.review', count: presenter.comments.count)
   - presenter.comments.each do |comment|
     .general-message-wrap.divider-lg
       .clearfix
@@ -13,7 +13,7 @@
               .general-message-verified
                 = t('comment.verified_reviewer')
               .general-message-name
-                = comment.user.email
+                = comment.user_email
           .rating
             - comment.mark.times do
               %span.star-show.in-gold-500
