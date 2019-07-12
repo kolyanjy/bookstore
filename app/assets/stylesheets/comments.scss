@@ -9,7 +9,6 @@ $star-off-color: #CCCCCC;
 	label {
 		float: right;
 		cursor: pointer;
-
 		&:not(:first-of-type) {
       padding-right: $star-spacing;
 		}
