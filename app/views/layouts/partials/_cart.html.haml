@@ -1,0 +1,17 @@
+.navbar-header
+  %button.navbar-toggle.pull-left{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
+    %span.sr-only
+    %span.icon-bar
+    %span.icon-bar
+    %span.icon-bar
+  = link_to t('header.logo_name'), root_path, {:class => 'navbar-brand blood'}
+  - if current_order.persisted?
+    = link_to cart_path(session[:order_id]), {:class => 'shop-link pull-right visible-xs'} do
+      %span.shop-icon
+        %span.shop-quantity
+          = current_order.decorate.sum_books
+- if current_order.persisted?
+  = link_to cart_path(session[:order_id]), {:class => 'shop-link pull-right hidden-xs'} do
+    %span.shop-icon
+      %span.shop-quantity
+        = current_order.decorate.sum_books

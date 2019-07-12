@@ -12,5 +12,8 @@ Rails.application.routes.draw do
   resources :categories do
     resources :books, only: :index
   end
+  resources :orders, only: %i[index show] do
+    resources :line_items, only: %i[destroy]
+  end
   root 'home#index'
 end
