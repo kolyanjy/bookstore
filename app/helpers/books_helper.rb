@@ -1,7 +1,7 @@
 module BooksHelper
   include Pagy::Frontend
 
-  def stars_quantity
+  def radio_btn_option
     stars = []
     count = 1
     Comment::COUNT_STARTS.times do
