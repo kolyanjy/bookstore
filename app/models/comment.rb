@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
+  COUNT_STARTS = 5
+
   belongs_to :user
   belongs_to :book
 

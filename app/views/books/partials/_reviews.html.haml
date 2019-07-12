@@ -4,11 +4,11 @@
     .general-message-wrap.divider-lg
       .clearfix
         %span.img-circle.logo-size.pull-left
-          = presenter.first_char_user_email(comment)
+          = comment.first_char_user_email
         .ml-70
           %div
             .general-message-date.hidden-xs
-              = presenter.date_created_at(comment)
+              = l(comment.created_at)
             .max-240
               .general-message-verified
                 = t('comment.verified_reviewer')
@@ -17,7 +17,7 @@
           .rating
             - comment.mark.times do
               %span.star-show.in-gold-500
-            - presenter.gray_stars_count(comment.mark).times do
+            - comment.gray_stars_count(comment.mark).times do
               %span.star-show.in-grey-350
           %p.font-18
             = comment.description

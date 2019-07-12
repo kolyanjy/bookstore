@@ -1,4 +1,4 @@
-RSpec.describe Comments::CreateComment do
+RSpec.describe Comments::Create do
   subject(:context) { described_class.call(params: comment, current_user: user, book_id: book.id) }
 
   let!(:user) { create(:user) }
@@ -10,6 +10,7 @@ RSpec.describe Comments::CreateComment do
 
       it do
         expect(context.success?).to eq(true)
+        expect(Comment.count).to eq(1)
       end
     end
 
@@ -18,6 +19,7 @@ RSpec.describe Comments::CreateComment do
 
       it do
         expect(context.success?).to eq(false)
+        expect(Comment.count).to eq(0)
       end
     end
   end

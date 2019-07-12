@@ -13,25 +13,21 @@ $star-off-color: #CCCCCC;
 		&:not(:first-of-type) {
       padding-right: $star-spacing;
 		}
-
 		&:before {
       content: "\2605";
       font-size: $star-size;
       color: $grey-350;
 		}
   }
-
   .star-show {
     &:before {
       content: "\2605";
       font-size: 20px;
     }
   }
-
 	input {
     display: none;
 	}
-
 	input:checked ~ label:before,
 	&:not(:checked) > label:hover:before,
 	&:not(:checked) > label:hover ~ label:before {

@@ -3,7 +3,7 @@ FactoryBot.define do
     title { Faker::FunnyName.two_word_name }
     description { Faker::Lorem.paragraph }
     mark { 1 }
-    verified { 1 }
+    verified { true }
     user
     book
   end
