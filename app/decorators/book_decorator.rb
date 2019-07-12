@@ -1,6 +1,5 @@
 class BookDecorator < Draper::Decorator
   LENGTH_DESCRIPTION = 70
-  COUNT_STARTS = 5
 
   decorates_association :authors
   decorates_association :comments
