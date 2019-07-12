@@ -17,7 +17,7 @@
           .rating
             - comment.mark.times do
               %span.star-show.in-gold-500
-            - comment.gray_stars_count(comment.mark).times do
+            - comment.gray_stars_count.times do
               %span.star-show.in-grey-350
           %p.font-18
             = comment.description

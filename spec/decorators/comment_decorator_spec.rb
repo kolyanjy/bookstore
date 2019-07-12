@@ -2,9 +2,7 @@ RSpec.describe CommentDecorator do
   let!(:comment) { build(:comment).decorate }
 
   describe 'grey stars count' do
-    let(:num) { 3 }
-
-    it { expect(comment.gray_stars_count(num)).to eq(2) }
+    it { expect(comment.gray_stars_count).to eq(Comment::COUNT_STARTS - comment.mark) }
   end
 
   describe 'first user email letter' do
