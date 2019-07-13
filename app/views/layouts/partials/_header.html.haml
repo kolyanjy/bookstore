@@ -8,12 +8,7 @@
         %span.icon-bar
       %a.navbar-brand
         = t('.bookstore')
-      %a.shop-link.pull-right.visible-xs{href: "#"}
-        %span.shop-icon
-          %span.shop-quantity 3
-      %a.shop-link.pull-right.hidden-xs{href: "#"}
-        %span.shop-icon
-          %span.shop-quantity 3
+        = render partial: 'layouts/partials/cart'
       #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
         - if user_signed_in?
           %ul.nav.navbar-nav

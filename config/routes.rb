@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     resources :books, only: :index
   end
   resources :orders, only: %i[index show] do
-    resources :line_items, only: %i[destroy]
+    resources :order_items, only: %i[destroy]
   end
+  post 'posts/' => 'order_items#create', as: 'new_order_items'
+
   root 'home#index'
 end

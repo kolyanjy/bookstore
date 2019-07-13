@@ -4,6 +4,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def current_order
+    @current_order ||= Orders::CheckService.new(session[:order_id], current_user).call
+  end
+
   def not_found
     render file: Rails.root.join('public', '404.html'), layout: false, status: 404
   end

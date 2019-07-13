@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_02_130809) do
+ActiveRecord::Schema.define(version: 2019_07_11_164730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,12 +94,44 @@ ActiveRecord::Schema.define(version: 2019_07_02_130809) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "mark", default: 0
+    t.boolean "verified", default: false
+    t.bigint "user_id"
+    t.bigint "book_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_comments_on_book_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "materials", force: :cascade do |t|
     t.string "name"
     t.bigint "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_materials_on_book_id"
+  end
+
+  create_table "order_items", force: :cascade do |t|
+    t.bigint "book_id"
+    t.bigint "order_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_order_items_on_book_id"
+    t.index ["order_id"], name: "index_order_items_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "status", default: 0
+    t.boolean "hidden_shipping_form", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -128,4 +160,9 @@ ActiveRecord::Schema.define(version: 2019_07_02_130809) do
   add_foreign_key "book_images", "books"
   add_foreign_key "book_materials", "books"
   add_foreign_key "book_materials", "materials"
+  add_foreign_key "comments", "books"
+  add_foreign_key "comments", "users"
+  add_foreign_key "order_items", "books"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "users"
 end
