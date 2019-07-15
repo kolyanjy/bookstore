@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       patch 'decrement_quantity'
     end
   end
+  resources :checkout, only: %i[update show]
+
   get 'cart/:id' => 'orders#cart', as: 'cart'
   post 'posts/' => 'order_items#create', as: 'new_order_items'
 

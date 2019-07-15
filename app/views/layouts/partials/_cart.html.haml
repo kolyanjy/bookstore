@@ -1,9 +1,9 @@
-- if current_order.persisted?
+- if current_order.persisted? && !current_order.order_items.empty?
   = link_to cart_path(session[:order_id]), {:class => 'shop-link pull-right visible-xs'} do
     %span.shop-icon
       %span.shop-quantity
         = current_order.decorate.sum_books
-- if current_order.persisted?
+- if current_order.persisted? && !current_order.order_items.empty?
   = link_to cart_path(session[:order_id]), {:class => 'shop-link pull-right hidden-xs'} do
     %span.shop-icon
       %span.shop-quantity

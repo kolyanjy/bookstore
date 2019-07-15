@@ -1,6 +1,6 @@
 module Orders
   class CheckService
-    def initialize(order_id, user)
+    def initialize(order_id = nil, user = nil)
       @order_id = order_id
       @user = user
     end
@@ -9,7 +9,7 @@ module Orders
       if @user
         user_order
       elsif @order_id
-        @check_order ||= order_find_by_order_id
+        order_find_by_order_id
       else
         Order.new
       end

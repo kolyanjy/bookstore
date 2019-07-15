@@ -19,6 +19,9 @@ gem 'interactor'
 # decorators
 gem 'draper'
 
+# states
+gem 'aasm'
+
 # html css
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'

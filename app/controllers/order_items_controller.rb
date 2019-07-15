@@ -4,6 +4,7 @@ class OrderItemsController < ApplicationController
   def create
     OrderItems::Create.call(params: permitted_params, current_order: current_order)
     session[:order_id] = current_order.id
+    redirect_back(fallback_location: :fallback_location, notice: t('order_item.success_update'))
   end
 
   def destroy
