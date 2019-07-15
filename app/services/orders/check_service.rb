@@ -36,7 +36,7 @@ module Orders
     end
 
     def order_find_by_user_id
-      @order_find_by_user_id ||= @user.orders.where.
+      @order_find_by_user_id ||= Order.find_by(user_id: @user.id)
     end
 
     def order_find_by_order_id

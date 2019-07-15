@@ -1,13 +1,8 @@
 module OrderItems
   class Create
-    def initialize(params, order, book_id)
-      @order = order
-      @params = params
-      binding.pry
-      @order_item = @order.order_items.find_or_initialize_by(book_id: book_id)
-    end
 
     def call
+      @order_item = @order.order_items.find_or_initialize_by(book_id: book_id)
       @order_item.update(quantity: new_calculated_quantity)
     end
 
