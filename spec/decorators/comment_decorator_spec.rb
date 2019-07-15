@@ -1,11 +1,16 @@
 RSpec.describe CommentDecorator do
-  let!(:comment) { build(:comment).decorate }
+  let(:user) { build(:user) }
+  let!(:comment) { build(:comment, user: user, mark: 3).decorate }
 
   describe 'grey stars count' do
-    it { expect(comment.gray_stars_count).to eq(Comment::COUNT_STARTS - comment.mark) }
+    let(:count_stars) { stub_const('Comment::COUNT_STARTS', 5) }
+
+    it { expect(comment.gray_stars_count).to eq(2) }
   end
 
   describe 'first user email letter' do
-    it { expect(comment.first_char_user_email).to eq(comment.user_email.first) }
+    let(:first_letter) { user.email.first }
+
+    it { expect(comment.first_char_user_email).to eq(first_letter) }
   end
 end
