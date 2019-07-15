@@ -6,12 +6,22 @@ en:
     welcome: "Welcome"
     catalog: "Catalog"
 
+  header:
+    all_books: All books
+    logo_name: Bookstore
+    shop: Shop
+    home: Home
+    login: Login
+    log_out: Log out
+    my_account: My account
+    
   btn:
     account: "My account"
     settings: "Settings"
     books: "Books"
     orders: "Orders"
     out: "Log out"
+    post: "Post"
     home: "Home"
     shop: "Shop"
     edit: "edit"

@@ -1,0 +1,30 @@
+#slider.carousel.slide{'data-ride': "carousel"}
+  %ol.carousel-indicators
+    %li.active{'data-target': "#slider", 'data-slide-to': "0"}
+    %li{'data-target': "#slider", 'data-slide-to': "1"}
+    %li{'data-target': "#slider", 'data-slide-to': "2"}
+  .carousel-inner{role: "listbox"}
+    - slider_books.each_with_index do |book, index|
+      %div{'class': "item#{' active' if index.zero?}"}
+        .row
+          .col-sm-5
+            .general-img-wrap
+              = link_to book_path(book.id) do
+                = image_tag(book.first_book_image(:medium_img), class: "img-shadow general-thumbnail-img")
+          .col-sm-7
+            .mb-60
+              = link_to book_path(book.id) do
+                %h1
+                  = book.name
+              %p.lead.small.line-height-2
+                = book.short_description
+              %p.lead.small
+                = book.authors_title
+    %a.left.carousel-control{href: "#slider", role: "button", 'data-slide': "prev"}
+      %span.icon-prev{'aria-hidden': "true"}
+      %span.sr-only
+        = t('home.previous')
+    %a.right.carousel-control{href: "#slider", role: "button", 'data-slide': "next"}
+      %span.icon-next{'aria-hidden': "true"}
+      %span.sr-only
+        = t('home.next')
