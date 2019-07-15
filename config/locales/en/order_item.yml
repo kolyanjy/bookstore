@@ -1,0 +1,10 @@
+en:
+  order_item:
+    book: Book
+    price: Price
+    quantity: Quantity
+    total: Total
+    success_delete: Line item successfully deleted
+    error_delete: Line item not deleted
+    success_update: Quantity successfully updated
+    error_update: Quantity can not be less than 1

@@ -1,0 +1,49 @@
+%main.container.general-main-wrap
+  - if @order.order_items.exists?
+    %h1.general-title-margin
+      = t('order.cart')
+    -# = render 'orders/shared/mobile_item'
+    .hidden-xs
+      %table.table.table-hover
+        %tr.no-hover
+          %th.col-pic.pl-0
+            %span.in-grey-600
+              = t('order_item.book')
+          %th.col-title
+          %th.col-price
+            %span.in-grey-600
+              = t('order_item.price')
+          %th.col-quantity
+            %span.in-grey-600
+              = t('order_item.quantity')
+          %th.col-total
+            %span.in-grey-600
+              = t('order_item.total')
+          %th.col-close
+        - @order.order_items.decorate.order(id: 'desc').each do |order_item|
+          %tr
+            %td
+              = link_to book_path(order_item.book.id) do
+                .general-img-wrap-table.margin-0
+                  = image_tag(order_item.book.decorate.first_book_image(:medium_img) , class: "cart-img-shadow pull-left")
+            %td
+              %p.title
+                = order_item.book.name
+            %td
+              %span.font-16.in-gold-500
+                = number_to_currency(order_item.book.price)
+            %td
+              = render 'orders/partials/update_order_item', order_item: order_item
+            %td
+              %span.font-16.in-gold-500
+                = number_to_currency(order_item.sub_total)
+            %td
+              = link_to order_order_item_path(session[:order_id], order_item.id), method: :delete, class: 'close general-cart-close' do
+                %span{'aria-hidden': "true"} &times;
+    .text-center
+      -# = link_to t('button.checkout'), user_signed_in? ? checkout_path(:fill_address) : checkout_path(:quick_registration), class: 'btn btn-default mb-20'
+  - else
+    %h1.general-title-margin
+      = t('order.cart')
+    .text-center.font-18.in-gold-500
+      = t('order.empty')
