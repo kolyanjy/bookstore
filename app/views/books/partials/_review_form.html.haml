@@ -1,0 +1,17 @@
+.col-md-12
+  %h3= t('comment.write_a_review')
+  %p.general-info-text= t('comment.score')
+  = simple_form_for(:comment, url: book_comments_path(book), html: { method: :post}, defaults: { input_html: { class: "form-control write_review" }}) do |f|
+    .mb-15.rating
+      = f.collection_radio_buttons :mark, radio_btn_option, :first, :last, item_wrapper_tag: false do |b|
+        = b.radio_button
+        = b.label {''}
+    .row
+      .col-md-8
+        .mb-40
+          = f.input :title, placeholder: t('comment.enter_title')
+
+          = f.input :description, as: :text, placeholder: t('comment.enter_description')
+
+        .text-right
+          = f.submit t('btn.post'), class: 'btn btn-default mb-20'

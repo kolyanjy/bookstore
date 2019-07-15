@@ -1,0 +1,25 @@
+.mb-80
+  %h3.in-gold-500.mb-25= t('comment.review', count: presenter.comments.count)
+  - presenter.comments.each do |comment|
+    .general-message-wrap.divider-lg
+      .clearfix
+        %span.img-circle.logo-size.pull-left
+          = comment.first_char_user_email
+        .ml-70
+          %div
+            .general-message-date.hidden-xs
+              = l(comment.created_at)
+            .max-240
+              .general-message-verified
+                = t('comment.verified_reviewer')
+              .general-message-name
+                = comment.user_email
+          .rating
+            - comment.mark.times do
+              %span.star-show.in-gold-500
+            - comment.gray_stars_count.times do
+              %span.star-show.in-grey-350
+          %p.font-18
+            = comment.description
+          %p
+            = comment.title

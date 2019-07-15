@@ -2,6 +2,7 @@ class BookDecorator < Draper::Decorator
   LENGTH_DESCRIPTION = 70
 
   decorates_association :authors
+  decorates_association :comments
 
   delegate_all
   def authors_title
