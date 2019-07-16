@@ -41,7 +41,7 @@
               = link_to order_order_item_path(session[:order_id], order_item.id), method: :delete, class: 'close general-cart-close' do
                 %span{'aria-hidden': "true"} &times;
     .text-center
-      = link_to t('btn.checkout'), user_signed_in? ? checkout_path(:fill_address) : checkout_path(:quick_registration), class: 'btn btn-default mb-20'
+      = link_to t('btn.checkout'), class: 'btn btn-default mb-20'
   - else
     %h1.general-title-margin
       = t('order.cart')

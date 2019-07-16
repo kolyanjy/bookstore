@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
-  before_action :loaded_categories
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
-  helper_method :current_order
+  helper_method :current_order, :loaded_categories
 
   private
 

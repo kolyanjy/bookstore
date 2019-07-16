@@ -20,7 +20,7 @@ module Orders
     def user_order
       return create_user_order unless order_find_by_user_id
 
-      @user_order = order_find_by_user_id
+      order_find_by_user_id
     end
 
     def create_user_order
