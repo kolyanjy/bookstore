@@ -1,4 +1,4 @@
-RSpec.feature 'Cart', type: :feature do
+RSpec.describe 'Cart', type: :feature do
   let!(:category) { create(:category) }
   let!(:book) { create(:book, category: category) }
 

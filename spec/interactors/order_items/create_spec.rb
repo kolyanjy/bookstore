@@ -6,7 +6,7 @@ RSpec.describe OrderItems::Create do
 
   describe 'call' do
     context 'with valid params' do
-      let(:order_item) { { quantity: '1' , book_id: book.id } }
+      let(:order_item) { { quantity: '1', book_id: book.id } }
 
       it do
         expect(context.success?).to eq(true)
@@ -15,7 +15,7 @@ RSpec.describe OrderItems::Create do
     end
 
     context 'with valid params' do
-      let(:order_item) { { quantity: '1' , book_id: nil } }
+      let(:order_item) { { quantity: '1', book_id: nil } }
 
       it do
         expect(context.success?).to eq(false)

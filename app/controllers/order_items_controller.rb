@@ -24,7 +24,7 @@ class OrderItemsController < ApplicationController
   private
 
   def setup_order_item
-    @order_item ||= OrderItem.find(params[:id])
+    @order_item ||= OrderItem.find(params[:id]) # rubocop:disable Naming/MemoizedInstanceVariableName:
   end
 
   def permitted_params

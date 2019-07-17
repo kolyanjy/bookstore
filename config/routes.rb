@@ -17,10 +17,7 @@ Rails.application.routes.draw do
   resources :categories do
     resources :books, only: :index
   end
-  resources :orders, only: %i[index show] do
-    resources :order_items, only: :destroy
-  end
-  resources :order_items
+  resources :order_items, only: %i[update create destroy]
   resource :carts, only: :show
 
   root 'home#index'

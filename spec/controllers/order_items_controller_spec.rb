@@ -4,7 +4,7 @@ RSpec.describe OrderItemsController, type: :controller do
   let(:order_item) { build(:order_item, book: book) }
 
   describe '#create' do
-    context 'success add order_item' do
+    context 'when success add order_item' do
       it do
         expect(OrderItem.count).to eq(0)
         post :create, params: { book_id: order_item.book_id, order_items: { book_id: order_item.book_id, quantity: 1 } }
@@ -14,10 +14,11 @@ RSpec.describe OrderItemsController, type: :controller do
       end
     end
 
-    context 'failed add order_item' do
+    context 'when failed add order_item' do
       it do
         expect(OrderItem.count).to eq(0)
-        post :create, params: { book_id: order_item.book_id, order_items: { book_id: order_item.book_id, quantity: nil } }
+        post :create, params: { book_id: order_item.book_id, order_items:
+           { book_id: order_item.book_id, quantity: nil } }
         expect(OrderItem.count).to eq(0)
         expect(response.status).to eq 302
       end
@@ -27,22 +28,22 @@ RSpec.describe OrderItemsController, type: :controller do
   describe '#destroy' do
     let!(:order_item) { create(:order_item) }
 
-      context 'when order item exist' do
-        it do
-          expect(OrderItem.count).to eq(1)
-          post :destroy, params: { id: order_item.id }
-          expect(OrderItem.count).to eq(0)
-          expect(controller).to set_flash[:success].to I18n.t('order_item.success_delete')
-          expect(response.status).to eq 302
-        end
+    context 'when order item exist' do
+      it do
+        expect(OrderItem.count).to eq(1)
+        post :destroy, params: { id: order_item.id }
+        expect(OrderItem.count).to eq(0)
+        expect(controller).to set_flash[:success].to I18n.t('order_item.success_delete')
+        expect(response.status).to eq 302
       end
+    end
 
-      context 'when order item not found' do
-        it do
-          expect(OrderItem.count).to eq(1)
-          post :destroy, params: { id: 100 }
-          expect(OrderItem.count).to eq(1)
-          expect(response.status).to eq 404
+    context 'when order item not found' do
+      it do
+        expect(OrderItem.count).to eq(1)
+        post :destroy, params: { id: 100 }
+        expect(OrderItem.count).to eq(1)
+        expect(response.status).to eq 404
       end
     end
   end
@@ -69,5 +70,4 @@ RSpec.describe OrderItemsController, type: :controller do
       end
     end
   end
-
 end
