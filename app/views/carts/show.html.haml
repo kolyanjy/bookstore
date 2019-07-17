@@ -19,7 +19,7 @@
             %span.in-grey-600
               = t('order_item.total')
           %th.col-close
-        - @order.order_items.decorate.order(id: 'desc').each do |order_item|
+        - @order.order_items.order(id: 'desc').each do |order_item|
           %tr
             %td
               = link_to book_path(order_item.book.id) do
@@ -35,7 +35,7 @@
               = render 'carts/partials/update_order_item', order_item: order_item
             %td
               %span.font-16.in-gold-500
-                = number_to_currency(order_item.sub_total)
+                = number_to_currency(order_item.book.price * order_item.quantity)
             %td
               = link_to order_item_path(order_item.id), method: :delete, class: 'close general-cart-close' do
                 %span{'aria-hidden': "true"} &times;
