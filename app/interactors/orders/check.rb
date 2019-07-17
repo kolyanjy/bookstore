@@ -1,17 +1,14 @@
 module Orders
-  class CheckService
-    def initialize(order_id = nil, user = nil)
-      @order_id = order_id
-      @user = user
-    end
+  class Check
+    include Interactor
 
     def call
-      if @user
+      if context.user
         user_order
-      elsif @order_id
+      elsif context.order_id
         order_find_by_order_id
       else
-        Order.new
+        context.order = Order.create
       end
     end
 
@@ -27,20 +24,20 @@ module Orders
       if order_find_by_order_id
         order_update_user_id
       else
-        Order.new(user_id: @user.id)
+        context.order = Order.new(user_id: context.user.id)
       end
     end
 
     def order_update_user_id
-      return order_find_by_user_id if order_find_by_order_id.update(user_id: @user.id)
+      return order_find_by_user_id if order_find_by_order_id.update(user_id: context.user.id)
     end
 
     def order_find_by_user_id
-      @order_find_by_user_id ||= Order.find_by(user_id: @user.id)
+      context.order ||= Order.find_by(user_id: context.user.id)
     end
 
     def order_find_by_order_id
-      @order_find_by_order_id ||= Order.find_by(id: @order_id)
+      context.order ||= Order.find_by(id: context.order_id)
     end
   end
 end

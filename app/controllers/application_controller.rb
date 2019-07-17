@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   private
 
   def current_order
-    @current_order ||= Orders::CheckService.new(session[:order_id], current_user).call
+    @current_order = Orders::Check.call(order_id: session[:order_id], user: current_user).order
+    # binding.pry
   end
 
   def not_found
@@ -14,6 +15,6 @@ class ApplicationController < ActionController::Base
   end
 
   def loaded_categories
-    @loaded_categories ||= Category.all
+    Category.all
   end
 end

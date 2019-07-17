@@ -2,7 +2,6 @@
   - if @order.order_items.exists?
     %h1.general-title-margin
       = t('order.cart')
-    -# = render 'orders/shared/mobile_item'
     .hidden-xs
       %table.table.table-hover
         %tr.no-hover
@@ -33,7 +32,7 @@
               %span.font-16.in-gold-500
                 = number_to_currency(order_item.book.price)
             %td
-              = render 'orders/partials/update_order_item', order_item: order_item
+              = render 'carts/partials/update_order_item', order_item: order_item
             %td
               %span.font-16.in-gold-500
                 = number_to_currency(order_item.sub_total)

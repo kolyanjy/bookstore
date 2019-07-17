@@ -4,25 +4,21 @@ class OrderItemsController < ApplicationController
   def create
     OrderItems::Create.call(params: permitted_params, current_order: current_order)
     session[:order_id] = current_order.id
+    # binding.pry
     redirect_back(fallback_location: :fallback_location, notice: t('order_item.success_update'))
   end
 
   def destroy
     @order_item.destroy
-    redirect_to cart_path(current_order), flash: { success: t('order_item.success_delete') }
+    redirect_to carts_path, flash: { success: t('order_item.success_delete') }
   end
 
-  def increment_quantity
-    @order_item.increment!(:quantity)
-    redirect_to cart_path(current_order), flash: { success: t('order_item.success_update') }
-  end
-
-  def decrement_quantity
-    if @order_item.quantity == 1
-      redirect_to cart_path(current_order), flash: { danger: t('order_item.error_update') }
+  def update
+    result = OrderItems::Update.call(params: params, order_item: @order_item)
+    if result.success?
+      redirect_to carts_path, flash: { success: t('order_item.success_update') }
     else
-      @order_item.decrement!(:quantity)
-      redirect_to cart_path(current_order), flash: { success: t('order_item.success_update') }
+      redirect_to carts_path, flash: { danger: t('order_item.error_update') }
     end
   end
 

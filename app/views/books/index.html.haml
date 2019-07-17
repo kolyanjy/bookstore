@@ -11,7 +11,7 @@
           = t('book.all')
           %span.badge.general-badge
             = @presenter.books_count
-      - @loaded_categories.each do |category|
+      - loaded_categories.each do |category|
         %li.mr-15
           = link_to books_path(category: category), class: 'filter-link' do
             = category.name
@@ -28,7 +28,7 @@
                 .general-thumb-link-wrap
                   = link_to book_path(book.id), class: 'thumb-hover-link' do
                     %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
-                  = simple_form_for(:order_items, url: new_order_items_path, html: { class: "display-inline-block" }) do |f|
+                  = simple_form_for(:order_items, url: order_items_path, html: { method: :post, class: "display-inline-block" }) do |f|
                     = f.input :quantity, :as => :hidden, :input_html => { :value => 1 }
                     = f.input :book_id, :as => :hidden, :input_html => { :value => book.id }
                     = f.button :button, class: 'thumb-hover-link', id: 'button' do

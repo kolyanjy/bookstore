@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :order_item do
-    
-  end
+      quantity { 1 }
+      book
+      order
+    end
 end
