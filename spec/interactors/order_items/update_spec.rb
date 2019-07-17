@@ -4,8 +4,8 @@ RSpec.describe OrderItems::Update do
   let!(:book) { create(:book) }
 
   describe 'call' do
-    context 'when plus' do
-      let(:params) { { operation: 'plus' } }
+    context 'when valid' do
+      let(:params) { { quantity: 2  } }
 
       it do
         expect(context.success?).to eq(true)
@@ -13,22 +13,12 @@ RSpec.describe OrderItems::Update do
       end
     end
 
-    context 'when plus' do
-      let(:params) { { operation: 'minus' } }
-      let(:order_item) { create(:order_item, book: book, quantity: 2) }
-
-      it do
-        expect(context.success?).to eq(true)
-        expect(order_item.quantity).to eq(1)
-      end
-    end
-
-    context 'when invalid minus' do
-      let(:params) { { operation: 'minus' } }
+    context 'when invalid' do
+      let(:params) { { quantity: nil } }
 
       it do
         expect(context.success?).to eq(false)
-        expect(order_item.quantity).to eq(1)
+        expect(order_item.quantity).to eq(nil)
       end
     end
   end

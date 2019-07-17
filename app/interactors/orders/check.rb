@@ -8,7 +8,7 @@ module Orders
       elsif context.order_id
         order_find_by_order_id
       else
-        context.order = Order.create
+        context.order ||= Order.create
       end
     end
 
@@ -21,15 +21,7 @@ module Orders
     end
 
     def create_user_order
-      if order_find_by_order_id
-        order_update_user_id
-      else
-        context.order = Order.new(user_id: context.user.id)
-      end
-    end
-
-    def order_update_user_id
-      return order_find_by_user_id if order_find_by_order_id.update(user_id: context.user.id)
+      context.order ||= Order.create(user_id: context.user.id)
     end
 
     def order_find_by_user_id

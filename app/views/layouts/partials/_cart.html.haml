@@ -1,10 +1,11 @@
-- if current_order.persisted? && !current_order.order_items.empty?
-  = link_to carts_path, {:class => 'shop-link pull-right visible-xs'} do
-    %span.shop-icon
-      %span.shop-quantity
-        = current_order.decorate.sum_books
-- if current_order.persisted? && !current_order.order_items.empty?
-  = link_to carts_path, {:class => 'shop-link pull-right hidden-xs'} do
-    %span.shop-icon
-      %span.shop-quantity
-        = current_order.decorate.sum_books
+- unless current_order.nil?
+  - if current_order.persisted? && !current_order.order_items.empty?
+    = link_to carts_path, {:class => 'shop-link pull-right visible-xs'} do
+      %span.shop-icon
+        %span.shop-quantity
+          = current_order.order_items.sum(:quantity)
+  - if current_order.persisted? && !current_order.order_items.empty?
+    = link_to carts_path, {:class => 'shop-link pull-right hidden-xs'} do
+      %span.shop-icon
+        %span.shop-quantity
+          = current_order.order_items.sum(:quantity)

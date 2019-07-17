@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :books, only: :index
   end
   resources :orders, only: %i[index show] do
-    resources :order_items, only: %i[destroy]
+    resources :order_items, only: :destroy
   end
   resources :order_items
   resource :carts, only: :show

@@ -1,11 +1,10 @@
 class OrderItemsController < ApplicationController
-  before_action :setup_order_item
+  before_action :setup_order_item, except: [:create]
 
   def create
+    session[:order_id] ||= current_order.id
     OrderItems::Create.call(params: permitted_params, current_order: current_order)
-    session[:order_id] = current_order.id
-    # binding.pry
-    redirect_back(fallback_location: :fallback_location, notice: t('order_item.success_update'))
+    redirect_back(fallback_location: root_path, notice: t('order_item.success_update'))
   end
 
   def destroy
@@ -25,7 +24,7 @@ class OrderItemsController < ApplicationController
   private
 
   def setup_order_item
-    @order_item ||= OrderItem.find_by(id: params[:id])
+    @order_item ||= OrderItem.find(params[:id])
   end
 
   def permitted_params
