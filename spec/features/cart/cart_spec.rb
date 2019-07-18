@@ -7,39 +7,41 @@ RSpec.describe 'Cart', type: :feature do
     expect(page).not_to have_css '.shop-icon'
   end
 
-  it 'Add new order item from shop' do
-    visit books_path
-    expect(OrderItem.count).to eq(0)
-    find('.thumbnail.general-thumbnail').hover
-    find('.btn.thumb-hover-link').click
-    expect(page).to have_css '.shop-icon', text: '1'
-    expect(page).to have_content I18n.t('order_item.success_update')
-    expect(OrderItem.count).to eq(1)
-  end
-
-  it 'Add new order item from home page' do
-    visit root_path
-    expect(OrderItem.count).to eq(0)
-    find('.thumbnail.general-thumbnail').hover
-    find('.btn.thumb-hover-link').click
-    expect(page).to have_css '.shop-icon', text: '1'
-    expect(page).to have_content I18n.t('order_item.success_update')
-    expect(OrderItem.count).to eq(1)
-  end
-
-  it 'Add two order items from book page' do
-    visit book_path(book.id)
-    expect(OrderItem.count).to eq(0)
-    within('a#plus') do
-      find('.fa.fa-plus').click
+  describe 'Add new order items' do
+    it 'from shop' do
+      visit books_path
+      expect(OrderItem.count).to eq(0)
+      find('.thumbnail.general-thumbnail').hover
+      find('.btn.thumb-hover-link').click
+      expect(page).to have_css '.shop-icon', text: '1'
+      expect(page).to have_content I18n.t('order_item.success_update')
+      expect(OrderItem.count).to eq(1)
     end
-    find('button', text: 'Add to Cart').click
-    expect(page).to have_content I18n.t('order_item.success_update')
-    expect(page).to have_css '.shop-icon', text: '2'
-    expect(OrderItem.count).to eq(1)
+
+    it 'from home page' do
+      visit root_path
+      expect(OrderItem.count).to eq(0)
+      find('.thumbnail.general-thumbnail').hover
+      find('.btn.thumb-hover-link').click
+      expect(page).to have_css '.shop-icon', text: '1'
+      expect(page).to have_content I18n.t('order_item.success_update')
+      expect(OrderItem.count).to eq(1)
+    end
+
+    it 'two order items from book page' do
+      visit book_path(book.id)
+      expect(OrderItem.count).to eq(0)
+      within('a#plus') do
+        find('.fa.fa-plus').click
+      end
+      find('button', text: 'Add to Cart').click
+      expect(page).to have_content I18n.t('order_item.success_update')
+      expect(page).to have_css '.shop-icon', text: '2'
+      expect(OrderItem.count).to eq(1)
+    end
   end
 
-  it 'Add new two order item in cart' do
+  it 'Add quantity to order item in cart' do
     visit books_path
     find('.thumbnail.general-thumbnail').hover
     find('.btn.thumb-hover-link').click
@@ -50,7 +52,7 @@ RSpec.describe 'Cart', type: :feature do
     expect(OrderItem.find_by(book_id: book.id).quantity).to eq(2)
   end
 
-  it 'try to set quantity less than 1' do
+  it 'try to set order item quantity less than 1' do
     visit books_path
     find('.thumbnail.general-thumbnail').hover
     find('.btn.thumb-hover-link').click
