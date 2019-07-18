@@ -13,13 +13,15 @@ RSpec.describe Orders::Check do
     it { expect(interactor.call(order_id: order.id).order.id).to eq(order.id) }
   end
 
-  context 'when user have order' do
-    let!(:order) { create(:order, user: user) }
-
-    it { expect(interactor.call(user: user).order).to eq(order) }
-  end
-
   context 'when user exist' do
-    it { expect(interactor.call(user: user).order.user_id).to eq(user.id) }
+    context 'when user have order' do
+      let!(:order) { create(:order, user: user) }
+
+      it { expect(interactor.call(user: user).order).to eq(order) }
+    end
+
+    context 'when user havn`t order' do
+      it { expect(interactor.call(user: user).order.user_id).to eq(user.id) }
+    end
   end
 end
