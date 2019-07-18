@@ -27,18 +27,18 @@ RSpec.describe 'Cart', type: :feature do
       expect(page).to have_content I18n.t('order_item.success_update')
       expect(OrderItem.count).to eq(1)
     end
+  end
 
-    it 'two order items from book page' do
-      visit book_path(book.id)
-      expect(OrderItem.count).to eq(0)
-      within('a#plus') do
-        find('.fa.fa-plus').click
-      end
-      find('button', text: 'Add to Cart').click
-      expect(page).to have_content I18n.t('order_item.success_update')
-      expect(page).to have_css '.shop-icon', text: '2'
-      expect(OrderItem.count).to eq(1)
+  it 'two order items from book page' do
+    visit book_path(book.id)
+    expect(OrderItem.count).to eq(0)
+    within('a#plus') do
+      find('.fa.fa-plus').click
     end
+    find('button', text: 'Add to Cart').click
+    expect(page).to have_content I18n.t('order_item.success_update')
+    expect(page).to have_css '.shop-icon', text: '2'
+    expect(OrderItem.count).to eq(1)
   end
 
   it 'Add quantity to order item in cart' do

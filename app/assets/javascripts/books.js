@@ -16,7 +16,7 @@ $(document).on('turbolinks:load', function() {
 
   $('#minus').click(function(e) {
     var currentValue = $('.input-count-book').val();
-    if (currentValue > min_value) {
+    if (currentValue > MIN_VALUE) {
       var new_value = Number(currentValue) - 1;
       $('.input-count-book').val(new_value);
     }
@@ -24,7 +24,7 @@ $(document).on('turbolinks:load', function() {
 
   $('#plus').click(function(e) {
     var currentValue = $('.input-count-book').val();
-    if (currentValue < max_value) {
+    if (currentValue < MAX_VALUE) {
       var new_value = Number(currentValue) + 1;
       $('.input-count-book').val(new_value);
     }
