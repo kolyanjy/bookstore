@@ -5,7 +5,7 @@ RSpec.describe OrderItem, type: :model do
   end
 
   describe 'validation' do
-    it { is_expected.not_to allow_value('').for(:quantity) }
+    it { is_expected.to validate_numericality_of(:quantity).is_greater_than(0) }
     it { is_expected.to validate_presence_of(:quantity) }
   end
 end

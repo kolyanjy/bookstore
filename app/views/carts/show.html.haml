@@ -1,5 +1,5 @@
 %main.container.general-main-wrap
-  - if @order.order_items.exists?
+  - unless @order_items.nil?
     %h1.general-title-margin
       = t('order.cart')
     .hidden-xs
@@ -19,15 +19,15 @@
             %span.in-grey-600
               = t('order_item.total')
           %th.col-close
-        - @order.order_items.order(id: 'desc').each do |order_item|
+        - @order_items.each do |order_item|
           %tr
             %td
               = link_to book_path(order_item.book.id) do
                 .general-img-wrap-table.margin-0
-                  = image_tag(order_item.book.decorate.first_book_image(:medium_img) , class: "cart-img-shadow pull-left")
+                  = image_tag(order_item.book.first_book_image(:medium_img) , class: "cart-img-shadow pull-left")
             %td
               %p.title
-                = order_item.book_name
+                = order_item.book.name
             %td
               %span.font-16.in-gold-500
                 = number_to_currency(order_item.book.price)

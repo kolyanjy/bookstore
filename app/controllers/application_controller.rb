@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   private
 
   def current_order
-    @current_order ||= Orders::Check.call(order_id: session[:order_id], user: current_user).order
+    @current_order ||= Orders::Check.call(order_id: session[:order_id], user: current_user).order.decorate
   end
 
   def not_found

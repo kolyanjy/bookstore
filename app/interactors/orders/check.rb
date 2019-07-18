@@ -15,13 +15,11 @@ module Orders
     private
 
     def user_order
-      return create_user_order unless order_find_by_user_id
-
-      order_find_by_user_id
+      order_find_by_user_id || create_user_order
     end
 
     def create_user_order
-      context.order ||= Order.create(user_id: context.user.id)
+      context.order = Order.create(user_id: context.user.id)
     end
 
     def order_find_by_user_id
