@@ -20,13 +20,13 @@
         .col-xs-12.col-md-4
           %p.h1.in-gold-500.mt-10
             = number_to_currency(@book.price)
-        = simple_form_for(:order_items, url: new_order_items_path, html: { method: :post}, defaults: { input_html: { class: "form-control" }}) do |f|
+        = simple_form_for(:order_items, url: order_items_path, html: { method: :post}, defaults: { input_html: { class: "form-control" }}) do |f|
           .col-xs-5.col-md-3
             .input-group.general-position.inline
               %a.input-link.b-n.pt-7#minus
                 %i.fa.fa-minus.line-height-40.cursor-pointer.bg-i
-              = f.input :book_id, :as => :hidden, :input_html => { :value => @book.id }
-              = f.input :quantity, label: false, :input_html => { :type=>"text", :required => true, :value => 1, class: 'form-control quantity-input input-count-book inline' }
+              = f.input :book_id, as: :hidden, input_html: { value: @book.id }
+              = f.input :quantity, label: false, input_html: { type: "text", required: true, value: 1, class: 'form-control quantity-input input-count-book inline' }
               %a.b-n.input-link#plus
                 %i.fa.fa-plus.line-height-40.cursor-pointer.bg-i
           .col-xs-7.col-md-5

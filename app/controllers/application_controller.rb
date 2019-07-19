@@ -1,13 +1,12 @@
 class ApplicationController < ActionController::Base
-  before_action :loaded_categories
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
-  helper_method :current_order
+  helper_method :current_order, :loaded_categories
 
   private
 
   def current_order
-    @current_order ||= Orders::CheckService.new(session[:order_id], current_user).call
+    @current_order ||= Orders::Check.call(order_id: session[:order_id], user: current_user).order.decorate
   end
 
   def not_found

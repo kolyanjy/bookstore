@@ -1,4 +1,7 @@
 $(document).on('turbolinks:load', function() {
+  const MIN_VALUE = 1
+  const MAX_VALUE = 100
+
   $('#btn_read_more').click(function() {
     $('#small_text').hide();
     $('#block_more').css('display', 'inline');
@@ -12,17 +15,17 @@ $(document).on('turbolinks:load', function() {
   })
 
   $('#minus').click(function(e) {
-    var current_value = $('.input-count-book').val();
-    if(current_value >= 2) {
-      var new_value = Number(current_value) - 1;
+    var currentValue = $('.input-count-book').val();
+    if (currentValue > MIN_VALUE) {
+      var new_value = Number(currentValue) - 1;
       $('.input-count-book').val(new_value);
     }
   });
 
   $('#plus').click(function(e) {
-    var current_value = $('.input-count-book').val();
-    if(current_value < 100) {
-      var new_value = Number(current_value) + 1;
+    var currentValue = $('.input-count-book').val();
+    if (currentValue < MAX_VALUE) {
+      var new_value = Number(currentValue) + 1;
       $('.input-count-book').val(new_value);
     }
   });
