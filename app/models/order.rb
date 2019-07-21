@@ -1,6 +1,9 @@
 class Order < ApplicationRecord
   include AASM
 
+  FINISH_STATUSES = %i[in_progress in_delivery delivered canceled].freeze
+
+
   belongs_to :user, optional: true
 
   has_many :order_items, dependent: :destroy
