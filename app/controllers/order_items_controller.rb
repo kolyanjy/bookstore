@@ -6,22 +6,22 @@ class OrderItemsController < ApplicationController
     if result.success?
       redirect_back(fallback_location: root_path, notice: t('order_item.success_update'))
     else
-      redirect_to carts_path, flash: { danger: t('order_item.error_update') }
+      redirect_to cart_path, flash: { danger: t('order_item.error_update') }
     end
     session[:order_id] ||= current_order.id
   end
 
   def destroy
     @order_item.destroy
-    redirect_to carts_path, flash: { success: t('order_item.success_delete') }
+    redirect_to cart_path, flash: { success: t('order_item.success_delete') }
   end
 
   def update
     result = OrderItems::Update.call(params: params, order_item: @order_item)
     if result.success?
-      redirect_to carts_path, flash: { success: t('order_item.success_update') }
+      redirect_to cart_path, flash: { success: t('order_item.success_update') }
     else
-      redirect_to carts_path, flash: { danger: t('order_item.error_update') }
+      redirect_to cart_path, flash: { danger: t('order_item.error_update') }
     end
   end
 

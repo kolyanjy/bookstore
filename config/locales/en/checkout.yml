@@ -1,0 +1,55 @@
+en:
+  checkout:
+    title: Checkout
+    edit: edit
+    address:
+      billing_address: Billing Address
+      shippingbutton_address: Shipping Address
+      all_fields_required: all fields are required
+      use_billing_address: Use Billing Address
+      phone: "Phone %{phone}"
+      success_create: "address success created"
+      danger_create: "address has not created"
+    delivery:
+      title: Delivery
+      method: Method
+      days: Days
+      price: Price
+      delivery_in_days: "%{min_days} to %{max_days} days"
+    payment:
+      title: Credit Card
+      hint: 3-digit security code, usually found on the back of your card. American Express cards has 4-digit code, located on the front
+      payment_information: Payment Information
+      placeholder:
+        name_on_card: Name on Card
+        cart_number: Cart Number
+        date: MM / YY
+        cvv: CVV
+    complete:
+      thank_you_for_your_order: Thank You for your Order!
+      back_to_store: Back to Store
+      send_email: "An order confirmation has been has been sent to %{email}"
+      order_number: Order %{number}
+    authentication:
+      or: or
+      log_in_with_password: Log In With Password
+      enter_email: Enter Email
+      enter_password: Password
+      forgot_password: Forgot password?
+      returning_customer: Returning Customer
+      new_customer: New Customer
+      quick_registration: Quick Registration
+      able_to_create_password_late: Able To Create Password Late
+      sign_up: Sign Up
+    step:
+      address: Address
+      delivery: Delivery
+      payment: Payment
+      confirm: Confirm
+      complete: Complete
+    checkout_step:
+      fill_address: "Address"
+      fill_delivery: "Delivery"
+      fill_payment: "Payment"
+      fill_confirm: "Confirm"
+      fill_complete: "Complete"

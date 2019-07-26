@@ -14,7 +14,7 @@ en:
     login: Login
     log_out: Log out
     my_account: My account
-    
+
   btn:
     account: "My account"
     settings: "Settings"
@@ -26,6 +26,7 @@ en:
     shop: "Shop"
     edit: "edit"
     save: "Save"
+    save_and_continue: "Save and continue"
 
   interpolation:
     hello: "Hello %{email}"

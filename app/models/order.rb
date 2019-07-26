@@ -5,6 +5,7 @@ class Order < ApplicationRecord
 
 
   belongs_to :user, optional: true
+  belongs_to :delivery, optional: true
 
   has_many :order_items, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy

@@ -1,0 +1,43 @@
+%main.container
+  %h1.general-title-margin
+    = t('checkout.title')
+  %ul.steps.list-inline
+    = render 'checkout/partials/checkout_steps'
+    .hidden-xs.hidden-sm
+      .row
+        .col-md-5
+          %h3.general-subtitle
+            = t('checkout.address.billing_address')
+          %p.general-info-text
+            = t('checkout.address.all_fields_required')
+        .col-md-5.col-md-offset-1
+          %h3.general-subtitle
+            = t('checkout.address.shipping_address')
+    = simple_form_for(current_order, validate: true, defaults: { input_html: { class: "form-control" }}, html: { method: :post }, url: checkout_fill_address_path) do |f|
+      .row
+        .col-md-5.mb-40
+          .visible-xs.visible-sm
+            %h3.general-subtitle
+              = t('checkout.address.billing_address')
+            %p.general-info-text
+              = t('checkout.address.all_fields_required')
+          = render partial: '/shared/addresses/form_fields', locals: { f: f, address: current_order.billing_address }
+        .col-md-5.col-md-offset-1.mb-60
+          .shipping_address_js
+            .visible-xs.visible-sm
+              %h3.general-subtitle
+                = t('checkout.address.shipping_address')
+            = render partial: '/shared/addresses/form_fields', locals: { f: f, address: current_order.shipping_address }
+          .form-group.checkbox
+            %label.checkbox-label
+              - if current_order.hidden_shipping_form == true
+                = check_box(:hidden_shipping_form, :show, class: 'checkbox-input', hidden: true, checked: true)
+              - else
+                = check_box(:hidden_shipping_form, :show, class: 'checkbox-input', hidden: true, checked: false)
+              %span.checkbox-icon
+                %i.fa.fa-check
+              %span.checkbox-text
+                = t('checkout.address.use_billing_address')
+      .general-text-left.mb-60
+        = render 'checkout/partials/order_summary', order: current_order
+        = f.submit t('btn.save_and_continue'), class: "btn btn-default mb-20 center-block"

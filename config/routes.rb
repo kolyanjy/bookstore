@@ -18,8 +18,16 @@ Rails.application.routes.draw do
     resources :books, only: :index
   end
   resources :order_items, only: %i[update create destroy]
-  resource :carts, only: :show
-  resources :checkout
+  resource :cart, only: :show do
+    get :checkout
+  end
+  namespace :checkout do
+    resource :fill_address, only: %i[show create]
+    resource :fill_delivery, only: %i[show create]
+    resource :fill_payment, only: %i[show create]
+    resource :fill_confirm, only: %i[show create]
+    resource :fill_complete, only: %i[show create]
+  end
 
   root 'home#index'
 end

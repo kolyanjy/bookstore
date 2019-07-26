@@ -1,0 +1,8 @@
+- Order.statuses.first(6).last(5).to_h.each do |key, value|
+  %li.step{class: "#{'active' if value <= current_order.status_before_type_cast}"}
+    %span.step-number
+      = value
+    %span.hidden-xs
+      = link_to public_send("checkout_#{key}_path"), class: 'step_checkout step-text' do
+        = t(key, scope: [:checkout, :checkout_step])
+  %li{class: "#{'step-divider' if value < current_order.status_before_type_cast}"}

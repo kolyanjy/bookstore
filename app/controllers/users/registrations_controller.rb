@@ -30,7 +30,7 @@ module Users
       else
         redirect_back(fallback_location: root_path) and return
       end
-      redirect_to(carts_path)
+      redirect_to(cart_path)
     end
 
     def update_resource(user, params)

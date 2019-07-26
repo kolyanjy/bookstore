@@ -24,12 +24,12 @@ RSpec.describe 'Settings', type: :feature do
     context 'when valid input' do
       it do
         visit edit_user_registration_path
-        fill_in 'user_billing_address_attributes_first_name', with: valid_str
-        fill_in 'user_billing_address_attributes_last_name', with: valid_str
-        fill_in 'user_billing_address_attributes_address', with: valid_str
-        fill_in 'user_billing_address_attributes_city', with: valid_str
-        fill_in 'user_billing_address_attributes_zip', with: valid_zip
-        fill_in 'user_billing_address_attributes_phone', with: valid_phone
+        fill_in 'user_billing_address_first_name', with: valid_str
+        fill_in 'user_billing_address_last_name', with: valid_str
+        fill_in 'user_billing_address_address', with: valid_str
+        fill_in 'user_billing_address_city', with: valid_str
+        fill_in 'user_billing_address_zip', with: valid_zip
+        fill_in 'user_billing_address_phone', with: valid_phone
         find('input', class: 'BillingAddress').click
         expect(page).to have_selector '.flash', text: I18n.t('settings.address.success_update')
       end
@@ -38,12 +38,12 @@ RSpec.describe 'Settings', type: :feature do
     context 'when invalid input' do
       it do
         visit edit_user_registration_path
-        fill_in 'user_billing_address_attributes_first_name', with: empty
-        fill_in 'user_billing_address_attributes_last_name', with: empty
-        fill_in 'user_billing_address_attributes_address', with: empty
-        fill_in 'user_billing_address_attributes_city', with: empty
-        fill_in 'user_billing_address_attributes_zip', with: empty
-        fill_in 'user_billing_address_attributes_phone', with: empty
+        fill_in 'user_billing_address_first_name', with: empty
+        fill_in 'user_billing_address_last_name', with: empty
+        fill_in 'user_billing_address_address', with: empty
+        fill_in 'user_billing_address_city', with: empty
+        fill_in 'user_billing_address_zip', with: empty
+        fill_in 'user_billing_address_phone', with: empty
         find('input', class: 'BillingAddress').click
         expect(page).to have_selector('.invalid-feedback', count: 6)
       end
@@ -54,12 +54,12 @@ RSpec.describe 'Settings', type: :feature do
     context 'when valid input' do
       it do
         visit edit_user_registration_path
-        fill_in 'user_shipping_address_attributes_first_name', with: valid_str
-        fill_in 'user_shipping_address_attributes_last_name', with: valid_str
-        fill_in 'user_shipping_address_attributes_address', with: valid_str
-        fill_in 'user_shipping_address_attributes_city', with: valid_str
-        fill_in 'user_shipping_address_attributes_zip', with: valid_zip
-        fill_in 'user_shipping_address_attributes_phone', with: valid_phone
+        fill_in 'user_shipping_address_first_name', with: valid_str
+        fill_in 'user_shipping_address_last_name', with: valid_str
+        fill_in 'user_shipping_address_address', with: valid_str
+        fill_in 'user_shipping_address_city', with: valid_str
+        fill_in 'user_shipping_address_zip', with: valid_zip
+        fill_in 'user_shipping_address_phone', with: valid_phone
         find('input', class: 'ShippingAddress').click
         expect(page).to have_selector '.flash', text: I18n.t('settings.address.success_update')
       end
@@ -68,12 +68,12 @@ RSpec.describe 'Settings', type: :feature do
     context 'when invalid input' do
       it do
         visit edit_user_registration_path
-        fill_in 'user_shipping_address_attributes_first_name', with: empty
-        fill_in 'user_shipping_address_attributes_last_name', with: empty
-        fill_in 'user_shipping_address_attributes_address', with: empty
-        fill_in 'user_shipping_address_attributes_city', with: empty
-        fill_in 'user_shipping_address_attributes_zip', with: empty
-        fill_in 'user_shipping_address_attributes_phone', with: empty
+        fill_in 'user_shipping_address_first_name', with: empty
+        fill_in 'user_shipping_address_last_name', with: empty
+        fill_in 'user_shipping_address_address', with: empty
+        fill_in 'user_shipping_address_city', with: empty
+        fill_in 'user_shipping_address_zip', with: empty
+        fill_in 'user_shipping_address_phone', with: empty
         find('input', class: 'ShippingAddress').click
         expect(page).to have_selector('.invalid-feedback', count: 6)
       end
