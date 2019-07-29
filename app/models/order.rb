@@ -3,15 +3,18 @@ class Order < ApplicationRecord
 
   FINISH_STATUSES = %i[in_progress in_delivery delivered canceled].freeze
 
-
   belongs_to :user, optional: true
   belongs_to :delivery, optional: true
+  belongs_to :coupon, optional: true
 
   has_many :order_items, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
 
   has_one :billing_address, as: :addressable, dependent: :destroy
   has_one :shipping_address, as: :addressable, dependent: :destroy
+  has_one :payment, dependent: :destroy
+
+  accepts_nested_attributes_for :shipping_address, :billing_address, update_only: true
 
   enum status: {
     cart: 0,

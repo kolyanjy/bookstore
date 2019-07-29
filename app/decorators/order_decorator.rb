@@ -2,7 +2,7 @@ class OrderDecorator < Draper::Decorator
   delegate_all
 
   def items_sum
-    order_items.sum(:quantity)
+    order_items.sum(&:quantity)
   end
 
   def order_summary

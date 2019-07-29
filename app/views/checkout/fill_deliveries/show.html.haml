@@ -6,7 +6,7 @@
   %h3.general-subtitle
     = t('checkout.delivery.title')
   -# = render 'checkout/shared/mobile/delivery'
-  = simple_form_for :checkout_delivery, { url: checkout_fill_delivery_path, html: { method: :post }} do |f|
+  = simple_form_for current_order, { url: checkout_fill_delivery_path, html: { method: :post }} do |f|
     .hidden-xs.mb-res-50
       %table.table.table-hover
         %thead
@@ -21,12 +21,13 @@
               %span.in-grey-600
                 = t('checkout.delivery.price')
         %tbody
+
           - @deliveries.each_with_index do |delivery, index|
             %tr
               %td
                 .form-group.radio.mt-0.mb-0
                   %label.radio-label
-                    = f.radio_button(:delivery, delivery.id, checked: current_order.delivery == delivery || index.zero?, class: 'radio-input', hidden: true)
+                    = f.radio_button(:delivery_id, delivery.id, checked: current_order.delivery == delivery || index.zero?, class: 'radio-input', hidden: true)
                     %span.radio-icon
                     %span.radio-text
                       = delivery.name

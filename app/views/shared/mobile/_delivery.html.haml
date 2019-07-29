@@ -1,0 +1,34 @@
+= simple_form_for :checkout_delivery, { url: wizard_path, html: { method: :put }} do |f|
+  .visible-xs
+    - @presenter.delivery_all.each_with_index do |delivery, index|
+      .general-cart-item.divider-lg-bottom
+        %table.table
+          %tr
+            %td.col-half
+              %span.in-grey-600
+                = t('checkout.delivery.method')
+            %td.col-half
+              .form-group.radio.mt-0.mb-0
+                %label.radio-label
+                  = f.radio_button(:delivery, delivery.id, checked: @presenter.order_delivery?(delivery.id) || index.zero?, class: 'radio-input', hidden: true)
+                  %span.radio-icon
+                  %span.radio-text
+                    = delivery.name
+          %tr
+            %td
+              %span.in-grey-600
+                = t('checkout.delivery.days')
+            %td
+              %span.font-16.fw-300
+                = t('checkout.delivery.delivery_in_days', min_days: delivery.min_days, max_days: delivery.max_days)
+          %tr
+            %td
+              %span.in-grey-600
+                = t('checkout.delivery.price')
+            %td
+              %span.font-16.in-gold-500
+                = t('book.price', price: delivery.price)
+    .general-text-right
+      = render 'order_summary', order: @presenter.order
+    .text-center
+      = f.submit t('button.save_and_continue'), class: "btn btn-default mb-20 center-block"

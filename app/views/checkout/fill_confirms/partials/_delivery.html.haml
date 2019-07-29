@@ -1,0 +1,10 @@
+.col-sm-3
+  %h3.general-subtitle
+    = t('checkout.delivery.title')
+    = link_to checkout_fill_delivery_path do
+      %span.general-edit
+        = t('checkout.edit')
+  %p.general-address
+    = delivery.name
+  %p
+    = t('checkout.delivery.delivery_in_days', min_days: delivery.min_days, max_days: delivery.max_days)

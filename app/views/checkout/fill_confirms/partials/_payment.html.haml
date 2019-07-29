@@ -1,0 +1,10 @@
+.col-sm-3
+  %h3.general-subtitle
+    = t('checkout.payment.payment_information')
+    = link_to checkout_fill_payment_path do
+      %span.general-edit
+        = t('checkout.edit')
+  %p.general-address
+    = order.payment.name
+    %br
+    = order.payment.date

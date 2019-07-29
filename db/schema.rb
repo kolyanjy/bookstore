@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_25_163047) do
+ActiveRecord::Schema.define(version: 2019_07_28_223222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,13 @@ ActiveRecord::Schema.define(version: 2019_07_25_163047) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "coupons", force: :cascade do |t|
+    t.string "key"
+    t.decimal "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "deliveries", force: :cascade do |t|
     t.string "name"
     t.string "min_days"
@@ -135,12 +142,28 @@ ActiveRecord::Schema.define(version: 2019_07_25_163047) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "user_id"
     t.integer "status", default: 0
+    t.string "number"
+    t.bigint "user_id"
     t.boolean "hidden_shipping_form", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "delivery_id"
+    t.bigint "coupon_id"
+    t.index ["coupon_id"], name: "index_orders_on_coupon_id"
+    t.index ["delivery_id"], name: "index_orders_on_delivery_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.string "number"
+    t.string "name"
+    t.string "date"
+    t.integer "cvv"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -173,5 +196,8 @@ ActiveRecord::Schema.define(version: 2019_07_25_163047) do
   add_foreign_key "comments", "users"
   add_foreign_key "order_items", "books"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "coupons"
+  add_foreign_key "orders", "deliveries"
   add_foreign_key "orders", "users"
+  add_foreign_key "payments", "orders"
 end
