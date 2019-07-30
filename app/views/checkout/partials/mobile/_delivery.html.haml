@@ -1,6 +1,6 @@
-= simple_form_for :checkout_delivery, { url: wizard_path, html: { method: :put }} do |f|
+= simple_form_for current_order, { url: checkout_fill_delivery_path, html: { method: :post }} do |f|
   .visible-xs
-    - @presenter.delivery_all.each_with_index do |delivery, index|
+    - @deliveries.each_with_index do |delivery, index|
       .general-cart-item.divider-lg-bottom
         %table.table
           %tr
@@ -10,7 +10,7 @@
             %td.col-half
               .form-group.radio.mt-0.mb-0
                 %label.radio-label
-                  = f.radio_button(:delivery, delivery.id, checked: @presenter.order_delivery?(delivery.id) || index.zero?, class: 'radio-input', hidden: true)
+                  = f.radio_button(:delivery_id, delivery.id, checked: current_order.delivery == delivery || index.zero?, class: 'radio-input', hidden: true)
                   %span.radio-icon
                   %span.radio-text
                     = delivery.name
@@ -29,6 +29,6 @@
               %span.font-16.in-gold-500
                 = t('book.price', price: delivery.price)
     .general-text-right
-      = render 'order_summary', order: @presenter.order
+      = render 'checkout/partials/order_summary', order: current_order
     .text-center
-      = f.submit t('button.save_and_continue'), class: "btn btn-default mb-20 center-block"
+      = f.submit t('btn.save_and_continue'), class: "btn btn-default mb-20 center-block"

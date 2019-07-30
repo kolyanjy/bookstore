@@ -7,14 +7,14 @@
     = t('checkout.payment.title')
   = simple_form_for(@payment, url: checkout_fill_payment_path, validate: true, defaults: { input_html: { class: "form-control"}}, html: { method: :post }) do |f|
     .max-600.mb-80
-      = f.input :number, input_html: {value: "#{@payment.number}", maxlength: 16}, placeholder: t('checkout.payment.placeholder.cart_number')
+      = f.input :number, placeholder: t('checkout.payment.placeholder.cart_number')
       .row.mt-30
         .col-sm-6
-          = f.input :name, placeholder: t('checkout.payment.placeholder.name_on_card'), input_html: { value: "#{@payment.name}" }
+          = f.input :name, placeholder: t('checkout.payment.placeholder.name_on_card'), input_html: { value: @payment.name }
         .col-sm-3
-          = f.input :date, input_html: {value: "#{@payment.date}", maxlength: 5}, placeholder: t('checkout.payment.placeholder.date')
+          = f.input :date,  placeholder: t('checkout.payment.placeholder.date')
         .col-sm-3
-          = f.input :cvv, input_html: {type: 'password', value: "#{@payment.cvv}", maxlength: 4}, placeholder: t('checkout.payment.placeholder.cvv')
+          = f.input :cvv,  placeholder: t('checkout.payment.placeholder.cvv')
           .hint_cvv
             %i.fa.fa-question-circle.general-form-help
             %span

@@ -1,8 +1,9 @@
 module Checkout
   class FillDeliveriesController < ApplicationController
+    include CheckoutCheck
 
     def show
-      if !Checkout::CheckPermission.call(allowed_status: :fill_delivery, order: current_order).success?
+      unless check_step(:fill_delivery, current_order)
         redirect_to public_send('checkout_' + current_order.status + '_path') and return
       end
       @deliveries = Delivery.all.order(price: :asc)

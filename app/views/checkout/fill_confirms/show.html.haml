@@ -20,8 +20,8 @@
         = render 'checkout/fill_confirms/partials/address', address: current_order.shipping_address
     = render 'checkout/fill_confirms/partials/delivery', delivery: current_order.delivery
     = render 'checkout/fill_confirms/partials/payment', order: current_order
-  -# .visible-xs
-    -# = render 'checkout/shared/mobile/order_items', order_items: current_order.order_items.decorate
+  .visible-xs
+    = render 'checkout/partials/mobile/order_items', order_items: current_order.order_items.decorate
   .hidden-xs.divider-lg.pt-20
     = render 'checkout/fill_confirms/partials/order_items', order_items: current_order.order_items.decorate
   .general-text-left

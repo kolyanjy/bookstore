@@ -1,7 +1,11 @@
 module Checkout
   class FillAddressesController < ApplicationController
+    include CheckoutCheck
 
     def show
+      unless check_step(:fill_address, current_order)
+        redirect_to public_send('checkout_' + current_order.status + '_path') and return
+      end
       unless current_order.billing_address
         current_order.build_billing_address(current_user.billing_address.
           attributes.symbolize_keys.slice(*Users::AddressesController::ADDRESS_PARAMS))

@@ -1,8 +1,9 @@
 module Checkout
   class FillPaymentsController < ApplicationController
+    include CheckoutCheck
 
     def show
-      if !Checkout::CheckPermission.call(allowed_status: :fill_payment, order: current_order).success?
+      unless check_step(:fill_payment, current_order)
         redirect_to public_send('checkout_' + current_order.status + '_path') and return
       end
       @payment = Payment.first_or_initialize(order_id: current_order.id)

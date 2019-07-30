@@ -16,7 +16,7 @@ module Checkout
         order = Order.order(number: :asc).last
         number = nil
         if order.number.nil?
-          number = 'R1'
+          number = 'R00000'
         else
           order_number = order.number.slice(RANGE_NUMBER).to_i
           order_number += 1
