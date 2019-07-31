@@ -14,6 +14,10 @@ class OrderDecorator < Draper::Decorator
   end
 
   def order_total
-    (order_summary + (delivery&.price).to_i).round(2)
+    if coupon
+      (order_summary + (delivery&.price).to_i - coupon.price).round(2)
+    else
+      (order_summary + (delivery&.price).to_i).round(2)
+    end
   end
 end

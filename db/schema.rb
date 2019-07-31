@@ -118,7 +118,7 @@ ActiveRecord::Schema.define(version: 2019_07_28_223222) do
     t.string "name"
     t.string "min_days"
     t.string "max_days"
-    t.float "price"
+    t.decimal "price", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resource :fill_confirm, only: %i[show create]
     resource :fill_complete, only: %i[show create]
   end
+  resource :coupon, only: :update
 
   root 'home#index'
 end

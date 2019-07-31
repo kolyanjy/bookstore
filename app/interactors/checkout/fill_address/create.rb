@@ -4,9 +4,9 @@ module Checkout
       include Interactor
 
       def call
-        return context.fail! unless ActiveRecord::Base.transaction do
-          context.order.update(build_attributes)
-          context.order.fill_delivery!
+        ActiveRecord::Base.transaction do
+          return context.fail! unless context.order.update(build_attributes)
+          context.order.filling_delivering! if context.order.fill_address?
         end
       end
 

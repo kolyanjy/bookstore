@@ -3,26 +3,17 @@ module Checkout
     class Create
       include Interactor
 
-      RANGE_NUMBER = 1..14.freeze
+      NUMBER_QUANTITY = 9.freeze
 
       def call
-        return context.fail! unless context.order.update(number: generate_number)
-        context.order.fill_complete!
+        return context.fail! unless context.order.update(number: build_number)
+        context.order.confirm! if context.order.fill_confirm?
       end
 
       private
 
-      def generate_number
-        order = Order.order(number: :asc).last
-        number = nil
-        if order.number.nil?
-          number = 'R00000'
-        else
-          order_number = order.number.slice(RANGE_NUMBER).to_i
-          order_number += 1
-          number = 'R' + order_number.to_s
-        end
-        number
+      def build_number
+        'R'.rjust(NUMBER_QUANTITY - context.order.id.to_s.length, '0').reverse + context.order.id.to_s
       end
     end
   end

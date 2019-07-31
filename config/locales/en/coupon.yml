@@ -1,0 +1,6 @@
+en:
+  coupon:
+    enter_coupon: Enter Your Coupon Code
+    not_found: Coupon not found
+    success_update: Coupon successfully updated
+    coupon: 'Coupon'

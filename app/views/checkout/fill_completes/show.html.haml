@@ -2,7 +2,7 @@
   %h1.general-title-margin
     = t('checkout.title')
   %ul.steps.list-inline
-    = render 'checkout/partials/checkout_steps'
+    = render 'checkout/partials/checkout_steps', current_order: @order
   .text-center.mb-40
     %h3.general-subtitle
       = t('checkout.complete.thank_you_for_your_order')
@@ -14,13 +14,13 @@
         %p.general-order-number.mb-0
           = t('checkout.complete.order_number', number: @order.number)
         %p.general-address.mb-30
-          = "#{@order.order.created_at}"
+          = "#{@order.created_at}"
       = render 'checkout/fill_confirms/partials/address', address: @order.shipping_address
     .col-sm-6.hidden-xs.text-right
       %p.general-order-number.mb-0
         = t('checkout.complete.order_number', number: @order.number)
       %p.general-address.mb-30
-        = "#{@order.order.created_at}"
+        = "#{@order.created_at}"
   .visible-xs
     -# = render 'checkout/shared/mobile/order_items', order_items: @order.order_items
   .hidden-xs.divider-lg.pt-20

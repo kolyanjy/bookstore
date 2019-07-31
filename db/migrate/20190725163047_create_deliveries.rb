@@ -4,7 +4,7 @@ class CreateDeliveries < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :min_days
       t.string :max_days
-      t.float :price
+      t.decimal :price, precision: 10, scale: 2
       t.timestamps
     end
   end

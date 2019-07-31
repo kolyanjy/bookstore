@@ -3,7 +3,7 @@ module Checkout
     include CheckoutCheck
 
     def show
-      unless check_step(:fill_delivery, current_order)
+      unless check_step(:fill_delivery)
         redirect_to public_send('checkout_' + current_order.status + '_path') and return
       end
       @deliveries = Delivery.all.order(price: :asc)

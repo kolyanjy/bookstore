@@ -1,10 +1,10 @@
 class Order < ApplicationRecord
   include AASM
-
+  STEPS = %i[fill_address fill_delivery fill_payment fill_confirm fill_complete]
   FINISH_STATUSES = %i[in_progress in_delivery delivered canceled].freeze
 
   belongs_to :user, optional: true
-  belongs_to :delivery, optional: true
+  belongs_to :delivery, optional: true, validate: true
   belongs_to :coupon, optional: true
 
   has_many :order_items, dependent: :destroy
@@ -22,11 +22,10 @@ class Order < ApplicationRecord
     fill_delivery: 2,
     fill_payment: 3,
     fill_confirm: 4,
-    fill_complete: 5,
-    in_progress: 6,
-    in_delivery: 7,
-    delivered: 8,
-    canceled: 9
+    in_progress: 5,
+    in_delivery: 6,
+    delivered: 7,
+    canceled: 8
   }
 
   aasm :status, enum: true do
@@ -53,27 +52,23 @@ class Order < ApplicationRecord
       transitions from: :fill_delivery, to: :fill_payment
     end
 
-    event :confirming do
+    event :filling_confirm do
       transitions from: :fill_payment, to: :fill_confirm
     end
 
-    event :complete do
-      transitions from: :fill_confirm, to: :fill_complete
+    event :confirm do
+      transitions from: :fill_confirm, to: :in_progress
     end
 
-    event :in_progressing do
-      transitions from: :fill_complete, to: :in_progress
-    end
-
-    event :in_delivering do
+    event :deliver do
       transitions from: :in_progress, to: :in_delivery
     end
 
-    event :delivering do
+    event :confirm_delivery do
       transitions from: :in_delivery, to: :delivered
     end
 
-    event :canceling do
+    event :cancel do
       transitions from: %i[in_progress in_delivery delivered], to: :canceled
     end
   end

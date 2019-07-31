@@ -7,10 +7,9 @@ module Checkout
         payment = Payment.new(context.params) do |model|
           model.order = context.order
         end
-
-        return context.fail! unless ActiveRecord::Base.transaction do
-          payment.save
-          context.order.fill_confirm!
+        ActiveRecord::Base.transaction do
+          return context.fail! unless payment.save
+          context.order.filling_confirm! if context.order.fill_payment?
         end
       end
     end

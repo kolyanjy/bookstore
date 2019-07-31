@@ -3,7 +3,7 @@ module Checkout
     include CheckoutCheck
 
     def show
-      unless check_step(:fill_payment, current_order)
+      unless check_step(:fill_payment)
         redirect_to public_send('checkout_' + current_order.status + '_path') and return
       end
       @payment = Payment.first_or_initialize(order_id: current_order.id)
@@ -17,7 +17,7 @@ module Checkout
     private
 
     def payment_params
-      params.require(:payment).permit(:number, :name, :cvv, :date, order_id: current_order.id)
+      params.require(:payment).permit(:number, :name, :cvv, :date)
     end
   end
 end
