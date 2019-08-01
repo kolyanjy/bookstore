@@ -1,5 +1,6 @@
 RSpec.describe Checkout::FillDelivery::Create do
   subject(:context) { described_class.call(params: params, order: order) }
+
   let(:order) { build(:order, :delivery_step) }
   let!(:delivery) { create(:delivery) }
 

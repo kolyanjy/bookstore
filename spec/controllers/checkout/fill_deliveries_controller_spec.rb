@@ -33,7 +33,7 @@ RSpec.describe Checkout::FillDeliveriesController, type: :controller do
     context 'when valid' do
       let!(:delivery) { create(:delivery) }
       let(:order) { create(:order, :with_order_item, :delivery_step) }
-      let(:params) { { order: { delivery_id: delivery.id }  } }
+      let(:params) { { order: { delivery_id: delivery.id } } }
 
       it do
         post :create, params: params
@@ -44,9 +44,9 @@ RSpec.describe Checkout::FillDeliveriesController, type: :controller do
 
     context 'when invalid' do
       let(:order) { create(:order, :with_order_item, :address_step) }
-      let(:params) { { order: { delivery_id: '1' }  } }
+      let(:params) { { order: { delivery_id: '1' } } }
 
-      it  do
+      it do
         post :create, params: params
         expect(response).not_to be_successful
         expect(controller).to redirect_to(checkout_fill_address_path)

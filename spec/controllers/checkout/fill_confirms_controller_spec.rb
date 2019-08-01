@@ -29,8 +29,9 @@ RSpec.describe Checkout::FillConfirmsController, type: :controller do
   end
 
   describe '#create' do
+    let(:delivery) { create(:delivery) }
+
     context 'when valid' do
-      let!(:delivery) { create(:delivery) }
       let(:order) { create(:order, :with_order_item, :confirm_step) }
 
       it do
@@ -44,7 +45,7 @@ RSpec.describe Checkout::FillConfirmsController, type: :controller do
     context 'when invalid' do
       let(:order) { create(:order, :with_order_item, :payment_step) }
 
-      it  do
+      it do
         post :create
         expect(response).not_to be_successful
         expect(controller).to redirect_to(checkout_fill_payment_path)

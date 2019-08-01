@@ -1,6 +1,6 @@
 = simple_form_for current_order, { url: checkout_fill_delivery_path, html: { method: :post }} do |f|
   .visible-xs
-    - @deliveries.each_with_index do |delivery, index|
+    - deliveries.each_with_index do |delivery, index|
       .general-cart-item.divider-lg-bottom
         %table.table
           %tr

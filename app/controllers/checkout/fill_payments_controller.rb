@@ -3,9 +3,7 @@ module Checkout
     include CheckoutConcern
 
     def show
-      unless check_step(:fill_payment)
-        redirect_to public_send('checkout_' + current_order.status + '_path') and return
-      end
+      redirect_to(public_send('checkout_' + current_order.status + '_path')) && return unless check_step(:fill_payment)
       @payment = Payment.first_or_initialize(order_id: current_order.id)
     end
 

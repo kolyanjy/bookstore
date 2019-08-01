@@ -1,5 +1,6 @@
 RSpec.describe Checkout::FillConfirm::Create do
   subject(:context) { described_class.call(order: order) }
+
   let(:order) { create(:order, :confirm_step) }
 
   describe 'call' do
@@ -9,5 +10,4 @@ RSpec.describe Checkout::FillConfirm::Create do
       expect(order.number.length).to eq(Checkout::FillConfirm::Create::NUMBER_QUANTITY)
     end
   end
-
 end

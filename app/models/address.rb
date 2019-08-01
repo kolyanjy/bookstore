@@ -1,6 +1,6 @@
 class Address < ApplicationRecord
   ADDRESS_PARAMS = %i[first_name last_name address city zip country phone].freeze
-  
+
   belongs_to :addressable, polymorphic: true
 
   validates :first_name, presence: true, length: { in: 2..50 }

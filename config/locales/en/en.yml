@@ -26,6 +26,7 @@ en:
     shop: "Shop"
     edit: "edit"
     save: "Save"
+    checkout: "Checkout"
     save_and_continue: "Save and continue"
 
   interpolation:

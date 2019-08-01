@@ -1,5 +1,6 @@
 RSpec.describe Checkout::FillPayment::Create do
   subject(:context) { described_class.call(params: params, order: order) }
+
   let(:order) { create(:order, :payment_step) }
 
   describe 'call' do
@@ -21,5 +22,4 @@ RSpec.describe Checkout::FillPayment::Create do
       end
     end
   end
-
 end

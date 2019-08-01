@@ -21,5 +21,4 @@ RSpec.describe Coupons::Add do
       expect(order.coupon).to eq(nil)
     end
   end
-
 end

@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-
   devise :database_authenticatable, :confirmable,
          :registerable, :recoverable, :rememberable,
          :validatable, :omniauthable, omniauth_providers: %i[facebook]
@@ -12,5 +11,4 @@ class User < ApplicationRecord
   has_one :shipping_address, as: :addressable, dependent: :destroy
 
   accepts_nested_attributes_for :shipping_address, :billing_address, update_only: true
-
 end

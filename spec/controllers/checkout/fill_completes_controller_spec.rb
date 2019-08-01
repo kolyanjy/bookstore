@@ -10,7 +10,7 @@ RSpec.describe Checkout::FillCompletesController, type: :controller do
     context 'when order number successful' do
       it do
         get :show, params: { number: order.number }
-        expect(response).to be_success
+        expect(response).to be_successful
         expect(controller).to render_template(:show)
         expect(assigns(:order)).to be_kind_of(Order)
         expect(session[:order_id]).to be_nil
@@ -19,8 +19,8 @@ RSpec.describe Checkout::FillCompletesController, type: :controller do
 
     context 'when order number failed' do
       it do
-        get :show, params: { number:'1234' }
-        expect(response).not_to be_success
+        get :show, params: { number: '1234' }
+        expect(response).not_to be_successful
         expect(response.status).to eq(404)
       end
     end

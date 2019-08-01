@@ -31,9 +31,9 @@ RSpec.describe Checkout::FillPaymentsController, type: :controller do
 
   describe '#create' do
     context 'when valid' do
-      let!(:delivery) { create(:delivery) }
+      let(:delivery) { create(:delivery) }
       let(:order) { create(:order, :with_order_item, :payment_step) }
-      let(:params) { { payment: attributes_for(:payment)  } }
+      let(:params) { { payment: attributes_for(:payment) } }
 
       it do
         post :create, params: params
@@ -46,7 +46,7 @@ RSpec.describe Checkout::FillPaymentsController, type: :controller do
       let(:order) { create(:order, :with_order_item, :payment_step) }
       let(:params) { { payment: attributes_for(:payment, cvv: nil) } }
 
-      it  do
+      it do
         post :create, params: params
         expect(response).not_to be_successful
         expect(controller).to redirect_to(checkout_fill_payment_path)

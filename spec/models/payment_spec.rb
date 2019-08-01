@@ -26,6 +26,5 @@ RSpec.describe Payment, type: :model do
       it { is_expected.to validate_presence_of(:date) }
       it { is_expected.to validate_length_of(:date).is_at_least(4).is_at_most(5) }
     end
-
   end
 end

@@ -4,7 +4,8 @@ module Users
       super do
         if params[:quick]
           return redirect_to books_path, flash: { danger: t('order.add_to_cart') } if current_order.order_items.empty?
-          render('quick_new') and return
+
+          render('quick_new') && return
         end
       end
     end
@@ -28,7 +29,7 @@ module Users
       if resource.save
         sign_up(resource_name, resource)
       else
-        redirect_back(fallback_location: root_path) and return
+        redirect_back(fallback_location: root_path) && return
       end
       redirect_to(cart_path)
     end
@@ -40,7 +41,6 @@ module Users
     def after_update_path_for(_resource)
       edit_user_registration_path
     end
-
 
     def password_update(user, params)
       return true if user.update_with_password(params)

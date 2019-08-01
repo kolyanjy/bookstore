@@ -1,5 +1,6 @@
 RSpec.describe Checkout::FillAddressesController, type: :controller do
   let!(:user) { create(:user) }
+
   before do
     allow(Orders::Check).to receive(:call).and_return(double(order: order))
     sign_in(user)
@@ -32,8 +33,10 @@ RSpec.describe Checkout::FillAddressesController, type: :controller do
   describe '#create' do
     context 'when valid' do
       let(:order) { create(:order, :with_order_item, :address_step) }
-      let(:params) { { order: { billing_address_attributes: attributes_for(:address),
-         shipping_address_attributes: attributes_for(:address) }, hidden_shipping_form: { show: '1' } } }
+      let(:params) do
+        { order: { billing_address_attributes: attributes_for(:address),
+                   shipping_address_attributes: attributes_for(:address) }, hidden_shipping_form: { show: '1' } }
+      end
 
       it do
         post :create, params: params
@@ -44,10 +47,12 @@ RSpec.describe Checkout::FillAddressesController, type: :controller do
 
     context 'when invalid' do
       let(:order) { create(:order, :with_order_item, :address_step) }
-      let(:params) { { order: { billing_address_attributes: attributes_for(:address, first_name: nil),
-         shipping_address_attributes: attributes_for(:address) }, hidden_shipping_form: { show: '1' } } }
+      let(:params) do
+        { order: { billing_address_attributes: attributes_for(:address, first_name: nil),
+                   shipping_address_attributes: attributes_for(:address) }, hidden_shipping_form: { show: '1' } }
+      end
 
-      it  do
+      it do
         post :create, params: params
         expect(response).not_to be_successful
         expect(controller).to redirect_to(checkout_fill_address_path)

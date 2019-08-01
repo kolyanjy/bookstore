@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   include AASM
-  STEPS = %i[fill_address fill_delivery fill_payment fill_confirm fill_complete]
+  STEPS = %i[fill_address fill_delivery fill_payment fill_confirm fill_complete].freeze
   FINISH_STATUSES = %i[in_progress in_delivery delivered canceled].freeze
 
   belongs_to :user, optional: true
@@ -28,7 +28,7 @@ class Order < ApplicationRecord
     canceled: 8
   }
 
-  aasm :status, enum: true do
+  aasm :status, enum: true do # rubocop:disable Metrics/BlockLength
     state :cart, initial: true
     state :fill_address
     state :fill_delivery

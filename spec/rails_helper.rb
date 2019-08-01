@@ -8,6 +8,7 @@ require 'capybara/rails'
 require 'capybara/rspec'
 require 'shoulda/matchers'
 require 'webdrivers/chromedriver'
+require 'rack_session_access/capybara'
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 

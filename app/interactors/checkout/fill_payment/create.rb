@@ -9,6 +9,7 @@ module Checkout
         end
         ActiveRecord::Base.transaction do
           return context.fail! unless payment.save
+
           context.order.filling_confirm! if context.order.fill_payment?
         end
       end

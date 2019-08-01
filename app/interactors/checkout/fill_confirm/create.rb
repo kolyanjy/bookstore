@@ -3,10 +3,11 @@ module Checkout
     class Create
       include Interactor
 
-      NUMBER_QUANTITY = 9.freeze
+      NUMBER_QUANTITY = 9
 
       def call
         return context.fail! unless context.order.update(number: build_number)
+
         context.order.confirm! if context.order.fill_confirm?
       end
 

@@ -5,7 +5,7 @@
     = render 'checkout/partials/checkout_steps'
   %h3.general-subtitle
     = t('checkout.delivery.title')
-  = render 'checkout/partials/mobile/delivery'
+  = render 'checkout/partials/mobile/delivery', deliveries: @deliveries
   = simple_form_for current_order, { url: checkout_fill_delivery_path, html: { method: :post }} do |f|
     .hidden-xs.mb-res-50
       %table.table.table-hover

@@ -3,16 +3,15 @@ module Checkout
     include CheckoutConcern
 
     def show
-      unless check_step(:fill_address)
-        redirect_to cart_path and return
-      end
+      redirect_to(cart_path) && return unless check_step(:fill_address)
       Checkout::FillAddress::BuildAddresses.call(order: current_order, user: current_user)
     end
 
     def create
       Checkout::FillAddress::Organizer.call(
         order: current_order, params: address_params, hidden_shipping_form: params[:hidden_shipping_form],
-        allowed_status: :fill_address)
+        allowed_status: :fill_address
+      )
       redirect_to public_send('checkout_' + current_order.status + '_path')
     end
 
@@ -21,7 +20,7 @@ module Checkout
     def address_params
       params.require(:order).permit(
         shipping_address_attributes: Address::ADDRESS_PARAMS,
-        billing_address_attributes: Address::ADDRESS_PARAMS,
+        billing_address_attributes: Address::ADDRESS_PARAMS
       )
     end
   end

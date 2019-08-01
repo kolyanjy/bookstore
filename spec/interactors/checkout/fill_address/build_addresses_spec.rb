@@ -1,5 +1,6 @@
 RSpec.describe Checkout::FillAddress::BuildAddresses do
   subject(:context) { described_class.call(order: order, user: user) }
+
   let!(:user) { create(:user) }
 
   describe 'call' do
@@ -13,5 +14,4 @@ RSpec.describe Checkout::FillAddress::BuildAddresses do
       expect(order.reload.shipping_address).to eq(nil)
     end
   end
-
 end
