@@ -1,31 +1,27 @@
 RSpec.describe Checkout::FillCompletesController, type: :controller do
   let!(:user) { create(:user) }
+  let!(:order) { create(:order, :with_order_item, :in_progress_step, :with_order_number, user: user) }
 
   before do
-    allow(Orders::Check).to receive(:call).and_return(double(order: order))
     sign_in(user)
   end
 
   describe '#show' do
-    context 'when order status successful' do
-      let(:order) { create(:order, :with_order_item, :complete_step) }
-
+    context 'when order number successful' do
       it do
-        get :show
-        expect(response).to be_successful
+        get :show, params: { number: order.number }
+        expect(response).to be_success
         expect(controller).to render_template(:show)
         expect(assigns(:order)).to be_kind_of(Order)
         expect(session[:order_id]).to be_nil
       end
     end
 
-    context 'when order status failed' do
-      let(:order) { create(:order, :with_order_item, :delivery_step) }
-
+    context 'when order number failed' do
       it do
-        get :show
-        expect(response).not_to be_successful
-        expect(controller).to redirect_to(checkout_fill_delivery_path)
+        get :show, params: { number:'1234' }
+        expect(response).not_to be_success
+        expect(response.status).to eq(404)
       end
     end
   end

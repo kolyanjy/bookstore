@@ -1,6 +1,6 @@
 module Checkout
   class FillPaymentsController < ApplicationController
-    include CheckoutCheck
+    include CheckoutConcern
 
     def show
       unless check_step(:fill_payment)

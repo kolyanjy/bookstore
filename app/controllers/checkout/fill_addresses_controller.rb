@@ -1,20 +1,12 @@
 module Checkout
   class FillAddressesController < ApplicationController
-    include CheckoutCheck
+    include CheckoutConcern
 
     def show
       unless check_step(:fill_address)
         redirect_to cart_path and return
       end
-      unless current_order.billing_address
-        current_order.build_billing_address(current_user.billing_address.
-          attributes.symbolize_keys.slice(*Users::AddressesController::ADDRESS_PARAMS))
-      end
-
-      unless current_order.shipping_address
-        current_order.build_shipping_address(current_user.shipping_address.
-          attributes.symbolize_keys.slice(*Users::AddressesController::ADDRESS_PARAMS))
-      end
+      Checkout::FillAddress::BuildAddresses.call(order: current_order, user: current_user)
     end
 
     def create
@@ -28,8 +20,8 @@ module Checkout
 
     def address_params
       params.require(:order).permit(
-        shipping_address_attributes: Users::AddressesController::ADDRESS_PARAMS,
-        billing_address_attributes: Users::AddressesController::ADDRESS_PARAMS,
+        shipping_address_attributes: Address::ADDRESS_PARAMS,
+        billing_address_attributes: Address::ADDRESS_PARAMS,
       )
     end
   end

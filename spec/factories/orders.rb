@@ -8,6 +8,10 @@ FactoryBot.define do
         create(:order_item, book: category.books.first, order: order)
       end
     end
+    
+    trait :with_order_number do
+      number { 'R1' }
+    end
 
     trait :address_step do
       status { Order.statuses[:fill_address] }

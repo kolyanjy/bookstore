@@ -1,5 +1,4 @@
 RSpec.describe Checkout::FillAddress::Create do
-  # before { allow(subject).to receive(:current_order).and_return(order) }
   subject(:context) { described_class.call(params: params, order: order, hidden_shipping_form: hidden_shipping_form) }
   let(:billing_address) { attributes_for(:billing_address) }
   let(:shipping_address) { attributes_for(:shipping_address) }
@@ -14,9 +13,9 @@ RSpec.describe Checkout::FillAddress::Create do
 
       it do
         expect(context.success?).to eq(true)
-        expect(order.billing_address.slice(*Users::AddressesController::ADDRESS_PARAMS).symbolize_keys).
+        expect(order.billing_address.slice(*Address::ADDRESS_PARAMS).symbolize_keys).
         to eq(billing_address)
-        expect(order.shipping_address.slice(*Users::AddressesController::ADDRESS_PARAMS).symbolize_keys).
+        expect(order.shipping_address.slice(*Address::ADDRESS_PARAMS).symbolize_keys).
         to eq(shipping_address)
       end
     end
@@ -28,9 +27,9 @@ RSpec.describe Checkout::FillAddress::Create do
 
       it do
         expect(context.success?).to eq(true)
-        expect(order.billing_address.slice(*Users::AddressesController::ADDRESS_PARAMS).symbolize_keys).
+        expect(order.billing_address.slice(*Address::ADDRESS_PARAMS).symbolize_keys).
         to eq(billing_address)
-        expect(order.shipping_address.slice(*Users::AddressesController::ADDRESS_PARAMS).symbolize_keys).
+        expect(order.shipping_address.slice(*Address::ADDRESS_PARAMS).symbolize_keys).
         to eq(billing_address)
       end
     end

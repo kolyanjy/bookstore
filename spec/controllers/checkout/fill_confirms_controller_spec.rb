@@ -37,7 +37,7 @@ RSpec.describe Checkout::FillConfirmsController, type: :controller do
         post :create
         expect(response).not_to be_successful
         expect(order.number).not_to be_nil
-        expect(controller).to redirect_to(checkout_fill_complete_path)
+        expect(controller).to redirect_to(checkout_fill_complete_path(order.number))
       end
     end
 

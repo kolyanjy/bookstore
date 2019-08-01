@@ -1,8 +1,7 @@
 class CouponsController < ApplicationController
   def update
-    coupon = Coupon.find_by(key: params[:coupon][:key])
-    if coupon
-      current_order.update(coupon_id: coupon.id)
+    result = Coupons::Add.call(key: params[:coupon][:key], order: current_order)
+    if result.success?
       flash[:success] = t('coupon.success_update')
     else
       flash[:danger] = t('coupon.not_found')

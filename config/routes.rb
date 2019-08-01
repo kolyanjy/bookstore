@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resource :fill_delivery, only: %i[show create]
     resource :fill_payment, only: %i[show create]
     resource :fill_confirm, only: %i[show create]
-    resource :fill_complete, only: %i[show create]
+    get '/fill_complete/:number', as: 'fill_complete',  to: 'fill_completes#show'
   end
   resource :coupon, only: :update
 

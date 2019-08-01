@@ -1,11 +1,16 @@
 module Checkout
   class FillCompletesController < ApplicationController
-    include CheckoutCheck
+
+    include CheckoutConcern
+
     def show
-      @order = current_user.orders.find_by(number: params[:format]).decorate
-      unless @order
-        redirect_to books_path and return
-      end
+      current_order
+    end
+
+    private
+
+    def current_order
+      @order ||= current_user.orders.find_by!(number: params[:number]).decorate
     end
   end
 end
