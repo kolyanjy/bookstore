@@ -39,5 +39,17 @@ FactoryBot.define do
     trait :in_progress_step do
       status { Order.statuses[:in_progress] }
     end
+
+    trait :in_delivery_step do
+      status { Order.statuses[:in_delivery] }
+    end
+
+    trait :delivered_step do
+      status { Order.statuses[:delivered] }
+    end
+
+    trait :canceled_step do
+      status { Order.statuses[:canceled] }
+    end
   end
 end

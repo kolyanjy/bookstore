@@ -1,0 +1,31 @@
+%main.container.general-main-wrap
+  %h1.general-title-margin
+    = t('checkout.complete.order_number', number: @order.number)
+  .row.mb-20
+    .col-sm-3
+      %h3.general-subtitle.mt-0
+        = t('checkout.address.billing_address')
+      = render 'shared/addresses/address', address: @order.billing_address
+    .col-sm-3
+      %h3.general-subtitle.mt-0
+        = t('checkout.address.shippingbutton_address')
+      = render 'shared/addresses/address', address: @order.shipping_address
+    .col-sm-3
+      %h3.general-subtitle.mt-0
+        = t('checkout.delivery.title')
+      %p.general-address
+        %p.general-address
+          = @order.delivery.name
+        %p
+          = t('checkout.delivery.delivery_in_days', min_days: @order.delivery.min_days, max_days: @order.delivery.max_days)
+    .col-sm-3
+      %h3.general-subtitle.mt-0
+        = t('checkout.payment.payment_information')
+      %p.general-address
+        = @order.payment.name
+        %br
+        = @order.payment.date
+  .hidden-xs.divider-lg.pt-20
+    = render 'shared/order_items/order_items', order_items: @order.order_items.decorate
+  .text-center.general-text-left
+  = render 'checkout/partials/order_summary', order: @order

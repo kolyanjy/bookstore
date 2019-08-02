@@ -1,0 +1,37 @@
+%main.container.general-main-wrap
+  %h1.mt-0.mb-25
+    = t('order.my_orders')
+  %p.lead.small.mb-10.visible-xs Sort by
+  .dropdowns.dropdown.general-order-dropdown
+    %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+      - if params[:sort]
+        = t("order.#{params[:sort]}")
+      - else
+        = t('order.in_progress')
+      %i.fa.fa-angle-down.dropdown-icon.pull-right
+    %ul.dropdown-menu
+      - Order::FINISH_STATUSES.each do |sort|
+        %li
+          = link_to sort.to_s.split('_').join(' ').capitalize, orders_path(sort: "#{sort}")
+  .visible-xs
+    .general-cart-item.divider-lg-bottom.pt-0
+      %table.table
+        -# = render 'orders/shared/mobile_orders', orders: @orders
+  .hidden-xs.mb-res-50
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+            %span.in-grey-600
+              = t('order.number')
+          %th
+            %span.in-grey-600
+              = t('order.completed_at')
+          %th
+            %span.in-grey-600
+              = t('order.status')
+          %th
+            %span.in-grey-600
+              = t('order.total')
+      %tbody
+        = render partial: 'orders/partials/orders', collection: @orders

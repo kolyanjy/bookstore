@@ -12,4 +12,8 @@ class OrderDecorator < Draper::Decorator
   def order_total
     (order_summary + delivery&.price.to_d - coupon&.price.to_d).round(2)
   end
+
+  def order_created_at
+    order.created_at.strftime('%F')
+  end
 end
