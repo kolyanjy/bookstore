@@ -20,4 +20,8 @@ class OrderDecorator < Draper::Decorator
       (order_summary + (delivery&.price).to_i).round(2)
     end
   end
+
+  def order_created_at
+    order.created_at.strftime('%F')
+  end
 end
