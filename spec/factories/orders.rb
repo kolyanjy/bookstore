@@ -9,6 +9,13 @@ FactoryBot.define do
       end
     end
 
+    trait :with_addresses do
+      after(:create) do |order|
+        order.billing_address = create(:billing_address, addressable: order)
+        order.shipping_address = create(:shipping_address, addressable: order)
+      end
+    end
+
     trait :with_order_number do
       number { 'R1' }
     end

@@ -1,5 +1,4 @@
 RSpec.describe Users::RegistrationsController, type: :controller do
-
   describe '#update' do
     let(:user) { create(:user) }
     let!(:old_password) { user.encrypted_password }
