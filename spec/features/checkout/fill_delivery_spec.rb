@@ -1,6 +1,6 @@
 RSpec.describe 'fill delivery', type: :feature do
   let!(:user) { create(:user) }
-  let(:order) { create(:order, :with_order_item, :delivery_step, user: user) }
+  let!(:order) { create(:order, :with_order_item, :delivery_step, user: user) }
   let!(:delivery) { create(:delivery) }
 
   before do
@@ -23,7 +23,7 @@ RSpec.describe 'fill delivery', type: :feature do
   end
 
   it 'Go past step' do
-    order
+
     visit checkout_fill_delivery_path
     click_link(I18n.t('checkout.checkout_step.fill_address'))
     expect(page).to have_current_path checkout_fill_address_path

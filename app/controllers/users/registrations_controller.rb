@@ -26,11 +26,8 @@ module Users
       resource.skip_confirmation!
       resource.password = Devise.friendly_token.first(8)
       resource.orders << current_order
-      if resource.save
-        sign_up(resource_name, resource)
-      else
-        redirect_back(fallback_location: root_path) && return
-      end
+      sign_up(resource_name, resource) if resource.save
+
       redirect_to(cart_path)
     end
 

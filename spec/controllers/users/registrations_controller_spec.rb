@@ -1,8 +1,9 @@
 RSpec.describe Users::RegistrationsController, type: :controller do
-  let!(:user) { create(:user) }
-  let!(:old_password) { user.encrypted_password }
 
   describe '#update' do
+    let(:user) { create(:user) }
+    let!(:old_password) { user.encrypted_password }
+
     before do
       request.env['devise.mapping'] = Devise.mappings[:user]
       sign_in user
@@ -28,6 +29,20 @@ RSpec.describe Users::RegistrationsController, type: :controller do
         patch :update, params: params
         expect(user.reload.email).not_to eq(old_email)
       end
+    end
+  end
+
+  describe 'quick registration' do
+    before do
+      request.env['devise.mapping'] = Devise.mappings[:user]
+    end
+
+    let(:params) { { user: { email: 'keklol@gmail.com', quick: true } } }
+
+    it do
+      expect(User.count).to eq(0)
+      post :create, params: params
+      expect(User.count).to eq(1)
     end
   end
 end
