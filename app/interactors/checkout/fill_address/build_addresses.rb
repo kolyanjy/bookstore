@@ -4,15 +4,21 @@ module Checkout
       include Interactor
 
       def call
-        unless context.order.billing_address
-          context.order.build_billing_address(context.user.billing_address
-            .attributes.symbolize_keys.slice(*Address::ADDRESS_PARAMS))
-        end
+        build_billing_address_attributes unless context.order.billing_address
 
-        unless context.order.shipping_address # rubocop:disable Style/GuardClause:
-          context.order.build_shipping_address(context.user.shipping_address
-            .attributes.symbolize_keys.slice(*Address::ADDRESS_PARAMS))
-        end
+        build_shipping_address_attributes unless context.order.shipping_address
+      end
+
+      private
+
+      def build_billing_address_attributes
+        context.order.build_billing_address(context.user.billing_address
+          .attributes.symbolize_keys.slice(*Address::ADDRESS_PARAMS))
+      end
+
+      def build_shipping_address_attributes
+        context.order.build_shipping_address(context.user.shipping_address
+          .attributes.symbolize_keys.slice(*Address::ADDRESS_PARAMS))
       end
     end
   end

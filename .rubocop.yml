@@ -19,7 +19,7 @@ RSpec/MessageSpies:
   EnforcedStyle: receive
 
 Metrics/AbcSize:
-  Max: 25
+  Max: 17
 
 Metrics/LineLength:
   Max: 120
