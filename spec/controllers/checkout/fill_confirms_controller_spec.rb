@@ -1,5 +1,6 @@
 RSpec.describe Checkout::FillConfirmsController, type: :controller do
   let!(:user) { create(:user) }
+  let!(:delivery) { create(:delivery) }
 
   before do
     allow(Orders::Check).to receive(:call).and_return(double(order: order))
@@ -8,7 +9,7 @@ RSpec.describe Checkout::FillConfirmsController, type: :controller do
 
   describe '#show' do
     context 'when order status successful' do
-      let(:order) { create(:order, :with_order_item, :confirm_step) }
+      let(:order) { create(:order, :with_order_item, :confirm_step, delivery: delivery) }
 
       it do
         get :show
@@ -18,7 +19,7 @@ RSpec.describe Checkout::FillConfirmsController, type: :controller do
     end
 
     context 'when order status failed' do
-      let(:order) { create(:order, :with_order_item, :payment_step) }
+      let(:order) { create(:order, :with_order_item, :payment_step, delivery: delivery) }
 
       it do
         get :show
@@ -32,7 +33,7 @@ RSpec.describe Checkout::FillConfirmsController, type: :controller do
     let(:delivery) { create(:delivery) }
 
     context 'when valid' do
-      let(:order) { create(:order, :with_order_item, :confirm_step) }
+      let(:order) { create(:order, :with_order_item, :confirm_step, delivery: delivery) }
 
       it do
         post :create
@@ -43,7 +44,7 @@ RSpec.describe Checkout::FillConfirmsController, type: :controller do
     end
 
     context 'when invalid' do
-      let(:order) { create(:order, :with_order_item, :payment_step) }
+      let(:order) { create(:order, :with_order_item, :payment_step, delivery: delivery) }
 
       it do
         post :create
