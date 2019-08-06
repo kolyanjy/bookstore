@@ -49,10 +49,6 @@ RSpec/DescribeClass:
 RSpec/NestedGroups:
   Max: 4
 
-RSpec/LetSetup:
-  Exclude:
-    - 'spec/features/**/*'
-
 RSpec/VerifiedDoubles:
   Exclude:
     - 'spec/controllers/**/*'

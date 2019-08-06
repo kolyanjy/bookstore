@@ -3,7 +3,7 @@ module Users
     def new
       super do
         if params[:quick]
-          return redirect_to books_path, flash: { danger: t('order.add_to_cart') } if current_order.order_items.empty?
+          return redirect_to(books_path), flash: { danger: t('order.add_to_cart') } if current_order.order_items.empty?
 
           render('quick_new') && return
         end
@@ -15,16 +15,16 @@ module Users
         super do |user|
           BillingAddress.new(addressable: user).save(validate: false)
           ShippingAddress.new(addressable: user).save(validate: false)
-          return quick_registration if params[:user][:quick]
+          quick_registration && return if params[:user][:quick]
         end
       end
     end
 
     private
 
-    def quick_registration
+    def quick_registration # rubocop:disable Metrics/AbcSize
       resource.skip_confirmation!
-      resource.password = Devise.friendly_token.first(8)
+      resource.password = Devise.friendly_token.first(Devise.password_length.begin)
       resource.orders << current_order
       sign_up(resource_name, resource) if resource.save
 

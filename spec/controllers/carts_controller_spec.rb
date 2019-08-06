@@ -20,7 +20,7 @@ RSpec.describe CartsController, type: :controller do
       end
     end
 
-    context 'with order items' do
+    context 'without order items' do
       let(:order) { create(:order) }
 
       it do

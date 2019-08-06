@@ -31,10 +31,7 @@
             = render partial: '/shared/addresses/form_fields', locals: { f: f, address: current_order.shipping_address,  address_type: :shipping_address }
           .form-group.checkbox
             %label.checkbox-label
-              - if current_order.hidden_shipping_form == true
-                = check_box(:hidden_shipping_form, :show, class: 'checkbox-input', hidden: true, checked: true)
-              - else
-                = check_box(:hidden_shipping_form, :show, class: 'checkbox-input', hidden: true, checked: false)
+              = check_box(:hidden_shipping_form, :show, class: 'checkbox-input', id: 'hidden_shipping_form' ,hidden: true, checked: current_order.hidden_shipping_form)
               %span.checkbox-icon
                 %i.fa.fa-check
               %span.checkbox-text

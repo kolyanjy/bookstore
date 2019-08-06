@@ -1,4 +1,4 @@
-- Order::STEPS.first(4).each_with_index do |step, index|
+- clickable_steps.each_with_index do |step, index|
   %li.step{class: "#{'active' if index.next <= current_order.status_before_type_cast}"}
     %span.step-number
       = index.next
@@ -8,6 +8,6 @@
   %li{class: "#{'step-divider' if index.next < current_order.status_before_type_cast}"}
 %li.step{class: "#{'active' if current_order.in_progress?}"}
   %span.step-number
-    = 5
+    = CheckoutHelper::LAST_STEP
   %span.hidden-xs
     = t(:fill_complete, scope: [:checkout, :checkout_step])

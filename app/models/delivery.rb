@@ -1,3 +1,3 @@
 class Delivery < ApplicationRecord
-  has_many :orders, dependent: :restrict_with_exception
+  has_many :orders, dependent: :nullify
 end

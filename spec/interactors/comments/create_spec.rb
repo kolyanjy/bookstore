@@ -1,5 +1,5 @@
 RSpec.describe Comments::Create do
-  subject(:context) { described_class.call(params: comment, current_user: user, book_id: book.id) }
+  subject(:result) { described_class.call(params: comment, current_user: user, book_id: book.id) }
 
   let!(:user) { create(:user) }
   let!(:book) { create(:book) }
@@ -9,7 +9,7 @@ RSpec.describe Comments::Create do
       let(:comment) { attributes_for(:comment) }
 
       it do
-        expect(context.success?).to eq(true)
+        expect(result.success?).to eq(true)
         expect(Comment.count).to eq(1)
       end
     end
@@ -18,7 +18,7 @@ RSpec.describe Comments::Create do
       let(:comment) { attributes_for(:comment, title: '') }
 
       it do
-        expect(context.success?).to eq(false)
+        expect(result.success?).to eq(false)
         expect(Comment.count).to eq(0)
       end
     end

@@ -1,4 +1,5 @@
 class CouponsController < ApplicationController
+  # TODO: remove this controller in the next pull request
   def update
     result = Coupons::Add.call(key: params[:coupon][:key], order: current_order)
     if result.success?

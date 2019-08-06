@@ -9,7 +9,7 @@ RSpec.describe Coupons::Add do
 
     it do
       expect(context).to be_success
-      expect(order.coupon).to be_kind_of(Coupon)
+      expect(order.coupon).to eq(coupon)
     end
   end
 

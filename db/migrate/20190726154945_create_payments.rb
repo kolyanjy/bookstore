@@ -4,7 +4,7 @@ class CreatePayments < ActiveRecord::Migration[5.2]
       t.string :number
       t.string :name
       t.string :date
-      t.integer :cvv
+      t.string :cvv
       t.references :order, foreign_key: true
       t.timestamps
     end

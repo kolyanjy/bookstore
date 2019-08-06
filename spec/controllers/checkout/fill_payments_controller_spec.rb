@@ -10,11 +10,24 @@ RSpec.describe Checkout::FillPaymentsController, type: :controller do
     context 'when order status successful' do
       let(:order) { create(:order, :with_order_item, :payment_step) }
 
-      it do
-        get :show
-        expect(response).to be_successful
-        expect(controller).to render_template(:show)
-        expect(assigns(:payment)).to be_kind_of(Payment)
+      context 'when payment exist' do
+        before { create(:payment, order: order) }
+
+        it do
+          get :show
+          expect(response).to be_successful
+          expect(controller).to render_template(:show)
+          expect(assigns(:payment).order_id).to eq(order.id)
+        end
+      end
+
+      context 'when payment does not exist' do
+        it do
+          get :show
+          expect(response).to be_successful
+          expect(controller).to render_template(:show)
+          expect(assigns(:payment)).to be_kind_of(Payment)
+        end
       end
     end
 

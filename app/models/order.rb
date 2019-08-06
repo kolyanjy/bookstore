@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   FINISH_STATUSES = %i[in_progress in_delivery delivered canceled].freeze
 
   belongs_to :user, optional: true
-  belongs_to :delivery, optional: true, validate: true
+  belongs_to :delivery, optional: true
   belongs_to :coupon, optional: true
 
   has_many :order_items, dependent: :destroy

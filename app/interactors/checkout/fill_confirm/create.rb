@@ -14,7 +14,8 @@ module Checkout
       private
 
       def build_number
-        'R'.rjust(NUMBER_QUANTITY - context.order.id.to_s.length, '0').reverse + context.order.id.to_s
+        id_length = context.order.id.to_s.length
+        'R'.rjust(NUMBER_QUANTITY - id_length, '0').reverse + context.order.id.to_s
       end
     end
   end

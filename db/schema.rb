@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 2019_07_28_223222) do
 
   create_table "coupons", force: :cascade do |t|
     t.string "key"
-    t.decimal "price"
+    t.decimal "price", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -159,7 +159,7 @@ ActiveRecord::Schema.define(version: 2019_07_28_223222) do
     t.string "number"
     t.string "name"
     t.string "date"
-    t.integer "cvv"
+    t.string "cvv"
     t.bigint "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

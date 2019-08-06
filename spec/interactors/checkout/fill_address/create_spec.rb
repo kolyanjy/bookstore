@@ -1,5 +1,5 @@
 RSpec.describe Checkout::FillAddress::Create do
-  subject(:context) { described_class.call(params: params, order: order, hidden_shipping_form: hidden_shipping_form) }
+  subject(:result) { described_class.call(params: params, order: order, hidden_shipping_form: hidden_shipping_form) }
 
   let(:billing_address) { attributes_for(:billing_address) }
   let(:shipping_address) { attributes_for(:shipping_address) }
@@ -14,7 +14,7 @@ RSpec.describe Checkout::FillAddress::Create do
       end
 
       it do
-        expect(context.success?).to eq(true)
+        expect(result.success?).to eq(true)
         expect(order.billing_address.slice(*Address::ADDRESS_PARAMS).symbolize_keys)
           .to eq(billing_address)
         expect(order.shipping_address.slice(*Address::ADDRESS_PARAMS).symbolize_keys)
@@ -30,7 +30,7 @@ RSpec.describe Checkout::FillAddress::Create do
       end
 
       it do
-        expect(context.success?).to eq(true)
+        expect(result.success?).to eq(true)
         expect(order.billing_address.slice(*Address::ADDRESS_PARAMS).symbolize_keys)
           .to eq(billing_address)
         expect(order.shipping_address.slice(*Address::ADDRESS_PARAMS).symbolize_keys)
@@ -45,7 +45,7 @@ RSpec.describe Checkout::FillAddress::Create do
       end
 
       it do
-        expect(context).to be_failure
+        expect(result).to be_failure
         expect(order).to be_invalid
       end
     end

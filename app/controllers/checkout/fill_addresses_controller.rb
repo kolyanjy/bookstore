@@ -9,10 +9,12 @@ module Checkout
 
     def create
       Checkout::FillAddress::Organizer.call(
-        order: current_order, params: address_params, hidden_shipping_form: params[:hidden_shipping_form],
+        order: current_order,
+        params: address_params,
+        hidden_shipping_form: params[:hidden_shipping_form],
         allowed_status: :fill_address
       )
-      redirect_to public_send('checkout_' + current_order.status + '_path')
+      redirect_to build_path
     end
 
     private

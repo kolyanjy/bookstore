@@ -3,7 +3,7 @@ module Checkout
     include CheckoutConcern
 
     def show
-      redirect_to(public_send('checkout_' + current_order.status + '_path')) && return unless check_step(:fill_confirm)
+      redirect_to(build_path) && return unless check_step(:fill_confirm)
     end
 
     def create

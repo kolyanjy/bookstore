@@ -1,5 +1,5 @@
 ActiveAdmin.register Order do
-  permit_params :status, :user_id, :delivery_id, :created_at
+  permit_params :status
 
   config.filters = false
   config.current_filters = false
