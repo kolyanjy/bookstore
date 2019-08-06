@@ -14,7 +14,7 @@ module Checkout
         hidden_shipping_form: params[:hidden_shipping_form],
         allowed_status: :fill_address
       )
-      redirect_to build_path
+      redirect_to checkout_step_path
     end
 
     private

@@ -19,7 +19,7 @@ RSpec.describe Checkout::FillConfirm::Create do
 
     it 'expect to order items' do
       result
-      order.order_items.each do |item|
+      order.order_items.reload.each do |item|
         expect(item.price).to eq(item.book_price)
       end
     end

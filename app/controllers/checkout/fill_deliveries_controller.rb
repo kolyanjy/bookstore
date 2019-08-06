@@ -3,7 +3,7 @@ module Checkout
     include CheckoutConcern
 
     def show
-      redirect_to(build_path) && return unless check_step(:fill_delivery)
+      redirect_to(checkout_step_path) && return unless check_step(:fill_delivery)
       @deliveries = Delivery.all.order(price: :asc)
     end
 
@@ -13,7 +13,7 @@ module Checkout
         params: delivery_params,
         allowed_status: :fill_delivery
       )
-      redirect_to build_path
+      redirect_to checkout_step_path
     end
 
     private

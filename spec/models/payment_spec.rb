@@ -14,6 +14,8 @@ RSpec.describe Payment, type: :model do
     describe 'cvv' do
       it { is_expected.to validate_presence_of(:cvv) }
       it { is_expected.to validate_length_of(:cvv).is_at_least(3).is_at_most(4) }
+      it { is_expected.not_to allow_value('asd').for(:cvv) }
+      it { is_expected.to allow_value('123').for(:cvv) }
     end
 
     describe 'name' do

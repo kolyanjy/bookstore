@@ -14,7 +14,7 @@ module Checkout
       def build_address(address)
         context.order.public_send(
           "build_#{address}",
-          context.user.public_send(address).attributes.symbolize_keys.slice(*Address::ADDRESS_PARAMS)
+          context.user.public_send(address).slice(*Address::ADDRESS_PARAMS)
         )
       end
     end

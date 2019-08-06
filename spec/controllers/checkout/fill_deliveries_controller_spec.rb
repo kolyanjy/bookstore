@@ -16,8 +16,7 @@ RSpec.describe Checkout::FillDeliveriesController, type: :controller do
         get :show
         expect(response).to be_successful
         expect(controller).to render_template(:show)
-        expect(assigns(:deliveries).first).to eq(delivery_1)
-        expect(assigns(:deliveries).last).to eq(delivery_2)
+        expect(assigns(:deliveries)).to eq([delivery_1, delivery_2])
       end
     end
 

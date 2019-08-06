@@ -9,7 +9,7 @@ RSpec.describe Comments::Create do
       let(:comment) { attributes_for(:comment) }
 
       it do
-        expect(result.success?).to eq(true)
+        expect(result).to be_success
         expect(Comment.count).to eq(1)
       end
     end
@@ -18,7 +18,7 @@ RSpec.describe Comments::Create do
       let(:comment) { attributes_for(:comment, title: '') }
 
       it do
-        expect(result.success?).to eq(false)
+        expect(result).to be_failure
         expect(Comment.count).to eq(0)
       end
     end

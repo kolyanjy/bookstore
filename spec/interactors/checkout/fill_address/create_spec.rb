@@ -14,7 +14,7 @@ RSpec.describe Checkout::FillAddress::Create do
       end
 
       it do
-        expect(result.success?).to eq(true)
+        expect(result).to be_success
         expect(order.billing_address.slice(*Address::ADDRESS_PARAMS).symbolize_keys)
           .to eq(billing_address)
         expect(order.shipping_address.slice(*Address::ADDRESS_PARAMS).symbolize_keys)
@@ -30,7 +30,8 @@ RSpec.describe Checkout::FillAddress::Create do
       end
 
       it do
-        expect(result.success?).to eq(true)
+        expect(result).to be_success
+
         expect(order.billing_address.slice(*Address::ADDRESS_PARAMS).symbolize_keys)
           .to eq(billing_address)
         expect(order.shipping_address.slice(*Address::ADDRESS_PARAMS).symbolize_keys)

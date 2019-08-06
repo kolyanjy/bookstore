@@ -8,7 +8,7 @@ RSpec.describe Checkout::FillPayment::Create do
       let(:params) { attributes_for(:payment) }
 
       it do
-        expect(result.success?).to eq(true)
+        expect(result).to be_success
         expect(Payment.count).to eq(1)
         expect(Payment.last).to have_attributes(params)
       end
@@ -18,7 +18,7 @@ RSpec.describe Checkout::FillPayment::Create do
       let(:params) { attributes_for(:payment, cvv: nil) }
 
       it do
-        expect(result.success?).to eq(false)
+        expect(result).to be_failure
         expect(Payment.count).to eq(0)
       end
     end
