@@ -9,5 +9,8 @@ module Orders
 
       context.orders = context.user.orders.where(status: context.status)
     end
+
+    private
+
   end
 end
