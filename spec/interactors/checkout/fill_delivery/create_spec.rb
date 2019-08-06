@@ -9,7 +9,7 @@ RSpec.describe Checkout::FillDelivery::Create do
       let(:params) { { delivery_id: delivery.id } }
 
       it do
-        expect(result.success?).to eq(true)
+        expect(result).to be_success
         expect(order.delivery).to eq(delivery)
       end
     end
