@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     get :checkout
   end
 
-  resources :orders, only: %i[show index]
+  resources :orders, only: %i[show index update]
   namespace :checkout do
     resource :fill_address, only: %i[show create]
     resource :fill_delivery, only: %i[show create]
@@ -32,7 +32,6 @@ Rails.application.routes.draw do
     resource :fill_confirm, only: %i[show create]
     get '/fill_complete/:number', as: 'fill_complete', to: 'fill_completes#show'
   end
-  resource :coupon, only: :update
 
   root 'home#index'
 end

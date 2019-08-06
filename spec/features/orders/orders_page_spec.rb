@@ -1,12 +1,12 @@
 RSpec.describe 'OrdersPage page', type: :feature do
   let!(:delivery) { create(:delivery) }
-  let!(:payment) { create(:payment, order_id: order.id) }
   let(:order) { create(:order, :with_order_item, :in_progress_step, :with_order_number, delivery_id: delivery.id) }
-  let!(:billing_address) { create(:billing_address, addressable: order) }
-  let!(:shipping_address) { create(:shipping_address, addressable: order) }
 
   before do
     login_as(order.user, scope: :user)
+    create(:billing_address, addressable: order)
+    create(:payment, order_id: order.id)
+    create(:shipping_address, addressable: order)
   end
 
   it 'Open index page for orders' do

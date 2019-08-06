@@ -1,5 +1,5 @@
-module Coupons
-  class Add
+module Orders
+  class AddCoupon
     include Interactor
     def call
       coupon = Coupon.find_by(key: context.key)
