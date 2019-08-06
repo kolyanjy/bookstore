@@ -3,7 +3,6 @@ module Checkout
     include CheckoutConcern
 
     def show
-      # binding.pry
       redirect_to(build_path) && return unless check_step(:fill_delivery)
       @deliveries = Delivery.all.order(price: :asc)
     end

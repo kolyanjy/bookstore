@@ -6,7 +6,6 @@ RSpec.describe Checkout::FillPayment::Create do
   describe 'call' do
     context 'with valid params' do
       let(:params) { attributes_for(:payment) }
-      # binding.pry
 
       it do
         expect(result.success?).to eq(true)

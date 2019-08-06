@@ -8,7 +8,7 @@ module Checkout
 
     def create
       result = Checkout::FillConfirm::Organizer.call(order: current_order, allowed_status: :fill_confirm)
-      redirect_to(public_send('checkout_' + current_order.status + '_path')) && return unless result.success?
+      redirect_to(build_path) && return unless result.success?
       session[:order_id] = nil
 
       redirect_to checkout_fill_complete_path(current_order.number)

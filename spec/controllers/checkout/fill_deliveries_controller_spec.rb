@@ -9,12 +9,15 @@ RSpec.describe Checkout::FillDeliveriesController, type: :controller do
   describe '#show' do
     context 'when order status successful' do
       let(:order) { create(:order, :with_order_item, :delivery_step) }
+      let!(:delivery_1) { create(:delivery, price: 10) }
+      let!(:delivery_2) { create(:delivery, price: 20) }
 
       it do
         get :show
         expect(response).to be_successful
         expect(controller).to render_template(:show)
-        expect(assigns(:deliveries)).to be_kind_of(ActiveRecord::Relation)
+        expect(assigns(:deliveries).first).to eq(delivery_1)
+        expect(assigns(:deliveries).last).to eq(delivery_2)
       end
     end
 
