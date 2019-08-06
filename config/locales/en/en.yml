@@ -6,6 +6,9 @@ en:
     welcome: "Welcome"
     catalog: "Catalog"
 
+  formats:
+
+
   header:
     all_books: All books
     logo_name: Bookstore
