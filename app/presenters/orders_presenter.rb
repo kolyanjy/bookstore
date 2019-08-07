@@ -1,5 +1,4 @@
 class OrdersPresenter
-
   def status_name(status)
     status.to_s.split('_').join(' ').capitalize
   end

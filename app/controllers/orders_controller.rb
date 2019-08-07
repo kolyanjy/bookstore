@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: :add_couopon
+  before_action :authenticate_user!, except: :add_coupon
 
   def index
-    @orders = Orders::SortQuery.new(current_user, params[:sort]).call.decorate
+    @orders = Orders::StatusQuery.new(current_user, params[:sort]).call.decorate
     @presenter = OrdersPresenter.new
   end
 

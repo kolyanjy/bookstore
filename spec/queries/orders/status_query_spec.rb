@@ -1,4 +1,4 @@
-RSpec.describe Orders::SortQuery do
+RSpec.describe Orders::StatusQuery do
   subject(:result) { described_class.new(user, status).call }
 
   let!(:user) { create(:user) }

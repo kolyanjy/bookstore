@@ -1,5 +1,5 @@
 module Orders
-  class SortQuery
+  class StatusQuery
     def initialize(user, status = nil)
       @user = user
       @status = status
