@@ -13,7 +13,6 @@ RSpec.describe 'OrdersPage page', type: :feature do
     visit orders_path
     expect(page).to have_content I18n.t('order.my_orders')
     expect(page).to have_content order.number.to_s
-    expect(page).to have_content order.decorate.order_created_at.to_s
     expect(page).to have_content order.status.split('_').join(' ').capitalize.to_s
     expect(page).to have_content order.decorate.order_summary.to_s
   end

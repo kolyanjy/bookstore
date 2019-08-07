@@ -16,7 +16,7 @@
   .visible-xs
     .general-cart-item.divider-lg-bottom.pt-0
       %table.table
-        -# = render 'orders/shared/mobile_orders', orders: @orders
+        = render 'orders/partials/mobile_orders', orders: @orders
   .hidden-xs.mb-res-50
     %table.table.table-hover
       %thead

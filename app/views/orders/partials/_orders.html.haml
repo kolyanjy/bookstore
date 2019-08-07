@@ -5,7 +5,7 @@
         = orders.number
   %td
     %span.in-grey-900.font-16.fw-300
-      = orders.order_created_at
+      = l(orders.created_at, format: :day_month_year)
   %td
     %span.font-16.in-grey-900.fw-300
       = orders.status.split('_').join(' ').capitalize
