@@ -1,8 +1,4 @@
 class OrdersPresenter
-  def status_name(status)
-    status.to_s.split('_').join(' ').capitalize
-  end
-
   def check_status(status)
     status_exist?(status) ? status : Order::FINISH_STATUSES.first
   end

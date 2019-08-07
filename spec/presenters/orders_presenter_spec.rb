@@ -20,10 +20,4 @@ RSpec.describe OrdersPresenter do
       it { expect(presenter.check_status(status)).to eq(status) }
     end
   end
-
-  describe 'status_name' do
-    let(:status) { :in_progress }
-
-    it { expect(presenter.status_name(status)).to eq('In progress') }
-  end
 end

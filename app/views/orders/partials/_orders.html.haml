@@ -8,7 +8,7 @@
       = l(order.created_at, format: :day_month_year)
   %td
     %span.font-16.in-grey-900.fw-300
-      = presenter.status_name(order.status)
+      = t(order.status, scope: [:order])
   %td
     %strong.font-16
       = number_to_currency(order.order_summary)

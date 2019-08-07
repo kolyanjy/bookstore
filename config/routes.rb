@@ -24,8 +24,10 @@ Rails.application.routes.draw do
     get :checkout
   end
 
-  resources :orders, only: %i[show index] do
-    patch :add_coupon
+  resources :orders, only: %i[show index]
+
+  resource :coupon, only: [] do
+    patch :apply
   end
 
   namespace :checkout do

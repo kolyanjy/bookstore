@@ -1,4 +1,4 @@
-RSpec.describe Orders::AddCoupon do
+RSpec.describe Coupons::Add do
   subject(:result) { described_class.call(order: order, key: key) }
 
   let!(:order) { create(:order) }

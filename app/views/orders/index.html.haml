@@ -10,7 +10,7 @@
     %ul.dropdown-menu
       - Order::FINISH_STATUSES.each do |status|
         %li
-          = link_to @presenter.status_name(status), orders_path(sort: status)
+          = link_to t(@presenter.check_status(status), scope: [:order]), orders_path(sort: status)
   .visible-xs
     .general-cart-item.divider-lg-bottom.pt-0
       %table.table
