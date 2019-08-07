@@ -1,7 +1,7 @@
 en:
   order:
     cart: Cart
-    order_summary: Order Summary
+    order_summary: 'Order Summary:'
     subtotal: 'Subtotal:'
     order_total: 'Order Total:'
     empty: Your cart is empty
@@ -14,4 +14,5 @@ en:
     in_delivery: In Delivery
     delivered: Delivered
     canceled: Canceled
-    add_to_cart: "Add books to cart before checkout"
+    add_to_cart: Add books to cart before checkout
+    sort:  Sort by

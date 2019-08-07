@@ -1,5 +1,5 @@
 RSpec.describe Coupons::Add do
-  subject(:context) { described_class.call(order: order, key: key) }
+  subject(:result) { described_class.call(order: order, key: key) }
 
   let!(:order) { create(:order) }
 
@@ -8,7 +8,7 @@ RSpec.describe Coupons::Add do
     let(:key) { coupon.key }
 
     it do
-      expect(context).to be_success
+      expect(result).to be_success
       expect(order.coupon).to eq(coupon)
     end
   end
@@ -17,7 +17,7 @@ RSpec.describe Coupons::Add do
     let(:key) { '123' }
 
     it do
-      expect(context).not_to be_success
+      expect(result).not_to be_success
       expect(order.coupon).to eq(nil)
     end
   end

@@ -17,10 +17,19 @@ Rails.application.routes.draw do
   resources :categories do
     resources :books, only: :index
   end
+
   resources :order_items, only: %i[update create destroy]
+
   resource :cart, only: :show do
     get :checkout
   end
+
+  resources :orders, only: %i[show index]
+
+  resource :coupon, only: [] do
+    patch :apply
+  end
+
   namespace :checkout do
     resource :fill_address, only: %i[show create]
     resource :fill_delivery, only: %i[show create]
@@ -28,7 +37,6 @@ Rails.application.routes.draw do
     resource :fill_confirm, only: %i[show create]
     get '/fill_complete/:number', as: 'fill_complete', to: 'fill_completes#show'
   end
-  resource :coupon, only: :update
 
   root 'home#index'
 end
