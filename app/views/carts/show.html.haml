@@ -39,8 +39,12 @@
             %td
               = link_to order_item_path(order_item.id), method: :delete, class: 'close general-cart-close' do
                 %span{'aria-hidden': "true"} &times;
+    = render 'carts/partials/coupon'
     .text-center
-      = link_to t('btn.checkout'), class: 'btn btn-default mb-20'
+      -if user_signed_in?
+        = link_to t('btn.checkout'), checkout_cart_path , class: 'btn btn-default mb-20'
+      - else
+        = link_to t('btn.checkout'),  new_user_registration_path(quick: true), method: :get, class: 'btn btn-default mb-20'
   - else
     %h1.general-title-margin
       = t('order.cart')

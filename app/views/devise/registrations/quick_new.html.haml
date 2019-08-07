@@ -1,0 +1,23 @@
+%main.container
+  .row
+    .col-md-6.col-md-offset-3.mb-60
+      .text-center
+        %h3.general-subtitle
+          = t('quick_registration.new_customer')
+        = render '/devise/shared/facebook_link'
+        %p.general-login-text
+          = t('quick_registration.or')
+      = simple_form_for(User.new, url: user_registration_path, method: :post, data: { quick: true }) do |f|
+        .mb-40
+          %p.mb-5
+            = t('quick_registration.quick_registration')
+          %p.general-info-text.font-12.mb-20
+            = t('checkout.able_to_create_password_late')
+          .form-group.mb-30
+            %label.control-label.input-label{for: "email"}
+              = t('quick_registration.enter_email')
+            = f.input :email, autofocus: true, autocomplete: "email", id: 'email', class: 'form-control', placeholder: t('quick_registration.enter_email')
+            = f.hidden_field :quick, value: true
+        .text-center
+          .form-group.checkbox.text-center.mb-30
+            = f.submit t('quick_registration.sign_up'), class: 'btn btn-default mb-20'

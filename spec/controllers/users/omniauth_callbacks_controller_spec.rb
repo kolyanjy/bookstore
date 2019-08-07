@@ -8,7 +8,7 @@ RSpec.describe Users::OmniauthCallbacksController do
 
   context 'when call omniauth callback with success result' do
     let(:user) { build(:user) }
-    let(:result) { double(:result, success?: true, user: user) } # rubocop:disable RSpec/VerifiedDoubles
+    let(:result) { double(:result, success?: true, user: user) }
 
     it 'redirects to root' do
       expect(Users::CreateFromOmniauth).to receive(:call).with(auth_hash: auth_hash).and_return(result)
@@ -20,7 +20,7 @@ RSpec.describe Users::OmniauthCallbacksController do
 
   context 'when call omniauth callback with fail result' do
     let(:user) { build(:user) }
-    let(:result) { double(:result, success?: false, user: user) } # rubocop:disable RSpec/VerifiedDoubles
+    let(:result) { double(:result, success?: false, user: user) }
 
     it 'redirects to root' do
       allow(Users::CreateFromOmniauth).to receive(:call).with(auth_hash: auth_hash).and_return(result)

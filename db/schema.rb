@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_11_164730) do
+ActiveRecord::Schema.define(version: 2019_07_28_223222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,22 @@ ActiveRecord::Schema.define(version: 2019_07_11_164730) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "coupons", force: :cascade do |t|
+    t.string "key"
+    t.decimal "price", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "deliveries", force: :cascade do |t|
+    t.string "name"
+    t.string "min_days"
+    t.string "max_days"
+    t.decimal "price", precision: 10, scale: 2
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "materials", force: :cascade do |t|
     t.string "name"
     t.bigint "book_id"
@@ -119,6 +135,7 @@ ActiveRecord::Schema.define(version: 2019_07_11_164730) do
     t.bigint "book_id"
     t.bigint "order_id"
     t.integer "quantity", default: 0
+    t.decimal "price", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_order_items_on_book_id"
@@ -126,12 +143,29 @@ ActiveRecord::Schema.define(version: 2019_07_11_164730) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.bigint "user_id"
     t.integer "status", default: 0
+    t.string "number"
+    t.bigint "user_id"
+    t.decimal "delivery_price", precision: 10, scale: 2
     t.boolean "hidden_shipping_form", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "delivery_id"
+    t.bigint "coupon_id"
+    t.index ["coupon_id"], name: "index_orders_on_coupon_id"
+    t.index ["delivery_id"], name: "index_orders_on_delivery_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.string "number"
+    t.string "name"
+    t.string "date"
+    t.string "cvv"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_payments_on_order_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -164,5 +198,8 @@ ActiveRecord::Schema.define(version: 2019_07_11_164730) do
   add_foreign_key "comments", "users"
   add_foreign_key "order_items", "books"
   add_foreign_key "order_items", "orders"
+  add_foreign_key "orders", "coupons"
+  add_foreign_key "orders", "deliveries"
   add_foreign_key "orders", "users"
+  add_foreign_key "payments", "orders"
 end

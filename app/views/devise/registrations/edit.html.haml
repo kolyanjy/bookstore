@@ -24,7 +24,7 @@
             %h3.general-subtitle.mt-0
               = t('settings.billing_address')
           = simple_form_for(current_user, validate: true,  defaults: { input_html: { class: "form-control address_form" }}, url: users_address_path, html: { method: :patch, id: "BillingAddress" }) do |f|
-            = render partial: '/devise/registrations/partials/form_fields', locals: { f: f, address: current_user.shipping_address, address_type: :billing_address }
+            = render partial: '/shared/addresses/form_fields', locals: { f: f, address: current_user.billing_address, address_type: :billing_address }
             .text-center.general-text-align
               = f.submit t('btn.save'), class: "btn btn-default mb-20 BillingAddress"
         .col-md-5.col-md-offset-1.mb-25
@@ -32,7 +32,7 @@
             %h3.general-subtitle.mt-0
               = t('settings.shipping_address')
           = simple_form_for(current_user, validate: true,  defaults: { input_html: { class: "form-control address_form" }}, url: users_address_path, html: { method: :patch, id: "ShippingAddress" }) do |f|
-            = render partial: '/devise/registrations/partials/form_fields', locals: { f: f, address: current_user.shipping_address, address_type: :shipping_address }
+            = render partial: '/shared/addresses/form_fields', locals: { f: f, address: current_user.shipping_address, address_type: :shipping_address }
             .text-center.general-text-align
               = f.submit t('btn.save'), class: "btn btn-default mb-20 ShippingAddress"
     #privacy.tab-pane.fade{role: "tabpanel"}

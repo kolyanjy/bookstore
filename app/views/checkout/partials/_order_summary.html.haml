@@ -1,0 +1,37 @@
+%p.in-gold-500.font-18
+  = t('order.order_summary')
+%table.general-summary-table.general-summary-table-left.general-text-left
+  %tr
+    %td
+      %p.font-16
+        = t('order.subtotal')
+    %td
+      %p.font-16
+        = number_to_currency(order.order_summary)
+  %tr
+    %td
+      %p.font-16
+        = t('coupon.coupon')
+    - if !order.coupon
+      %td
+        %p.font-16
+          = number_to_currency(0)
+    - else
+      %td
+        %p.font-16
+          = number_to_currency(order.coupon.price)
+  - if order.delivery
+    %tr
+      %td
+        %p.font-16
+          = t('checkout.delivery.title')
+      %td
+        %p.font-16
+          = number_to_currency(order.delivery.price)
+  %tr
+    %td
+      %strong.font-18
+        = t('order.order_total')
+    %td
+      %strong.font-18
+        = number_to_currency(order.order_total)

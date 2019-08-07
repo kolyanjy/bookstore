@@ -1,0 +1,25 @@
+%main.container.mb-res-50
+  %h1.general-title-margin
+    = t('checkout.title')
+  %ul.steps.list-inline
+    = render 'checkout/partials/checkout_steps'
+  %h3.general-subtitle
+    = t('checkout.payment.title')
+  = simple_form_for(@payment, url: checkout_fill_payment_path, validate: true, defaults: { input_html: { class: "form-control"}}, html: { method: :post }) do |f|
+    .max-600.mb-80
+      = f.input :number, placeholder: t('checkout.payment.placeholder.cart_number')
+      .row.mt-30
+        .col-sm-6
+          = f.input :name, placeholder: t('checkout.payment.placeholder.name_on_card'), input_html: { value: @payment.name }
+        .col-sm-3
+          = f.input :date,  placeholder: t('checkout.payment.placeholder.date')
+        .col-sm-3
+          = f.input :cvv,  placeholder: t('checkout.payment.placeholder.cvv')
+          .hint_cvv
+            %i.fa.fa-question-circle.general-form-help
+            %span
+              = t('checkout.payment.hint')
+    .general-text-left
+      = render 'checkout/partials/order_summary', order: current_order
+    .text-center
+      = f.submit t('btn.save_and_continue'), class: "btn btn-default mb-80"

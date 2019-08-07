@@ -18,6 +18,9 @@ Style/Encoding:
 RSpec/MessageSpies:
   EnforcedStyle: receive
 
+Metrics/AbcSize:
+  Max: 17
+
 Metrics/LineLength:
   Max: 120
   Exclude:
@@ -30,6 +33,7 @@ Metrics/BlockLength:
     - 'spec/**/*'
     - 'config/initializers/simple_form_bootstrap.rb'
     - 'config/environments/*'
+    - 'config/routes.rb'
 
 Documentation:
   Enabled: false
@@ -44,6 +48,10 @@ RSpec/DescribeClass:
 
 RSpec/NestedGroups:
   Max: 4
+
+RSpec/VerifiedDoubles:
+  Exclude:
+    - 'spec/controllers/**/*'
 
 RSpec/MultipleExpectations:
   Enabled: false

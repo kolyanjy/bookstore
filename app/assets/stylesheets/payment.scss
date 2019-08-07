@@ -1,0 +1,17 @@
+.hint_cvv {
+  text-align: center;
+  &:hover span {
+    display: inline-block;
+    position: absolute;
+    background: black;
+    color: white;
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 10px;
+  }
+  span {
+    display: none;
+  }
+}

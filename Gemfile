@@ -74,6 +74,7 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'database_cleaner'
+  gem 'rack_session_access'
   gem 'rails-controller-testing'
   gem 'rspec', '~> 3.8'
   gem 'selenium-webdriver'

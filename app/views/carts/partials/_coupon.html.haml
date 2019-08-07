@@ -1,0 +1,13 @@
+.general-order-wrap
+  .row
+    .col-sm-4
+      = simple_form_for(Coupon.new, url: coupon_path, validate: true, defaults: { input_html: { class: "form-control" }}, html: { method: :put }) do |f|
+        .input-group.general-input-group
+          %label
+            = t('coupon.enter_coupon')
+          = f.input :key, label: false, placeholder: t('coupon.enter_coupon')
+        %div
+          = f.submit t('coupon.coupon'), class: 'btn btn-primary mt-30'
+    .col-sm-8
+      .res-mr-200.text-center.general-text-left
+        = render 'checkout/partials/order_summary', order: current_order

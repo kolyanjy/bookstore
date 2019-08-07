@@ -14,7 +14,7 @@ en:
     login: Login
     log_out: Log out
     my_account: My account
-    
+
   btn:
     account: "My account"
     settings: "Settings"
@@ -26,6 +26,8 @@ en:
     shop: "Shop"
     edit: "edit"
     save: "Save"
+    checkout: "Checkout"
+    save_and_continue: "Save and continue"
 
   interpolation:
     hello: "Hello %{email}"
@@ -53,3 +55,6 @@ en:
         significant: false
         strip_insignificant_zeros: false
         unit: "€"
+  time:
+    formats:
+      day_month_year: '%B %d, %Y'

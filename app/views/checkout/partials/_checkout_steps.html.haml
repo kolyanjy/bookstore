@@ -1,0 +1,13 @@
+- clickable_steps.each_with_index do |step, index|
+  %li.step{class: "#{'active' if index.next <= current_order.status_before_type_cast}"}
+    %span.step-number
+      = index.next
+    %span.hidden-xs
+      = link_to public_send("checkout_#{step}_path"), class: 'step_checkout step-text' do
+        = t(step, scope: [:checkout, :checkout_step])
+  %li{class: "#{'step-divider' if index.next < current_order.status_before_type_cast}"}
+%li.step{class: "#{'active' if current_order.in_progress?}"}
+  %span.step-number
+    = CheckoutHelper::LAST_STEP
+  %span.hidden-xs
+    = t(:fill_complete, scope: [:checkout, :checkout_step])
