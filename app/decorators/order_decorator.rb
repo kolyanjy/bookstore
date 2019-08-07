@@ -6,7 +6,7 @@ class OrderDecorator < Draper::Decorator
   end
 
   def order_summary
-    order_items.sum(&:book_price)
+    order_items.sum { |item| item.book_price * item.quantity }
   end
 
   def order_total
