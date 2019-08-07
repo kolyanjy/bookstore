@@ -1,13 +1,27 @@
 RSpec.describe Checkout::FillConfirm::Create do
-  subject(:context) { described_class.call(order: order) }
+  subject(:result) { described_class.call(order: order) }
 
-  let(:order) { create(:order, :confirm_step) }
+  let(:order) { create(:order, :confirm_step, :with_order_item, id: 123, delivery: delivery) }
+  let(:delivery) { create(:delivery) }
 
   describe 'call' do
-    it 'create number to order' do
+    it 'expect to setup number to order' do
       expect(order.number).to eq(nil)
-      expect(context.success?).to eq(true)
-      expect(order.number.length).to eq(Checkout::FillConfirm::Create::NUMBER_QUANTITY)
+      expect(result).to be_success
+      expect(order.number).to eq('R00000123')
+    end
+
+    it 'expect to update order' do
+      expect(order.delivery_price).to eq(nil)
+      result
+      expect(order.delivery_price).to eq(delivery.price)
+    end
+
+    it 'expect to order items' do
+      result
+      order.order_items.reload.each do |item|
+        expect(item.price).to eq(item.book_price)
+      end
     end
   end
 end

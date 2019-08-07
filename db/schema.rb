@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 2019_07_28_223222) do
 
   create_table "coupons", force: :cascade do |t|
     t.string "key"
-    t.decimal "price"
+    t.decimal "price", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -135,6 +135,7 @@ ActiveRecord::Schema.define(version: 2019_07_28_223222) do
     t.bigint "book_id"
     t.bigint "order_id"
     t.integer "quantity", default: 0
+    t.decimal "price", precision: 10, scale: 2
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_order_items_on_book_id"
@@ -145,6 +146,7 @@ ActiveRecord::Schema.define(version: 2019_07_28_223222) do
     t.integer "status", default: 0
     t.string "number"
     t.bigint "user_id"
+    t.decimal "delivery_price", precision: 10, scale: 2
     t.boolean "hidden_shipping_form", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -159,7 +161,7 @@ ActiveRecord::Schema.define(version: 2019_07_28_223222) do
     t.string "number"
     t.string "name"
     t.string "date"
-    t.integer "cvv"
+    t.string "cvv"
     t.bigint "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

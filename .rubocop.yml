@@ -19,7 +19,7 @@ RSpec/MessageSpies:
   EnforcedStyle: receive
 
 Metrics/AbcSize:
-  Max: 25
+  Max: 17
 
 Metrics/LineLength:
   Max: 120
@@ -49,10 +49,13 @@ RSpec/DescribeClass:
 RSpec/NestedGroups:
   Max: 4
 
+<<<<<<< HEAD
 RSpec/LetSetup:
   Exclude:
     - 'spec/features/**/*'
 
+=======
+>>>>>>> develop
 RSpec/VerifiedDoubles:
   Exclude:
     - 'spec/controllers/**/*'

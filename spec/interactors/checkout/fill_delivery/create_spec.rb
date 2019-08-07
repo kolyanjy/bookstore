@@ -1,5 +1,5 @@
 RSpec.describe Checkout::FillDelivery::Create do
-  subject(:context) { described_class.call(params: params, order: order) }
+  subject(:result) { described_class.call(params: params, order: order) }
 
   let(:order) { build(:order, :delivery_step) }
   let!(:delivery) { create(:delivery) }
@@ -9,7 +9,7 @@ RSpec.describe Checkout::FillDelivery::Create do
       let(:params) { { delivery_id: delivery.id } }
 
       it do
-        expect(context.success?).to eq(true)
+        expect(result).to be_success
         expect(order.delivery).to eq(delivery)
       end
     end
@@ -18,7 +18,7 @@ RSpec.describe Checkout::FillDelivery::Create do
       let(:params) { { delivery_id: '100' } }
 
       it do
-        expect(context).to be_failure
+        expect(result).to be_failure
         expect(order.delivery).to eq(nil)
       end
     end

@@ -11,10 +11,11 @@
   %tr
     %td
       %p.font-16
-        = t('coupone.coupon')
+        = t('coupon.coupon')
     - if !order.coupon
       %td
-        %p.font-16 €0.00
+        %p.font-16
+          = number_to_currency(0)
     - else
       %td
         %p.font-16
@@ -22,7 +23,8 @@
   - if order.delivery
     %tr
       %td
-        %p.font-16 Delivery
+        %p.font-16
+          = t('checkout.delivery.title')
       %td
         %p.font-16
           = number_to_currency(order.delivery.price)

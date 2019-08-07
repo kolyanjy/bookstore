@@ -1,5 +1,5 @@
 RSpec.describe Checkout::FillPayment::Create do
-  subject(:context) { described_class.call(params: params, order: order) }
+  subject(:result) { described_class.call(params: params, order: order) }
 
   let(:order) { create(:order, :payment_step) }
 
@@ -8,8 +8,9 @@ RSpec.describe Checkout::FillPayment::Create do
       let(:params) { attributes_for(:payment) }
 
       it do
-        expect(context.success?).to eq(true)
+        expect(result).to be_success
         expect(Payment.count).to eq(1)
+        expect(Payment.last).to have_attributes(params)
       end
     end
 
@@ -17,7 +18,7 @@ RSpec.describe Checkout::FillPayment::Create do
       let(:params) { attributes_for(:payment, cvv: nil) }
 
       it do
-        expect(context.success?).to eq(false)
+        expect(result).to be_failure
         expect(Payment.count).to eq(0)
       end
     end

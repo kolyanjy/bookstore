@@ -1,15 +1,14 @@
 RSpec.describe 'fill_payment', type: :feature do
   let!(:delivery) { create(:delivery) }
   let(:order) { create(:order, :with_order_item, :payment_step, delivery_id: delivery.id) }
-  let!(:billing_address) { create(:billing_address, addressable: order) }
-  let!(:shipping_address) { create(:shipping_address, addressable: order) }
-
   let(:valid_number) { '1234123412341234' }
   let(:valid_name) { 'Rofl' }
   let(:valid_date) { '12/12' }
   let(:valid_cvv) { 123 }
 
   before do
+    create(:billing_address, addressable: order)
+    create(:shipping_address, addressable: order)
     login_as(order.user, scope: :user)
     page.set_rack_session(order_id: order.id)
   end

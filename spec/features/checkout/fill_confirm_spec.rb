@@ -1,11 +1,11 @@
 RSpec.describe 'Fill confirm', type: :feature do
   let!(:delivery) { create(:delivery) }
-  let!(:payment) { create(:payment, order_id: order.id) }
   let(:order) { create(:order, :with_order_item, :confirm_step, delivery_id: delivery.id) }
-  let!(:billing_address) { create(:billing_address, addressable: order) }
-  let!(:shipping_address) { create(:shipping_address, addressable: order) }
 
   before do
+    create(:payment, order_id: order.id)
+    create(:billing_address, addressable: order)
+    create(:shipping_address, addressable: order)
     allow(Orders::Check).to receive(:call).and_return(double(order: order)) # rubocop:disable RSpec/VerifiedDoubles
     login_as(order.user, scope: :user)
     page.set_rack_session(order_id: order.id)

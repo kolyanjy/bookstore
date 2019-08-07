@@ -2,10 +2,10 @@ RSpec.describe 'fill delivery', type: :feature do
   let(:user) { create(:user) }
   let(:order) { create(:order, :with_order_item, :delivery_step, user: user) }
   let!(:delivery) { create(:delivery) }
-  let!(:billing_address) { create(:billing_address, addressable: order) }
-  let!(:shipping_address) { create(:shipping_address, addressable: order) }
 
   before do
+    create(:billing_address, addressable: order)
+    create(:shipping_address, addressable: order)
     allow(Orders::Check).to receive(:call).and_return(double(order: order)) # rubocop:disable RSpec/VerifiedDoubles
     login_as(order.user, scope: :user)
     page.set_rack_session(order_id: order.id)
@@ -26,7 +26,6 @@ RSpec.describe 'fill delivery', type: :feature do
   end
 
   it 'Go past step' do
-    # page.set_rack_session('warden.user.user.key' => User.serialize_into_session(user), order_id: order.id)
     visit checkout_fill_delivery_path
     click_link(I18n.t('checkout.checkout_step.fill_address'))
     expect(page).to have_current_path checkout_fill_address_path

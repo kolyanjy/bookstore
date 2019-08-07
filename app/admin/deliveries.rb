@@ -1,4 +1,4 @@
-ActiveAdmin.register Delivery, as: 'checkout_delivery' do
+ActiveAdmin.register Delivery do
   permit_params :name, :min_days, :max_days, :price
   config.filters = false
 

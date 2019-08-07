@@ -6,18 +6,10 @@ class OrderDecorator < Draper::Decorator
   end
 
   def order_summary
-    summary = 0
-    order_items.each do |item|
-      summary += item.book.price * item.quantity
-    end
-    summary
+    order_items.sum { |item| item.book_price * item.quantity }
   end
 
   def order_total
-    if coupon
-      (order_summary + (delivery&.price).to_i - coupon.price).round(2)
-    else
-      (order_summary + (delivery&.price).to_i).round(2)
-    end
+    (order_summary + delivery&.price.to_d - coupon&.price.to_d).round(2)
   end
 end

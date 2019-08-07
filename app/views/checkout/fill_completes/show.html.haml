@@ -14,17 +14,17 @@
         %p.general-order-number.mb-0
           = t('checkout.complete.order_number', number: @order.number)
         %p.general-address.mb-30
-          = "#{@order.created_at}"
+          = l(@order.created_at, format: :day_month_year)
       = render 'checkout/fill_confirms/partials/address', address: @order.shipping_address
     .col-sm-6.hidden-xs.text-right
       %p.general-order-number.mb-0
         = t('checkout.complete.order_number', number: @order.number)
       %p.general-address.mb-30
-        = "#{@order.created_at}"
+        = l(@order.created_at, format: :day_month_year)
   .visible-xs
-    -# = render 'checkout/shared/mobile/order_items', order_items: @order.order_items
+    = render 'checkout/partials/mobile/order_items', order_items: @order_items
   .hidden-xs.divider-lg.pt-20
-    = render 'checkout/fill_confirms/partials/order_items', order_items: @order.order_items.decorate
+    = render 'checkout/fill_confirms/partials/order_items', order_items: @order_items
   .text-center.general-text-left
     = render 'checkout/partials/order_summary', order: @order
   .text-center

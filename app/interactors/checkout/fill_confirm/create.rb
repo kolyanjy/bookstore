@@ -3,18 +3,34 @@ module Checkout
     class Create
       include Interactor
 
-      NUMBER_QUANTITY = 9
+      NUMBER_PREFIX = 'R'.freeze
+      NUMBER_QUANTITY = 8
 
       def call
-        return context.fail! unless context.order.update(number: build_number)
+        ActiveRecord::Base.transaction do
+          return context.fail! unless update_order
 
-        context.order.confirm! if context.order.fill_confirm?
+          return context.fail! unless update_order_items
+
+          context.order.confirm! if context.order.fill_confirm?
+        end
       end
 
       private
 
+      def update_order
+        context.order.update(number: build_number, delivery_price: context.order.delivery.price)
+      end
+
+      def update_order_items
+        context.order.order_items.each do |item|
+          return false unless item.update(price: item.book_price)
+        end
+      end
+
       def build_number
-        'R'.rjust(NUMBER_QUANTITY - context.order.id.to_s.length, '0').reverse + context.order.id.to_s
+        id = context.order.id.to_s
+        NUMBER_PREFIX + id.rjust(NUMBER_QUANTITY, '0')
       end
     end
   end

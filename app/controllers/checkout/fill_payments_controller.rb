@@ -3,13 +3,13 @@ module Checkout
     include CheckoutConcern
 
     def show
-      redirect_to(public_send('checkout_' + current_order.status + '_path')) && return unless check_step(:fill_payment)
+      redirect_to(checkout_step_path) && return unless check_step(:fill_payment)
       @payment = Payment.first_or_initialize(order_id: current_order.id)
     end
 
     def create
       Checkout::FillPayment::Organizer.call(allowed_status: :fill_payment, order: current_order, params: payment_params)
-      redirect_to public_send('checkout_' + current_order.status + '_path')
+      redirect_to checkout_step_path
     end
 
     private

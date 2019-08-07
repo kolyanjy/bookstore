@@ -55,3 +55,6 @@ en:
         significant: false
         strip_insignificant_zeros: false
         unit: "€"
+  time:
+    formats:
+      day_month_year: '%B %d, %Y'
