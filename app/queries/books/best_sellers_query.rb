@@ -1,12 +1,10 @@
-module Home
-  class TakeBestSellers
-    include Interactor
-
+module Books
+  class BestSellersQuery
     NUMBER_BEST_SELLER = 4
 
     def call
       books = Book.where().limit(NUMBER_BEST_SELLER)
-      context.best_sellers = books.decorate
+      books.decorate
     end
   end
 end
