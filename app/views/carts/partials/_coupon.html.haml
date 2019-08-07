@@ -1,7 +1,7 @@
 .general-order-wrap
   .row
     .col-sm-4
-      = simple_form_for(Coupon.new, url: add_couopon_path, validate: true, defaults: { input_html: { class: "form-control" }}, html: { method: :put }) do |f|
+      = simple_form_for(Coupon.new, url: order_add_coupon_path(current_order.id), validate: true, defaults: { input_html: { class: "form-control" }}, html: { method: :patch }) do |f|
         .input-group.general-input-group
           %label
             = t('coupon.enter_coupon')

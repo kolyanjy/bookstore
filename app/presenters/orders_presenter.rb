@@ -1,13 +1,18 @@
 class OrdersPresenter
-  def check_sort(filter)
-    filter_exist?(filter) ? filter : Order::FINISH_STATUSES.first
+
+  def status_name(status)
+    status.to_s.split('_').join(' ').capitalize
+  end
+
+  def check_status(status)
+    status_exist?(status) ? status : Order::FINISH_STATUSES.first
   end
 
   private
 
-  def filter_exist?(filter)
-    return false if filter.nil?
+  def status_exist?(status)
+    return false if status.nil?
 
-    Order::FINISH_STATUSES.include?(filter.to_sym)
+    Order::FINISH_STATUSES.include?(status.to_sym)
   end
 end

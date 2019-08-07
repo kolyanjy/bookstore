@@ -1,23 +1,23 @@
 RSpec.describe OrdersPresenter do
   subject(:presenter) { described_class.new }
 
-  describe 'check_filter' do
-    context 'when filter nil' do
-      let(:filter) { nil }
+  describe 'check_status' do
+    context 'when status nil' do
+      let(:status) { nil }
 
-      it { expect(presenter.check_sort(filter)).to eq(Order::FINISH_STATUSES.first) }
+      it { expect(presenter.check_status(status)).to eq(:in_progress) }
     end
 
-    context 'when invalid filter' do
-      let(:filter) { :lolkek }
+    context 'when invalid status' do
+      let(:status) { :lolkek }
 
-      it { expect(presenter.check_sort(filter)).to eq(Order::FINISH_STATUSES.first) }
+      it { expect(presenter.check_status(status)).to eq(:in_progress) }
     end
 
-    context 'when valid filter' do
-      let(:filter) { :in_delivery }
+    context 'when valid status' do
+      let(:status) { :in_delivery }
 
-      it { expect(presenter.check_sort(filter)).to eq(filter) }
+      it { expect(presenter.check_status(status)).to eq(status) }
     end
   end
 end

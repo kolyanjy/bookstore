@@ -24,9 +24,9 @@ Rails.application.routes.draw do
     get :checkout
   end
 
-  resources :orders, only: %i[show index]
-
-  put '/add_couopon', to: 'orders#add_couopon', as: 'add_couopon'
+  resources :orders, only: %i[show index] do
+    patch :add_coupon
+  end
 
   namespace :checkout do
     resource :fill_address, only: %i[show create]

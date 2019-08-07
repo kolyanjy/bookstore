@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
     @order = current_user.orders.find_by!(id: params[:id]).decorate
   end
 
-  def add_couopon
+  def add_coupon
     result = Orders::AddCoupon.call(key: params[:coupon][:key], order: current_order)
     if result.success?
       flash[:success] = t('coupon.success_update')
