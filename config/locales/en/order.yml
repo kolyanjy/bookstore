@@ -1,9 +1,9 @@
 en:
   order:
     cart: Cart
-    order_summary: Order Summary:
-    subtotal: Subtotal:
-    order_total: Order Total:
+    order_summary: 'Order Summary:'
+    subtotal: 'Subtotal:'
+    order_total: 'Order Total:'
     empty: Your cart is empty
     number: Number
     completed_at: Completed at
