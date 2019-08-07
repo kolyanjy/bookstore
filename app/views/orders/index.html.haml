@@ -4,10 +4,7 @@
   %p.lead.small.mb-10.visible-xs Sort by
   .dropdowns.dropdown.general-order-dropdown
     %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
-      - if params[:sort]
-        = t("order.#{params[:sort]}")
-      - else
-        = t('order.in_progress')
+      = t(@presenter.check_sort(params[:sort]), scope: [:order])
       %i.fa.fa-angle-down.dropdown-icon.pull-right
     %ul.dropdown-menu
       - Order::FINISH_STATUSES.each do |sort|
@@ -16,7 +13,7 @@
   .visible-xs
     .general-cart-item.divider-lg-bottom.pt-0
       %table.table
-        = render 'orders/partials/mobile_orders', orders: @orders
+        = render partial: 'orders/partials/mobile_orders', collection: @orders, as: :order
   .hidden-xs.mb-res-50
     %table.table.table-hover
       %thead
@@ -34,4 +31,4 @@
             %span.in-grey-600
               = t('order.total')
       %tbody
-        = render partial: 'orders/partials/orders', collection: @orders
+        = render partial: 'orders/partials/orders', collection: @orders, as: :order

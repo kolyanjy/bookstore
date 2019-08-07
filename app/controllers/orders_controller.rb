@@ -1,15 +1,16 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!, except: :update
+  before_action :authenticate_user!, except: :add_couopon
 
   def index
-    @orders = Orders::Sort.call(status: params[:sort], user: current_user).orders.decorate
+    @orders = Orders::SortQuery.new(current_user, params[:sort]).call.decorate
+    @presenter = OrdersPresenter.new
   end
 
   def show
-    @order = Order.find_by!(user_id: current_user.id, id: params[:id]).decorate
+    @order = current_user.orders.find_by!(id: params[:id]).decorate
   end
 
-  def update
+  def add_couopon
     result = Orders::AddCoupon.call(key: params[:coupon][:key], order: current_order)
     if result.success?
       flash[:success] = t('coupon.success_update')

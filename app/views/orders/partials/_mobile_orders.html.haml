@@ -1,30 +1,29 @@
-- orders.each do |order|
-  %tr
-    %td.col-half
-      %span.in-grey-600
-        = t('order.number')
-    %td.col-half
-      = link_to order_path(order) do
-        %span.general-order-number
-          = order.number
-  %tr
-    %td
-      %span.in-grey-600
-        = t('order.completed_at')
-    %td
-      %span.in-grey-900.font-16.fw-300
-        = l(order.created_at, format: :day_month_year)
-  %tr
-    %td
-      %span.in-grey-600
-        = t('order.status')
-    %td
-      %span.font-16.in-grey-900.fw-300
-        = order.status
-  %tr
-    %td
-      %span.in-grey-600
-        = t('order.total')
-    %td
-      %strong.font-16
-        = number_to_currency(order.order_summary)
+%tr
+  %td.col-half
+    %span.in-grey-600
+      = t('order.number')
+  %td.col-half
+    = link_to order_path(order) do
+      %span.general-order-number
+        = order.number
+%tr
+  %td
+    %span.in-grey-600
+      = t('order.completed_at')
+  %td
+    %span.in-grey-900.font-16.fw-300
+      = l(order.created_at, format: :day_month_year)
+%tr
+  %td
+    %span.in-grey-600
+      = t('order.status')
+  %td
+    %span.font-16.in-grey-900.fw-300
+      = order.status
+%tr
+  %td
+    %span.in-grey-600
+      = t('order.total')
+  %td
+    %strong.font-16
+      = number_to_currency(order.order_summary)
