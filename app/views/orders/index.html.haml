@@ -1,7 +1,8 @@
 %main.container.general-main-wrap
   %h1.mt-0.mb-25
     = t('order.my_orders')
-  %p.lead.small.mb-10.visible-xs Sort by
+  %p.lead.small.mb-10.visible-xs
+    = t('order.sort')
   .dropdowns.dropdown.general-order-dropdown
     %a.dropdown-toggle.lead.small{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
       = t(@presenter.check_sort(params[:sort]), scope: [:order])
