@@ -72,4 +72,12 @@ class Order < ApplicationRecord
       transitions from: %i[in_progress in_delivery delivered], to: :canceled
     end
   end
+
+  after_update do |order|
+    if order.delivered? && order.status_previously_changed?
+      order.order_items.each do |item|
+        item.book.increment!(:buy_count) # rubocop:disable Rails/SkipsModelValidations
+      end
+    end
+  end
 end

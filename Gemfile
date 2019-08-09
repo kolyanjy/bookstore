@@ -64,6 +64,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'awesome_rails_console', '~> 0.4.0'
   gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'

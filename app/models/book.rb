@@ -6,6 +6,7 @@ class Book < ApplicationRecord
   has_many :authors, through: :book_authors
   has_many :book_images, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :order_items, dependent: :nullify
 
   accepts_nested_attributes_for :book_images, allow_destroy: true
 

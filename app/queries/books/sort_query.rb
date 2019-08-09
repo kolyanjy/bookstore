@@ -1,8 +1,8 @@
 module Books
   class SortQuery
     FILTERS = {
+      popular: ->(relation) { relation.order('buy_count DESC') },
       created_at: ->(relation) { relation.order('created_at DESC') },
-      popular: ->(relation) { relation.order('created_at DESC') },
       title_asc: ->(relation) { relation.order('name ASC') },
       title_desc: ->(relation) { relation.order('name DESC') },
       price_asc: ->(relation) { relation.order('price ASC') },

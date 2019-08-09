@@ -5,7 +5,7 @@ module Home
     NUMBER_SLIDER = 3
 
     def call
-      books = Book.order('id').limit(NUMBER_SLIDER)
+      books = Books::SliderBooksQuery.new.call(NUMBER_SLIDER)
       context.slider_books = books.decorate
     end
   end

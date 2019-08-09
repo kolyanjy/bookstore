@@ -5,7 +5,7 @@ module Home
     NUMBER_BEST_SELLER = 4
 
     def call
-      books = Book.order('id').limit(NUMBER_BEST_SELLER)
+      books = Books::BestSellersQuery.new.call(NUMBER_BEST_SELLER)
       context.best_sellers = books.decorate
     end
   end

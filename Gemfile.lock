@@ -68,6 +68,11 @@ GEM
     ast (2.4.0)
     autoprefixer-rails (9.5.1.1)
       execjs
+    awesome_print (1.8.0)
+    awesome_rails_console (0.4.3)
+      awesome_print
+      pry-rails
+      railties
     babel-source (5.8.35)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -250,6 +255,8 @@ GEM
     pry-byebug (3.7.0)
       byebug (~> 11.0)
       pry (~> 0.10)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
     public_suffix (3.1.0)
     puma (3.12.1)
     rack (2.0.7)
@@ -433,6 +440,7 @@ PLATFORMS
 DEPENDENCIES
   aasm
   activeadmin
+  awesome_rails_console (~> 0.4.0)
   bootsnap (>= 1.1.0)
   bootstrap-sass
   brakeman

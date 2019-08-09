@@ -4,6 +4,7 @@ RSpec.describe Book, type: :model do
     it { is_expected.to have_many :authors }
     it { is_expected.to have_many :materials }
     it { is_expected.to have_many(:book_materials).dependent(:destroy) }
+    it { is_expected.to have_many(:order_items).dependent(:nullify) }
     it { is_expected.to belong_to :category }
   end
 
