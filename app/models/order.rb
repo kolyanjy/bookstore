@@ -74,7 +74,7 @@ class Order < ApplicationRecord
   end
 
   after_update do |order|
-    if order.delivered?
+    if order.delivered? && order.status_previously_changed?
       order.order_items.each do |item|
         item.book.increment!(:buy_count) # rubocop:disable Rails/SkipsModelValidations
       end

@@ -15,13 +15,15 @@ RSpec.describe Order, type: :model do
     let(:user) { create(:user) }
     let(:book) { create(:book) }
 
-    context 'when status delivered' do
-      let(:order) { create(:order, :delivered_step) }
+    context 'when status in delivered and was changed' do
+      let(:order) { create(:order, :in_delivery_step) }
 
       it do
-        expect(Book.find_by(id: book.id).buy_count).to eq(0)
+        expect(book.reload.buy_count).to eq(0)
+        order.confirm_delivery!
+        expect(book.reload.buy_count).to eq(1)
         order.update(user: user)
-        expect(Book.find_by(id: book.id).buy_count).to eq(1)
+        expect(book.reload.buy_count).to eq(1)
       end
     end
 
