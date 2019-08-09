@@ -7,7 +7,7 @@ class Order < ApplicationRecord
   belongs_to :delivery, optional: true
   belongs_to :coupon, optional: true
 
-  has_many :order_items, dependent: :destroy, autosave: true
+  has_many :order_items, dependent: :destroy
   has_many :addresses, as: :addressable, dependent: :destroy
 
   has_one :billing_address, as: :addressable, dependent: :destroy
