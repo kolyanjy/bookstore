@@ -15,7 +15,7 @@ RSpec.describe Comments::Create do
     end
 
     context 'with valid params and verified comment' do
-      let!(:order) { create(:order, user: user) }
+      let!(:order) { create(:order, :delivered_step, user: user) }
       let(:comment) { attributes_for(:comment) }
 
       before do
@@ -25,7 +25,7 @@ RSpec.describe Comments::Create do
       it do
         expect(result).to be_success
         expect(Comment.count).to eq(1)
-        expect(Comment.last.verified?).to eq(true)
+        expect(Comment.last).to be_verified
       end
     end
 

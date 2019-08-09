@@ -8,6 +8,6 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find_by!(id: params[:id]).decorate
-    @presenter = BookPresenter.new(@book)
+    @comments = @book.comments.where(approved: true).order(created_at: :desc)
   end
 end

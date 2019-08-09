@@ -1,6 +1,6 @@
 .mb-80
-  %h3.in-gold-500.mb-25= t('comment.review', count: presenter.comments.count)
-  - presenter.comments.each do |comment|
+  %h3.in-gold-500.mb-25= t('comment.review', count: comments.count)
+  - comments.each do |comment|
     .general-message-wrap.divider-lg
       .clearfix
         %span.img-circle.logo-size.pull-left
