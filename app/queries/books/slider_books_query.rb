@@ -1,9 +1,7 @@
 module Books
   class SliderBooksQuery
-    NUMBER_SLIDER = 3
-
-    def call
-      Book.order(created_at: :desc).limit(NUMBER_SLIDER).decorate
+    def call(quantity)
+      Book.order(created_at: :desc).limit(quantity)
     end
   end
 end

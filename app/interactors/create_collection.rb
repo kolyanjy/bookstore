@@ -2,6 +2,7 @@ class CreateCollection
   include Interactor
   include Pagy::Backend
   BOOKS_ON_PAGE = 12
+  MAX_LOADED_BOOKS = 10_000
 
   delegate :params, to: :context
 

@@ -1,10 +1,16 @@
 module Books
   class BestSellersQuery
-    NUMBER_BEST_SELLER = 4
-
-    def call
-      books = Book.where().limit(NUMBER_BEST_SELLER)
-      books.decorate
+    def call(quantity)
+      Book.order('buy_count DESC').limit(quantity)
+      # best_seller_ids = OrderItem
+      #                   .where(order: Order.delivered)
+      #                   .group(:book_id)
+      #                   .order('count_all DESC')
+      #                   .limit(quantity)
+      #                   .count(:all)
+      #                   .keys
+      #
+      # Book.where(id: best_seller_ids)
     end
   end
 end

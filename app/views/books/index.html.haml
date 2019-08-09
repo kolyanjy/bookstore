@@ -4,7 +4,7 @@
   .hidden-xs.clearfix
     .dropdowns.pull-right
       .dropdown.width-240.dropdown-filter
-        = render partial: 'books/partials/dropdown_filters', locals: { sort: @current_sort, category: params[:category], presenter: @presenter }
+        = render partial: 'books/partials/dropdown_filters', locals: { category: params[:category], presenter: @presenter }
     %ul.list-inline.pt-10.mb-25.mr-240
       %li.mr-15
         = link_to books_path, class: 'filter-link' do
@@ -13,7 +13,7 @@
             = @presenter.books_count
       - loaded_categories.each do |category|
         %li.mr-15
-          = link_to books_path(category: category), class: 'filter-link' do
+          = link_to books_path(category: category, sort: params[:sort]), class: 'filter-link' do
             = category.name
             %span.badge.general-badge
               = @presenter.category_books_count(category.id)

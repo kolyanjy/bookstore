@@ -7,7 +7,7 @@ class Order < ApplicationRecord
   belongs_to :delivery, optional: true
   belongs_to :coupon, optional: true
 
-  has_many :order_items, dependent: :destroy
+  has_many :order_items, dependent: :destroy, autosave: true
   has_many :addresses, as: :addressable, dependent: :destroy
 
   has_one :billing_address, as: :addressable, dependent: :destroy
@@ -70,6 +70,14 @@ class Order < ApplicationRecord
 
     event :cancel do
       transitions from: %i[in_progress in_delivery delivered], to: :canceled
+    end
+  end
+
+  after_update do |order|
+    if order.delivered?
+      order.order_items.each do |item|
+        item.book.increment!(:buy_count) # rubocop:disable Rails/SkipsModelValidations
+      end
     end
   end
 end
