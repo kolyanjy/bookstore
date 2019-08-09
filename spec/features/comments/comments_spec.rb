@@ -61,7 +61,7 @@ RSpec.describe 'Comments', type: :feature do
   end
 
   describe 'view verified comment' do
-    before { create(:comment, approved: true, verified: true,  book: book) }
+    before { create(:comment, approved: true, verified: true, book: book) }
 
     it do
       visit book_path(book)
