@@ -51,12 +51,22 @@ RSpec.describe 'Comments', type: :feature do
     end
   end
 
-  describe 'view verified comment' do
-    before { create(:comment, book: book) }
+  describe 'view comment' do
+    before { create(:comment, approved: true, book: book) }
 
     it do
       visit book_path(book)
       expect(page).to have_text(I18n.t('comment.review', count: 1))
+    end
+  end
+
+  describe 'view verified comment' do
+    before { create(:comment, approved: true, verified: true, book: book) }
+
+    it do
+      visit book_path(book)
+      expect(page).to have_text(I18n.t('comment.review', count: 1))
+      expect(page).to have_selector '.general-message-verified', text: I18n.t('comment.verified_reviewer')
     end
   end
 end
