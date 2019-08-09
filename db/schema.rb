@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 2019_08_08_152235) do
     t.text "description"
     t.integer "mark", default: 0
     t.boolean "verified", default: false
+    t.boolean "approved", default: false
     t.bigint "user_id"
     t.bigint "book_id"
     t.datetime "created_at", null: false

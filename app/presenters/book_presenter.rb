@@ -4,6 +4,6 @@ class BookPresenter
   end
 
   def comments
-    @comments.where(verified: true).order(created_at: :desc)
+    @comments.where(approved: true).order(created_at: :desc)
   end
 end

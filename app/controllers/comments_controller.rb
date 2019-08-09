@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    result = Comments::Create.call(params: comment_params, current_user: current_user, book_id: params[:book_id])
+    result = Comments::Create.call(params: comment_params, user: current_user, book_id: params[:book_id])
     if result.success?
       flash[:success] = t('comment.comment_created')
     else

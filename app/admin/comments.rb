@@ -1,5 +1,5 @@
 ActiveAdmin.register Comment, as: 'CommentsForBook' do
-  permit_params :title, :description, :mark, :verified, :user_id, :book_id
+  permit_params :title, :description, :mark, :approved, :verified, :user_id, :book_id
 
   index do
     selectable_column
@@ -7,6 +7,7 @@ ActiveAdmin.register Comment, as: 'CommentsForBook' do
     column :description
     column :mark
     column :verified
+    column :approved
     column :user
     column :book
 

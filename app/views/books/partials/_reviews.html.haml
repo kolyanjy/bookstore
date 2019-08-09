@@ -10,8 +10,9 @@
             .general-message-date.hidden-xs
               = l(comment.created_at)
             .max-240
-              .general-message-verified
-                = t('comment.verified_reviewer')
+              -if comment.verified?
+                .general-message-verified
+                  = t('comment.verified_reviewer')
               .general-message-name
                 = comment.user_email
           .rating
