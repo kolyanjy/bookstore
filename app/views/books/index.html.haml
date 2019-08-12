@@ -1,0 +1,45 @@
+%main.container
+  %h1.general-title-margin
+    = t('word.catalog')
+  .hidden-xs.clearfix
+    .dropdowns.pull-right
+      .dropdown.width-240.dropdown-filter
+        = render partial: 'books/partials/dropdown_filters', locals: { category: params[:category], presenter: @presenter }
+    %ul.list-inline.pt-10.mb-25.mr-240
+      %li.mr-15
+        = link_to books_path, class: 'filter-link' do
+          = t('book.all')
+          %span.badge.general-badge
+            = @presenter.books_count
+      - loaded_categories.each do |category|
+        %li.mr-15
+          = link_to books_path(category: category, sort: params[:sort]), class: 'filter-link' do
+            = category.name
+            %span.badge.general-badge
+              = @presenter.category_books_count(category.id)
+  .mb-120
+    .row
+      - @books.each do |book|
+        .col-xs-6.col-sm-3.book_in_catalog
+          .general-thumb-wrap
+            .thumbnail.general-thumbnail
+              = image_tag(book.first_book_image(:medium_img), class: "img-shadow general-thumbnail-img")
+              .thumb-hover
+                .general-thumb-link-wrap
+                  = link_to book_path(book.id), class: 'thumb-hover-link' do
+                    %i.fa.fa-eye.thumb-icon{'aria-hidden': "true"}
+                  = simple_form_for(:order_items, url: order_items_path, html: { method: :post, class: "display-inline-block" }) do |f|
+                    = f.input :quantity, as: :hidden, input_html: { value: 1 }
+                    = f.input :book_id, as: :hidden, input_html: { value: book.id }
+                    = f.button :button, class: 'thumb-hover-link', id: 'button' do
+                      %i.fa.fa-shopping-cart.thumb-icon
+          .general-thumb-info
+            %p.title
+              = book.name
+            %p.font-16.in-gold-500
+              = number_to_currency(book.price)
+            %span.divider-sm
+            %p.lead.small
+              = book.authors_title
+    .text-center
+      = render file: Pagy.root.join('templates', 'bootstrap_nav.html.erb'), locals: { pagy: @pagy }

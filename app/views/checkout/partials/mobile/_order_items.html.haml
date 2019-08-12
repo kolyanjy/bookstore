@@ -1,0 +1,31 @@
+.general-cart-item.divider-lg
+  - order_items.each do |order_item|
+    .general-img-wrap-table
+      = link_to book_path(order_item.book.id) do
+        = image_tag(order_item.book.first_book_image(:medium_img), class: "cart-img-shadow pull-left", alt: "design-book")
+    %p.title
+      = order_item.book.name
+    %p.in-grey-600.fw-300
+      = order_item.book.description
+    %table.table
+      %tr
+        %td
+          %span.in-grey-600
+            = t('order_item.price')
+        %td
+          %span.font-16.in-gold-500
+            = number_to_currency(order_item.book.price)
+      %tr
+        %td.vertical-middle
+          %span.in-grey-600
+            = t('order_item.quantity')
+        %td
+          %span
+            = order_item.quantity
+      %tr
+        %td
+          %span.in-grey-600
+            = t('order_item.total')
+        %td
+          %span.font-16.in-gold-500
+            = number_to_currency(order_item.price)

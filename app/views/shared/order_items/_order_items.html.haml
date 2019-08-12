@@ -1,0 +1,37 @@
+%table.table.table-hover
+  %thead
+    %tr
+      %th
+        %span.in-grey-600
+          = t('order_item.book')
+      %th.col-method
+      %th
+        %span.in-grey-600
+          = t('order_item.price')
+      %th
+        %span.in-grey-600
+          = t('order_item.quantity')
+      %th
+        %span.in-grey-600
+          = t('order_item.total')
+  - order_items.each do |order_item|
+    %tbody
+      %tr
+        %td
+          .general-img-wrap-table
+            = link_to book_path(order_item.book.id) do
+              = image_tag(order_item.book.first_book_image(:medium_img), class: "cart-img-shadow pull-left", alt: "design-book")
+        %td
+          %p.title
+            = order_item.book.name
+          %p.in-grey-600.fw-300
+            = order_item.book.description
+        %td
+          %span.font-16.in-gold-500
+            = number_to_currency(order_item.book.price)
+        %td
+          %span.ml-30
+            = order_item.quantity
+        %td
+          %span.font-16.in-gold-500
+            = number_to_currency(order_item.price)

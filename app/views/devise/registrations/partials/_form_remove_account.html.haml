@@ -1,0 +1,12 @@
+.col-sm-12
+  %p.in-gold-500.font-18.mb-25
+    = t('settings._remove_form')
+  .general-settings-btn
+    = link_to t('settings.please_remove'), user_registration_path, method: :delete, id: 'button_delete_account', class: 'btn disabled mb-20 btn-default'
+  .form-group.checkbox.general-settings-checkbox
+    %label.checkbox-label
+      %input.checkbox-input#checkbox_consent{type: "checkbox", hidden: "true"}
+      %span.checkbox-icon
+        %i.fa.fa-check
+      %span.checkbox-text
+        = t('settings.confirmation_text')

@@ -1,0 +1,43 @@
+%main.container.general-main-wrap
+  %h1.general-title-margin
+    = t('checkout.title')
+  %ul.steps.list-inline
+    = render 'checkout/partials/checkout_steps'
+  %h3.general-subtitle
+    = t('checkout.delivery.title')
+  = render 'checkout/partials/mobile/delivery', deliveries: @deliveries
+  = simple_form_for current_order, { url: checkout_fill_delivery_path, html: { method: :post }} do |f|
+    .hidden-xs.mb-res-50
+      %table.table.table-hover
+        %thead
+          %tr
+            %th.col-method
+              %span.in-grey-600.ml-40
+                = t('checkout.delivery.method')
+            %th
+              %span.in-grey-600
+                = t('checkout.delivery.days')
+            %th
+              %span.in-grey-600
+                = t('checkout.delivery.price')
+        %tbody
+
+          - @deliveries.each_with_index do |delivery, index|
+            %tr
+              %td
+                .form-group.radio.mt-0.mb-0
+                  %label.radio-label
+                    = f.radio_button(:delivery_id, delivery.id, checked: current_order.delivery == delivery || index.zero?, class: 'radio-input', hidden: true)
+                    %span.radio-icon
+                    %span.radio-text
+                      = delivery.name
+              %td
+                %span
+                  = t('checkout.delivery.delivery_in_days', min_days: delivery.min_days, max_days: delivery.max_days)
+              %td
+                %span.font-16.in-gold-500
+                  = number_to_currency(delivery.price)
+      .general-text-left
+        = render 'checkout/partials/order_summary', order: current_order
+      .text-center
+        = f.submit t('btn.save_and_continue'), class: "btn btn-default mb-20 center-block"

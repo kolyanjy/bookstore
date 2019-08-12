@@ -1,0 +1,30 @@
+%main.container.general-main-wrap
+  = render "devise/shared/error_messages", resource: resource
+  .text-center
+    %h3.general-login-title
+      = t('devise.sign_up')
+    = render '/devise/shared/facebook_link'
+    .general-login-icon
+    %p.general-login-text
+      = t('word.or')
+  .general-form
+    = simple_form_for(@user, url: registration_path(@user), validate: true) do |f|
+      .form-group.mb-30
+        %label.control-label.input-label{for: "user_email"}
+          = t('devise.email')
+        = f.input_field :email, autofocus: true, class: "form-control", placeholder: t('devise.email')
+      .form-group.mb-30
+        - if @minimum_password_length
+          %label.control-label.input-label{for: "user_password"}
+            = t('devise.min_pass_length')
+            = @minimum_password_length
+          = f.input_field :password, class: "form-control", placeholder: t('devise.password'), pattern: "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).{8,}$"
+      .form-group.mb-30
+        %label.control-label.input-label{for: "user_password_confirmation"}
+          = t('devise.confirm')
+        = f.input_field :password_confirmation, class: "form-control", placeholder: t('devise.confirm'), pattern: "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).{8,}$"
+      .text-center
+        = f.submit t('user.registration.sign_up'), class: "btn btn-default mb-20"
+  %p.general-sign-text.text-center
+    = t('questions.account')
+    = link_to t('user.login'), new_session_path(resource_name), class: "in-gold-500"

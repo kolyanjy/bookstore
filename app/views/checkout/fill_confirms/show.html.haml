@@ -1,0 +1,31 @@
+%main.container.general-main-wrap
+  %h1.general-title-margin
+    = t('checkout.title')
+  %ul.steps.list-inline
+    = render 'checkout/partials/checkout_steps'
+  .row.mb-20
+    .col-sm-3
+      %h3.general-subtitle
+        = t('checkout.address.billing_address')
+        = link_to checkout_fill_address_path do
+          %span.general-edit
+            = t('checkout.edit')
+        = render 'shared/addresses/address', address: current_order.billing_address
+    .col-sm-3
+      %h3.general-subtitle
+        = t('checkout.address.shipping_address')
+        = link_to checkout_fill_address_path do
+          %span.general-edit
+            = t('checkout.edit')
+        = render 'shared/addresses/address', address: current_order.shipping_address
+    = render 'checkout/fill_confirms/partials/delivery', delivery: current_order.delivery
+    = render 'checkout/fill_confirms/partials/payment', order: current_order
+  .visible-xs
+    = render 'checkout/partials/mobile/order_items', order_items: current_order.order_items.decorate
+  .hidden-xs.divider-lg.pt-20
+    = render 'shared/order_items/order_items', order_items: current_order.order_items.decorate
+  .general-text-left
+    = render 'checkout/partials/order_summary', order: current_order
+  = simple_form_for :delivery, { url: checkout_fill_confirm_path, html: { method: :post }} do |f|
+    .text-center
+      = f.submit t('btn.save_and_continue'), class: "btn btn-default mb-20 center-block"

@@ -1,0 +1,6 @@
+.input-group.general-position.margin-0
+  = link_to order_item_path(order_item.id, quantity: (order_item.quantity - 1)), method: :patch, class: 'input-link b-n pt-7' do
+    %i.fa.fa-minus.line-height-40.cursor-pointer
+  %input.form-control.quantity-input.input-count-book{type:"text", disabled: true, required: true, value: order_item.quantity}
+  = link_to order_item_path(order_item.id, quantity: (order_item.quantity + 1)), method: :patch, class: 'input-link b-n pt-7' do
+    %i.fa.fa-plus.line-height-40.cursor-pointer

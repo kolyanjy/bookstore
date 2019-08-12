@@ -1,0 +1,18 @@
+en:
+  order:
+    cart: Cart
+    order_summary: 'Order Summary:'
+    subtotal: 'Subtotal:'
+    order_total: 'Order Total:'
+    empty: Your cart is empty
+    number: Number
+    completed_at: Completed at
+    status: Status
+    total: Total
+    my_orders: My Orders
+    in_progress: In Progress
+    in_delivery: In Delivery
+    delivered: Delivered
+    canceled: Canceled
+    add_to_cart: Add books to cart before checkout
+    sort:  Sort by

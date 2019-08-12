@@ -1,0 +1,60 @@
+en:
+  word:
+    bookstore: "Bookstore"
+    or: "Or"
+    hello: "Hello"
+    welcome: "Welcome"
+    catalog: "Catalog"
+
+  header:
+    all_books: All books
+    logo_name: Bookstore
+    shop: Shop
+    home: Home
+    login: Login
+    log_out: Log out
+    my_account: My account
+
+  btn:
+    account: "My account"
+    settings: "Settings"
+    books: "Books"
+    orders: "Orders"
+    out: "Log out"
+    post: "Post"
+    home: "Home"
+    shop: "Shop"
+    edit: "edit"
+    save: "Save"
+    checkout: "Checkout"
+    save_and_continue: "Save and continue"
+
+  interpolation:
+    hello: "Hello %{email}"
+    wellcome: "Welcome %{email}"
+
+  contacts:
+    email: "support@bookstore.com"
+    number: "(555)-555-5555"
+
+  questions:
+    account: "Account?"
+
+  user:
+    login: "login"
+    registration:
+      sign_up: "sign up"
+
+  number:
+    currency:
+      format:
+        delimiter: ","
+        format: "%u%n"
+        precision: 2
+        separator: "."
+        significant: false
+        strip_insignificant_zeros: false
+        unit: "€"
+  time:
+    formats:
+      day_month_year: '%B %d, %Y'

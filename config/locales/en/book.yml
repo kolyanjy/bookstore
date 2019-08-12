@@ -1,0 +1,24 @@
+en:
+  book:
+    all: 'All Books'
+    go_back: Back to results
+    description: Description
+    date_of_publication: Date of publication
+    dimension: Dimensions
+    materials: Materials
+    read_more: Read More
+    hide_read_more: Hide read more
+    add_to_card: Add to Cart
+    dimensions: "H:%{height} x W:%{width} x D:%{depth}"
+
+  comment:
+    review: "Review (%{count})"
+    verified_reviewer: Verified Reviewer
+    write_a_review: Write a Review
+    score: Score
+    title: Title
+    review_input: Review
+    comment_created: Comment successfully created
+    comment_failed_create: Comment hasn't created
+    enter_title: Enter Title
+    enter_description: Enter Description

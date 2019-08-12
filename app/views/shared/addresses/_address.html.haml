@@ -1,0 +1,14 @@
+%p.general-address
+  = address.first_name
+  %br
+  = address.last_name
+  %br
+  = address.address
+  %br
+  = address.city
+  %br
+  = address.zip
+  %br
+  = address.country
+  %br
+  = t('checkout.address.phone', phone: address.phone)

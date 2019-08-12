@@ -1,0 +1,49 @@
+%header.navbar.navbar-default
+  .container
+    .navbar-header
+      %button.navbar-toggle.pull-left{type: "button", 'data-toggle': "collapse", 'data-target': "#navbar"}
+        %span.sr-only
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand
+        = t('.bookstore')
+        = render partial: 'layouts/partials/cart'
+      #navbar.navbar-collapse.collapse.pl-30{'aria-expanded': "false"}
+        - if user_signed_in?
+          %ul.nav.navbar-nav
+            %li.dropdown
+              %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+                = t('btn.account')
+              %ul.dropdown-menu
+                %li
+                  = link_to t('sign.orders'), orders_path, class: "collapse-link"
+                %li
+                  = link_to t('sign.settings'), edit_user_registration_path, class: "collapse-link"
+                %li.divider{role: "separator"}
+                %li
+                  = link_to t('btn.out'), destroy_user_session_path, method: :delete, class: "collapse-link"
+        - else
+          %ul.nav.navbar-nav
+            %li.dropdown
+              %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+                = t('btn.account')
+              %ul.dropdown-menu
+                %li
+                  = link_to t('devise.login'), new_user_session_path, class: "collapse-link"
+                %li
+                  = link_to t('devise.sign_up'), new_user_registration_path, class: "collapse-link"
+
+        %ul.nav.navbar-nav
+          %li
+            = link_to t('header.home'), root_path
+          %li.dropdown
+            %a.dropdown-toggle{href: "#", 'data-toggle': "dropdown", role: "button", 'aria-haspopup': "true", 'aria-expanded': "false"}
+              = t('header.shop')
+            %ul.dropdown-menu
+              %li
+                = link_to t('header.all_books'), books_path
+              - categories.each do |category|
+                %li
+                  = link_to books_path(category: category), class: 'filter-link' do
+                    = category.name

@@ -1,0 +1,69 @@
+%main.container
+  = link_to url_for(:back), class: "general-back-link" do
+    %i.fa.fa-long-arrow-left.mr-15
+      = t('book.go_back')
+  .row
+    .col-sm-6
+      .product-gallery
+        .mb-20.d-flex-center
+          = image_tag(@book.first_book_image(:big_img))
+        .images.clearfix
+        - @book.without_first_img.each do |book_image|
+          %a.img-link.d-flex-center
+            = image_tag(book_image.image.url(:small_img))
+    .col-sm-6
+      %h1.mt-res-0
+        = @book.name
+      %p.lead.small
+        = @book.authors_title
+      .row
+        .col-xs-12.col-md-4
+          %p.h1.in-gold-500.mt-10
+            = number_to_currency(@book.price)
+        = simple_form_for(:order_items, url: order_items_path, html: { method: :post}, defaults: { input_html: { class: "form-control" }}) do |f|
+          .col-xs-5.col-md-3
+            .input-group.general-position.inline
+              %a.input-link.b-n.pt-7#minus
+                %i.fa.fa-minus.line-height-40.cursor-pointer.bg-i
+              = f.input :book_id, as: :hidden, input_html: { value: @book.id }
+              = f.input :quantity, label: false, input_html: { type: "text", required: true, value: 1, class: 'form-control quantity-input input-count-book inline' }
+              %a.b-n.input-link#plus
+                %i.fa.fa-plus.line-height-40.cursor-pointer.bg-i
+          .col-xs-7.col-md-5
+            = f.button :button, class: 'btn btn-default pull-right general-position' do
+              = t('book.add_to_card')
+      .general-info-wrap.divider-lg
+        %p= t('book.description')
+        %p.lead.small.line-height-2
+          %span#small_text
+            = @book.short_description
+          - if @book.long_description?
+            %a.in-gold-500.ml-10.cursor-pointer#btn_read_more
+              = t('book.read_more')
+            %span#block_more
+              = @book.description
+              %a.in-gold-500.ml-10.cursor-pointer#btn_hide_read_more
+                = t('book.hide_read_more')
+      .general-info-wrap.divider-lg
+        .clearfix.desc-item
+          %p.pull-left
+            = t('book.date_of_publication')
+          %p.lead.small.pull-right
+            = l(@book.date_of_publication)
+      .general-info-wrap.divider-lg
+      -unless @book.dimensions_empty?
+        .clearfix.desc-item
+          %p.pull-left= t('book.dimension')
+          %p.lead.small.pull-right
+            = t('book.dimensions', height: @book.height, width: @book.width, depth: @book.depth)
+      .general-info-wrap.divider-lg
+      -unless @book.materials.empty?
+        .clearfix.desc-item
+          %p.pull-left
+            = t('book.materials')
+          %p.lead.small.pull-right
+            - @book.materials.each do |material|
+              = material.name
+  - if user_signed_in?
+    = render partial: 'books/partials/review_form', locals: { book: @book }
+  = render partial: 'books/partials/reviews', locals: { book: @book, comments: @comments }

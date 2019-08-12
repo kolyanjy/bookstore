@@ -1,0 +1,20 @@
+%main.container.general-main-wrap
+  = render "devise/shared/error_messages", resource: resource
+  .text-center.mb-25
+    %h2
+      = t('.password_edit')
+  .general-form.field
+    = simple_form_for(@user, url: password_path(@user), validate: true, html: { method: :put }) do |f|
+      = f.hidden_field :reset_password_token
+      .form-group.mb-30
+        %label.control-label.input-label{for: "new_password"}
+          = t('.password_edit.new_password')
+        = f.input_field :password, autofocus: true, class: 'form-control', id: 'new_password'
+      .form-group.mb-30
+        %label.control-label.input-label{for: "password_confirmation"}
+          = t('.password_edit.confirm_new_password')
+        = f.input_field :password_confirmation, class: 'form-control', id: 'password_confirmation'
+      .text-center
+        .actions
+          = f.submit t('devise.change_password'), class: 'btn btn-default mb-20'
+        = link_to t('.go_back'), root_path, class: "in-gold-500"

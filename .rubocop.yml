@@ -1,0 +1,101 @@
+require:
+  - rubocop-rspec
+  - rubocop-performance
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'bin/*'
+    - 'app/channels/**/*'
+    - 'vendor/**/*'
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: nested
+
+Style/Encoding:
+  Enabled: false
+
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+
+Metrics/AbcSize:
+  Max: 17
+
+Metrics/LineLength:
+  Max: 120
+  Exclude:
+    - 'config/initializers/simple_form_bootstrap.rb'
+    - 'config/initializers/simple_form.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'app/admin/**/*'
+    - 'spec/**/*'
+    - 'config/initializers/simple_form_bootstrap.rb'
+    - 'config/environments/*'
+    - 'config/routes.rb'
+
+Documentation:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Exclude:
+    - 'spec/features/**/*'
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/features/**/*'
+
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/VerifiedDoubles:
+  Exclude:
+    - 'spec/controllers/**/*'
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Rails:
+  Enabled: true
+
+Layout/ClassStructure:
+  Enabled: true
+  Categories:
+    module_inclusion:
+      - include
+      - prepend
+      - extend
+    attributes:
+      - attribute
+      - attr_reader
+      - attr_writer
+      - attr_accessor
+    associations:
+      - has_one
+      - has_many
+      - belongs_to
+      - has_and_belongs_to_many
+    validations:
+      - validate
+      - validates_presence_of
+      - validates_uniqueness_of
+    hooks:
+      - after_save
+      - after_create
+      - after_initialize
+  ExpectedOrder:
+      - module_inclusion
+      - constants
+      - attributes
+      - associations
+      - validations
+      - hooks
+      - public_class_methods
+      - initializer
+      - public_methods
+      - protected_methods
+      - private_methods

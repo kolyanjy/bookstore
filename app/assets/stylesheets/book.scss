@@ -1,0 +1,41 @@
+.desc-item {
+  margin-top: 10px;
+}
+.book_in_catalog {
+  max-height: 544px;
+}
+#block_more {
+  display: none;
+}
+#btn_read_more, #btn_hide_read_more {
+  cursor: pointer;
+}
+.pagination > .active > a, .pagination > .active > a:hover {
+  background-color: $gold-500;
+  border-color: $gold-500;
+}
+#minus {
+  padding-top: 15px;
+}
+.pagination > li > a {
+  color: $gold-500;
+}
+.pagination > li > a:hover {
+  color: $gold-500;
+}
+.book_in_catalog {
+  height: 560px;
+}
+.inline {
+  display: inline;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+#button {
+  padding: 0;
+  background: inherit;
+}
+#button:hover {
+  background: white;
+}
