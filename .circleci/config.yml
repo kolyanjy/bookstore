@@ -9,8 +9,8 @@ jobs:
           RAILS_ENV: test
       - image: circleci/postgres:11.3-alpine
         environment:
-          POSTGRES_USER: kolya
-          POSTGRES_PASSWORD: 'qwerty123'
+          POSTGRES_USER: rails_dev
+          POSTGRES_PASSWORD: 'aqwe123'
           POSTGRES_DB: bookstore_test
           DATABASE_URL: "postgres://ubuntu@localhost:5432/bookstore_test"
     steps:
