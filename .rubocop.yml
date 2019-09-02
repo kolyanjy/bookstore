@@ -1,6 +1,7 @@
 require:
   - rubocop-rspec
   - rubocop-performance
+  - rubocop-rails
 
 AllCops:
   Exclude:
@@ -58,9 +59,6 @@ RSpec/MultipleExpectations:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
-
-Rails:
-  Enabled: true
 
 Layout/ClassStructure:
   Enabled: true
