@@ -54,12 +54,13 @@ group :development, :test do
   gem 'bundler-audit'
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
-  gem 'faker'
+  gem 'faker', '~> 1.9'
   gem 'pry-byebug'
   gem 'rails_best_practices'
   gem 'rspec-rails', '~> 3.8'
   gem 'rubocop'
   gem 'rubocop-performance'
+  gem 'rubocop-rails'
   gem 'rubocop-rspec'
 end
 
