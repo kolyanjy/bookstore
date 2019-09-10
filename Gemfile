@@ -10,7 +10,7 @@ gem 'client_side_validations-simple_form'
 gem 'country_select'
 
 # authentication
-gem 'devise'
+gem 'devise', '~> 4.7.1'
 gem 'omniauth-facebook'
 
 # interactors
