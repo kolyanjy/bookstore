@@ -2,6 +2,7 @@ version: 2
 jobs:
   build:
     working_directory: ~/repo
+    parallelism: 4
     docker:
       # specify the version you desire here
       - image: circleci/ruby:2.6.1-node-browsers
@@ -13,7 +14,7 @@ jobs:
           POSTGRES_PASSWORD: 'qwerty123'
           POSTGRES_DB: bookstore_test
           DATABASE_URL: "postgres://ubuntu@localhost:5432/bookstore_test"
-        parallelism: 4
+
     steps:
       - checkout
       - restore_cache:

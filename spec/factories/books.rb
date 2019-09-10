@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :book do
     name { Faker::Book.title }
-    price { Faker::Number.positive(from = 1.00, to = 1000.00) }
+    price { Faker::Number.positive(1.00, 1000.00) }
     description { Faker::Lorem.paragraph_by_chars(256, false) }
     date_of_publication { Faker::Date.birthday(10, 20) }
     height { rand(200..300) }
