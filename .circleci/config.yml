@@ -1,66 +1,206 @@
-version: 2
-jobs:
-  build:
-    working_directory: ~/repo
-    parallelism: 4
-    docker:
-      # specify the version you desire here
-      - image: circleci/ruby:2.6.1-node-browsers
-        environment:
-          RAILS_ENV: test
-      - image: circleci/postgres:11.3-alpine
-        environment:
-          POSTGRES_USER: kolya
-          POSTGRES_PASSWORD: 'qwerty123'
-          POSTGRES_DB: bookstore_test
-          DATABASE_URL: "postgres://ubuntu@localhost:5432/bookstore_test"
+# version: 2
+# jobs:
+#   build:
+#     working_directory: ~/repo
+#     docker:
+#       # specify the version you desire here
+#       - image: circleci/ruby:2.6.1-node-browsers
+#         environment:
+#           RAILS_ENV: test
+#       - image: circleci/postgres:11.3-alpine
+#         environment:
+#           POSTGRES_USER: kolya
+#           POSTGRES_PASSWORD: 'qwerty123'
+#           POSTGRES_DB: bookstore_test
+#           DATABASE_URL: "postgres://ubuntu@localhost:5432/bookstore_test"
 
+#     steps:
+#       - checkout
+#       - restore_cache:
+#           keys:
+#           - v2-dependencies-{{ checksum "Gemfile.lock" }}
+#           # fallback to using the latest cache if no exact match is found
+#           - v2-dependencies-
+
+#       - run:
+#           name: install dependencies
+#           command: |
+#             gem install bundler -v $(cat Gemfile.lock | tail -1 | tr -d " ")
+#             bundle install --jobs=4 --retry=3 --path vendor/bundle
+
+#       - save_cache:
+#           key: v2-dependencies-{{ checksum "Gemfile.lock" }}
+#           paths:
+#             - vendor/bundle
+#       - run:
+#           name: Set up DB
+#           command: |
+#             bundle exec rake db:create
+#             bundle exec rake db:migrate
+#       - run:
+#           name: run rubopcop
+#           command: bundle exec rubocop
+#       - run:
+#           name: run rails best practices
+#           command: bundle exec rails_best_practices .
+#       - run:
+#           name: run brakeman
+#           command: bundle exec brakeman -q
+#       - run:
+#           name: run bundle audit
+#           command: bundle exec bundle-audit check --update --ignore CVE-2015-9284
+
+#       parallelism: 2
+#       - run:
+#           name: run tests
+#           command: |
+#             mkdir /tmp/test-results
+#             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+#             bundle exec rspec --format progress \
+#                               --out /tmp/test-results/rspec.xml \
+#                               --format progress \
+#                               $TEST_FILES
+#       - run:
+#           name: Stash Coverage Results
+#           command: |
+#             mkdir coverage_results
+#       - run:
+#           name: Merge and copy coverage data
+#           command: |-
+#             RUN_COVERAGE=true bundle exec spec/support/simplecov_merger.rb
+#       - store_test_results:
+#           path: /tmp/test-results
+#       - store_artifacts:
+#           path: /home/circleci/projDirec/projName/coverage_results
+version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/ruby:2.6.1-node-browsers
+      environment:
+        RAILS_ENV: test
+    - image: circleci/postgres:11.3-alpine
+      environment:
+        POSTGRES_USER: kolya
+        POSTGRES_PASSWORD: 'qwerty123'
+        POSTGRES_DB: bookstore_test
+        DATABASE_URL: "postgres://ubuntu@localhost:5432/bookstore_test"
+
+references:
+  bundle_install: &bundle_install
+    run:
+      name: Installing gems
+      command: bundle install --path vendor/bundle
+
+  restore_bundle_cache: &restore_bundle_cache
+    restore_cache:
+      keys:
+        - repo-bundle-v2-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
+
+  save_bundle_cache: &save_bundle_cache
+    save_cache:
+      key: repo-bundle-v2-{{ checksum ".ruby-version" }}-{{ checksum "Gemfile.lock" }}
+      paths:
+        - vendor/bundle
+
+  creating_database: &creating_database
+    run:
+      name: Creating database
+      command: bundle exec rake db:create
+
+  loading_schema: &loading_schema
+    run:
+      name: Loading schema
+      command: RAILS_ENV=test bundle exec rake db:schema:load --trace
+
+  running_specs: &running_specs
+    run:
+      name: Run rspec in parallel
+      command: |
+        bundle exec rspec --format progress \
+                          --format RspecJunitFormatter \
+                          --out test_results/rspec/results.xml \
+                          $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+  stash_coverage_results: &stash_coverage_results
+    run:
+      name: Stash Coverage Results
+      command: |
+        mkdir coverage_results
+        cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
+        ls -lah coverage
+        cat coverage/.resultset.json
+        cat coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
+
+  merge_and_check_coverage: &merge_and_check_coverage
+    run:
+      name: Merge and check coverage
+      command: |
+        bundle exec rake simplecov:report_coverage COVERAGE_CHECK=$LAUNCH_COVERAGE_CHECK MIN_COVERAGE=$MIN_COVERAGE_PERCENTS
+
+  save_repo_cache: &save_repo_cache
+    save_cache:
+      key: v2-repo-{{ .Environment.CIRCLE_SHA1 }}
+      paths:
+        - ~/repo
+
+  restore_repo_cache: &restore_repo_cache
+    restore_cache:
+      key: v2-repo-{{ .Environment.CIRCLE_SHA1 }}
+
+jobs:
+  lintering:
+    <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          keys:
-          - v2-dependencies-{{ checksum "Gemfile.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v2-dependencies-
+      - <<: *save_repo_cache
+      - run: mkdir -p circle_artifacts
+      - <<: *restore_bundle_cache
+      - <<: *bundle_install
+      - <<: *save_bundle_cache
 
-      - run:
-          name: install dependencies
-          command: |
-            gem install bundler -v $(cat Gemfile.lock | tail -1 | tr -d " ")
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+  run_specs:
+    <<: *defaults
 
-      - save_cache:
-          key: v2-dependencies-{{ checksum "Gemfile.lock" }}
+    parallelism: 2
+    steps:
+      - <<: *restore_repo_cache
+      - <<: *restore_bundle_cache
+      - <<: *bundle_install
+      - <<: *save_bundle_cache
+      - <<: *creating_database
+      - <<: *loading_schema
+      - <<: *running_specs
+      - <<: *stash_coverage_results
+      - persist_to_workspace:
+          root: .
           paths:
-            - vendor/bundle
-
-      - run:
-          name: Set up DB
-          command: |
-            bundle exec rake db:create
-            bundle exec rake db:migrate
-
-      - run:
-          name: run tests
-          command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-            bundle exec rspec --format progress \
-                              --out /tmp/test-results/rspec.xml \
-                              --format progress \
-                              $TEST_FILES
-      - run:
-          name: run rubopcop
-          command: bundle exec rubocop
-      - run:
-          name: run rails best practices
-          command: bundle exec rails_best_practices .
-      - run:
-          name: run brakeman
-          command: bundle exec brakeman -q
-      - run:
-          name: run bundle audit
-          command: bundle exec bundle-audit check --update --ignore CVE-2015-9284
-
+            - coverage_results
       - store_test_results:
-          path: /tmp/test-results
+          path: test_results
+      - store_artifacts:
+          path: circle_artifacts
+
+  check_coverage:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - <<: *restore_repo_cache
+      - <<: *restore_bundle_cache
+      - <<: *bundle_install
+      - <<: *save_bundle_cache
+      - <<: *merge_and_check_coverage
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - lintering
+      - run_specs:
+          requires:
+            - lintering
+      - check_coverage:
+          requires:
+            - run_specs
