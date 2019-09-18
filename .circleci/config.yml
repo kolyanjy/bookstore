@@ -86,6 +86,10 @@ defaults: &defaults
         POSTGRES_PASSWORD: 'qwerty123'
         POSTGRES_DB: bookstore_test
         DATABASE_URL: "postgres://ubuntu@localhost:5432/bookstore_test"
+  # - persist_to_workspace:
+  #       root: ~/repo
+  #       paths:
+  #         - /tmp/workspace
 
 references:
   bundle_install: &bundle_install
@@ -163,7 +167,7 @@ jobs:
   run_specs:
     <<: *defaults
 
-    parallelism: 2
+    # parallelism: 2
     steps:
       - <<: *restore_repo_cache
       - <<: *restore_bundle_cache
@@ -185,8 +189,6 @@ jobs:
   check_coverage:
     <<: *defaults
     steps:
-      - attach_workspace:
-          at: .
       - <<: *restore_repo_cache
       - <<: *restore_bundle_cache
       - <<: *bundle_install
