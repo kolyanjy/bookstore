@@ -203,6 +203,6 @@ workflows:
       - run_specs:
           requires:
             - lintering
-      - check_coverage:
-          requires:
-            - run_specs
+      # - check_coverage:
+      #     requires:
+      #       - run_specs
