@@ -55,6 +55,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker', '~> 1.9'
+  gem 'lol_dba'
   gem 'pry-byebug'
   gem 'rails_best_practices'
   gem 'rspec-rails', '~> 3.8'
@@ -79,9 +80,9 @@ group :test do
   gem 'rack_session_access'
   gem 'rails-controller-testing'
   gem 'rspec', '~> 3.8'
+  gem 'rspec_junit_formatter'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
-  gem 'rspec_junit_formatter'
   gem 'simplecov'
   gem 'webdrivers'
 end
