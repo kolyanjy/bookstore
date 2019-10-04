@@ -1,73 +1,73 @@
-version: 2.1
-orbs:
-  say_hello: kolyanjy/say_hello@0.1.1
-  save_and_restore_cache: kolyanjy/save_and_restore_cache@0.1.2
-jobs:
-  build:
-    working_directory: ~/repo
-    docker:
-      # specify the version you desire here
-      - image: circleci/ruby:2.6.1-node-browsers
-        environment:
-          RAILS_ENV: test
-      - image: circleci/postgres:11.3-alpine
-        environment:
-          POSTGRES_USER: kolya
-          POSTGRES_PASSWORD: 'qwerty123'
-          POSTGRES_DB: bookstore_test
-          DATABASE_URL: "postgres://ubuntu@localhost:5432/bookstore_test"
-
-    steps:
-      - checkout
-      - say_hello/say_hello:
-          to: 'lolkek'
-      - save_and_restore_cache/take-cache:
-          key: 'v1-pidr'
-      - run:
-          name: Set up DB
-          command: |
-            bundle exec rake db:create
-            bundle exec rake db:migrate
-      - run:
-          name: run rubopcop
-          command: bundle exec rubocop
-      - run: 
-          name: lolkek
-          command: bundle exec lol_dba db:find_indexes
-      - run:
-          name: run rails best practices
-          command: bundle exec rails_best_practices .
-      - run:
-          name: run brakeman
-          command: bundle exec brakeman -q
-      - run:
-          name: run bundle audit
-          command: bundle exec bundle-audit check --update --ignore CVE-2015-9284
-      - run:
-          name: run tests
-          command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
-            bundle exec rspec --format progress \
-                              --out /tmp/test-results/rspec.xml \
-                              --format progress \
-                              $TEST_FILES
-      - run:
-          name: Stash Coverage Results
-          command: |
-            mkdir coverage_results
-      - run:
-          name: Merge and copy coverage data
-          command: |-
-            RUN_COVERAGE=true bundle exec spec/support/simplecov_merger.rb
-      - store_test_results:
-          path: /tmp/test-results
-      - store_artifacts:
-          path: /home/circleci/projDirec/projName/coverage_results
-
-
-
 # version: 2.1
+# orbs:
+#   say_hello: kolyanjy/say_hello@0.1.1
+#   save_and_restore_cache: kolyanjy/save_and_restore_cache@0.1.2
+# jobs:
+#   build:
+#     working_directory: ~/repo
+#     docker:
+#       # specify the version you desire here
+#       - image: circleci/ruby:2.6.1-node-browsers
+#         environment:
+#           RAILS_ENV: test
+#       - image: circleci/postgres:11.3-alpine
+#         environment:
+#           POSTGRES_USER: kolya
+#           POSTGRES_PASSWORD: 'qwerty123'
+#           POSTGRES_DB: bookstore_test
+#           DATABASE_URL: "postgres://ubuntu@localhost:5432/bookstore_test"
+
+#     steps:
+#       - checkout
+#       - say_hello/say_hello:
+#           to: 'lolkek'
+#       - save_and_restore_cache/take-cache:
+#           key: 'v1-pidr'
+#       - run:
+#           name: Set up DB
+#           command: |
+#             bundle exec rake db:create
+#             bundle exec rake db:migrate
+#       - run:
+#           name: run rubopcop
+#           command: bundle exec rubocop
+#       - run: 
+#           name: lolkek
+#           command: bundle exec lol_dba db:find_indexes
+#       - run:
+#           name: run rails best practices
+#           command: bundle exec rails_best_practices .
+#       - run:
+#           name: run brakeman
+#           command: bundle exec brakeman -q
+#       - run:
+#           name: run bundle audit
+#           command: bundle exec bundle-audit check --update --ignore CVE-2015-9284
+#       - run:
+#           name: run tests
+#           command: |
+#             mkdir /tmp/test-results
+#             TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+#             bundle exec rspec --format progress \
+#                               --out /tmp/test-results/rspec.xml \
+#                               --format progress \
+#                               $TEST_FILES
+#       - run:
+#           name: Stash Coverage Results
+#           command: |
+#             mkdir coverage_results
+#       - run:
+#           name: Merge and copy coverage data
+#           command: |-
+#             RUN_COVERAGE=true bundle exec spec/support/simplecov_merger.rb
+#       - store_test_results:
+#           path: /tmp/test-results
+#       - store_artifacts:
+#           path: /home/circleci/projDirec/projName/coverage_results
+
+
+
+# version: 2
 
 # defaults: &defaults
 #   working_directory: ~/repo
@@ -87,10 +87,6 @@ jobs:
 #     run:
 #       name: Installing gems
 #       command: bundle install --path vendor/bundle
-
-#   greeting: &greeting
-    
-
 
 #   restore_bundle_cache: &restore_bundle_cache
 #     restore_cache:
@@ -158,7 +154,6 @@ jobs:
 #       - <<: *restore_bundle_cache
 #       - <<: *bundle_install
 #       - <<: *save_bundle_cache
-#       # - <<: *greeting
 
 #   run_specs:
 #     <<: *defaults
@@ -192,6 +187,130 @@ jobs:
 #       - <<: *merge_and_check_coverage
 
 # workflows:
+#   version: 2
+#   build:
+#     jobs:
+#       - lintering
+#       - run_specs:
+#           requires:
+#             - lintering
+      # - check_coverage:
+      #     requires:
+      #       - run_specs
+
+# version: 2.1 asd
+
+# orbs:
+#   save_and_restore_cache: kolyanjy/save_and_restore_cache@0.1.3
+
+# executors:
+#   default:
+#     working_directory: ~/repo
+#     description: The official CircleCI Ruby Docker image
+#     docker:
+#       - image: circleci/ruby:2.6.1-node-browsers
+#         environment:
+#           RAILS_ENV: test
+#       - image: circleci/postgres:11.3-alpine
+#         environment:
+#           POSTGRES_USER: kolya
+#           POSTGRES_PASSWORD: 'qwerty123'
+#           POSTGRES_DB: bookstore_test
+#           DATABASE_URL: "postgres://ubuntu@localhost:5432/bookstore_test"
+
+# commands:
+#   rubocop:
+#     steps:
+#       - run: bundle exec rubocop
+
+
+# references:
+#   bundle_install: &bundle_install
+#     run:
+#       name: Installing gems
+#       command: bundle install --path vendor/bundle
+  
+#   restore_bundle_cache: &restore_bundle_cache
+#     restore_cache:
+#       keys:
+#         - repo-bundle-v2-{{ checksum "Gemfile.lock" }}
+
+#   save_bundle_cache: &save_bundle_cache
+#     save_cache:
+#       key: repo-bundle-v2-{{ checksum "Gemfile.lock" }}
+
+#       paths:
+#         - vendor/bundle
+
+#   creating_database: &creating_database
+#     run:
+#       name: Creating database
+#       command: bundle exec rake db:create
+
+#   loading_schema: &loading_schema
+#     run:
+#       name: Loading schema
+#       command: RAILS_ENV=test bundle exec rake db:schema:load --trace
+
+#   running_specs: &running_specs
+#     run:
+#       name: Run rspec in parallel
+#       command: |
+#         bundle exec rspec --format progress \
+#                           --format RspecJunitFormatter \
+#                           --out test_results/rspec/results.xml \
+#                           $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+#   stash_coverage_results: &stash_coverage_results
+#     run:
+#       name: Stash Coverage Results
+#       command: |
+#         mkdir coverage_results
+#         cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
+#         ls -lah coverage
+#         cat coverage/.resultset.json
+#         cat coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
+
+#   save_repo_cache: &save_repo_cache
+#     save_cache:
+#       key: v2-repo-{{ .Environment.CIRCLE_SHA1 }}
+#       paths:
+#         - ~/repo
+
+#   restore_repo_cache: &restore_repo_cache
+#     restore_cache:
+#       key: v2-repo-{{ .Environment.CIRCLE_SHA1 }}
+
+# jobs:
+#   lintering:
+#     executor: default
+#     steps:
+#       - checkout
+#       - save_and_restore_cache/take-cache:
+#           key: 'repo-bundle-v2'
+#       - run: mkdir -p circle_artifacts
+#       - rubocop
+#   run_specs:
+#     executor: default
+
+#     parallelism: 2
+#     steps:
+#       - save_and_restore_cache/take-cache:
+#           key: 'repo-bundle-v2'
+#       - <<: *creating_database
+#       - <<: *loading_schema
+#       - <<: *running_specs
+#       - <<: *stash_coverage_results
+#       - persist_to_workspace:
+#           root: .
+#           paths:
+#             - coverage_results
+#       - store_test_results:
+#           path: test_results
+#       - store_artifacts:
+#           path: circle_artifacts
+
+# workflows:
 #   version: 2.1
 #   build:
 #     jobs:
@@ -199,6 +318,65 @@ jobs:
 #       - run_specs:
 #           requires:
 #             - lintering
-#       # - check_coverage:
-#       #     requires:
-#       #       - run_specs
+
+#------------------------------------------------------------------------
+
+version: 2.1
+orbs:
+  say_hello: kolyanjy/say_hello@0.1.1
+  save_and_restore_cache: kolyanjy/save_and_restore_cache@0.1.2
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      # specify the version you desire here
+      - image: circleci/ruby:2.6.1-node-browsers
+        environment:
+          RAILS_ENV: test
+      - image: circleci/postgres:11.3-alpine
+        environment:
+          POSTGRES_USER: kolya
+          POSTGRES_PASSWORD: 'qwerty123'
+          POSTGRES_DB: bookstore_test
+          DATABASE_URL: "postgres://ubuntu@localhost:5432/bookstore_test"
+
+    steps:
+      - checkout
+      - say_hello/say_hello:
+          to: 'lolkek'
+      - save_and_restore_cache/take-cache:
+          key: 'v1-pidr'
+      - run:
+          name: Set up DB
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:migrate
+      - run:
+          name: run rubopcop
+          command: bundle exec rubocop
+      - run: 
+          name: lolkek
+          command: bundle exec lol_dba db:find_indexes
+      - run:
+          name: run rails best practices
+          command: bundle exec rails_best_practices .
+      - run:
+          name: run brakeman
+          command: bundle exec brakeman -q
+      - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            bundle exec rspec --format progress \
+                              --out /tmp/test-results/rspec.xml \
+                              --format progress \
+                              $TEST_FILES
+      - run:
+          name: Stash Coverage Results
+          command: |
+            mkdir coverage_results
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /home/circleci/projDirec/projName/coverage_results
