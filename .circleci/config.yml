@@ -423,6 +423,24 @@ commands:
                               --format progress \
                               $TEST_FILES
 
+  stash_coverage_results:
+    steps:
+      - run:
+          name: Stash Coverage Results
+          command: |
+            mkdir coverage_results
+            cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
+            ls -lah coverage
+            cat coverage/.resultset.json
+            cat coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
+
+  merge_and_check_coverage:
+    steps:
+      - run:
+          name: Merge and check coverage
+          command: |
+            bundle exec rake simplecov:report_coverage COVERAGE_CHECK=$LAUNCH_COVERAGE_CHECK MIN_COVERAGE=$MIN_COVERAGE_PERCENTS
+
   defaults:
     steps:
       - checkout
@@ -451,6 +469,14 @@ jobs:
     steps:
       - defaults
       - run_specs
+      - stash_coverage_results
+
+  check_coverage:
+    executor: default
+    steps:
+      - defaults
+      - merge_and_check_coverage
+  
 
 workflows:
   version: 2.1
@@ -460,9 +486,6 @@ workflows:
       - run_specs:
           requires:
             - lintering
-  build-1:
-    jobs:
-      - lintering
-      - run_specs:
+      - check_coverage:
           requires:
-            - lintering
+            - run_specs
