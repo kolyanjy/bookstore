@@ -1,7 +1,9 @@
-namespace :simplecov do
-  desc 'merge_results'
-  task report_coverage: :environment do
-    require Rails.root.join('spec', 'support', 'simplecov_merger')
-    SimpleCovHelper.report_coverage
+if Rails.env.test?
+  require_relative '../../spec/support/helpers/simplecov_helper'
+  namespace :simplecov do
+    desc 'merge_results'
+    task report_coverage: :environment do
+      SimpleCovHelper.report_coverage
+    end
   end
 end

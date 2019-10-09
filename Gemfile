@@ -63,6 +63,7 @@ group :development, :test do
   gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
+  gem 'simplecov'
 end
 
 group :development do
@@ -83,7 +84,6 @@ group :test do
   gem 'rspec_junit_formatter'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
-  gem 'simplecov'
   gem 'webdrivers'
 end
 
