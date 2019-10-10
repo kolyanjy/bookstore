@@ -447,8 +447,6 @@ commands:
           name: Stash Coverage Results
           command: |
             cp -R coverage/.resultset.json coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
-      - codecov/upload:
-          file: coverage_results/.resultset-${CIRCLE_NODE_INDEX}.json
       - persist_to_workspace:
           root: .
           paths:
@@ -518,9 +516,9 @@ workflows:
       - run_specs:
           requires:
             - lintering
-      # - check_coverage:
-      #     requires:
-      #       - run_specs
+      - check_coverage:
+          requires:
+            - run_specs
 
 # defaults: &defaults
 #   working_directory: ~/repo
