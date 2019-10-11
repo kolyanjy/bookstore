@@ -384,7 +384,7 @@
 version: 2.1
 
 orbs:
-  codecov: codecov/codecov@1.0.5
+  heroku: circleci/heroku@0.0.8
 
 caches: 
   - &bundle_cache v1-repo-{{ checksum "Gemfile.lock"  }}
@@ -452,11 +452,6 @@ commands:
           paths:
             - coverage_results
 
-        
-  # stash_coverage_results:
-  #   steps:
-
-
   merge_and_check_coverage:
     steps:
       - attach_workspace:
@@ -506,7 +501,15 @@ jobs:
     steps:
       - defaults
       - merge_and_check_coverage
-  
+
+  deploy_heroku:
+    executor: heroku/default 
+
+    steps:
+      - checkout
+      - heroku/install
+      - heroku/deploy-via-git: 
+          only-branch: master
 
 workflows:
   version: 2.1
@@ -517,6 +520,9 @@ workflows:
           requires:
             - lintering
       - check_coverage:
+          requires:
+            - run_specs
+      - deploy_heroku:
           requires:
             - run_specs
 
