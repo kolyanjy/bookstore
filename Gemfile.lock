@@ -133,7 +133,7 @@ GEM
       sort_alphabetical (~> 1.0)
     crass (1.0.4)
     database_cleaner (1.7.0)
-    devise (4.7.0)
+    devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
@@ -225,6 +225,10 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
+    lol_dba (2.1.8)
+      actionpack (>= 3.0, < 6.0)
+      activerecord (>= 3.0, < 6.0)
+      railties (>= 3.0, < 6.0)
     loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -378,6 +382,8 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.2)
+    rspec_junit_formatter (0.4.1)
+      rspec-core (>= 2, < 4, != 2.12.0)
     rubocop (0.74.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -514,7 +520,7 @@ DEPENDENCIES
   client_side_validations-simple_form
   country_select
   database_cleaner
-  devise
+  devise (~> 4.7.1)
   draper
   factory_bot_rails
   faker (~> 1.9)
@@ -523,6 +529,7 @@ DEPENDENCIES
   interactor
   letter_opener
   listen (>= 3.0.5, < 3.2)
+  lol_dba
   mini_magick
   omniauth-facebook
   pagy
@@ -535,6 +542,7 @@ DEPENDENCIES
   rails_best_practices
   rspec (~> 3.8)
   rspec-rails (~> 3.8)
+  rspec_junit_formatter
   rubocop
   rubocop-performance
   rubocop-rails

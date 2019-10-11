@@ -9,6 +9,7 @@ AllCops:
     - 'bin/*'
     - 'app/channels/**/*'
     - 'vendor/**/*'
+    - 'spec/support/simplecov_merger.rb'
 
 Style/ClassAndModuleChildren:
   EnforcedStyle: nested
