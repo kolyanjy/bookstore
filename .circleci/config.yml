@@ -494,7 +494,6 @@ jobs:
     steps:
       - defaults
       - run_specs
-      # - stash_coverage_results
 
   check_coverage:
     executor: default
@@ -502,7 +501,7 @@ jobs:
       - defaults
       - merge_and_check_coverage
 
-  deploy_heroku:
+  deploy_prod_heroku:
     executor: heroku/default 
 
     steps:
@@ -510,6 +509,8 @@ jobs:
       - heroku/install
       - heroku/deploy-via-git: 
           only-branch: master
+          app-name: ${HEROKU_APP_NAME_PROD}
+          api-key: ${HEROKU_API_KEY_PROD}
 
 workflows:
   version: 2.1
@@ -522,7 +523,7 @@ workflows:
       - check_coverage:
           requires:
             - run_specs
-      - deploy_heroku:
+      - deploy_prod_heroku:
           requires:
             - run_specs
 
