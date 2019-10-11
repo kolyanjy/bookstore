@@ -16,5 +16,10 @@ production:
   database: bookstore_production
 
 test:
-  <<: *default
-  database: bookstore_test
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  username: lol
+  password: kek
+  port: 5432
+  pool: 5
