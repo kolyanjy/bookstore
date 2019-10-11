@@ -394,7 +394,7 @@ executors:
     working_directory: ~/repo
     description: The official CircleCI Ruby Docker image
     docker:
-      - image: circleci/ruby:2.6.1-node-browsers
+      - image: circleci/ruby:2.6.3-buster-node-browsers-legacy
         environment:
           RAILS_ENV: test
       - image: circleci/postgres:11.3-alpine
@@ -407,6 +407,19 @@ executors:
 commands:
   run_linters:
     steps:
+      - restore_cache:
+          keys:
+            - libvips-cache-{{ .Branch }}
+      - run:
+          name: Install libvips
+          shell: /bin/sh
+          command: |
+            sudo apt-get update
+            sudo apt-get install libvips libvips-dev
+      - save_cache:
+          key: libvips-cache-{{ .Branch }}
+          paths:
+            - ../../usr/bin/vips
       - run: bundle exec rubocop
       - run: bundle exec brakeman -q
       - run: bundle exec lol_dba db:find_indexes
