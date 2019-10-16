@@ -430,7 +430,7 @@ commands:
             - RACK_ENV: test
           command: |
             mkdir -p /tmp/rspec
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=filesize)"
             bundle exec rspec --profile 10 \
                               --format RspecJunitFormatter \
                               --out /tmp/rspec/rspec.xml \

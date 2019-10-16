@@ -30,7 +30,7 @@ gem 'sass-rails', '~> 5.0'
 
 # for images
 gem 'carrierwave'
-gem 'mini_magick'
+gem 'mini_magick', '~> 4.9.5  '
 
 # pagination
 gem 'pagy'
