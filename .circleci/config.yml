@@ -419,10 +419,6 @@ commands:
 
   run_specs:
     steps:
-      - save_cache:
-          key: v2-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/repo
       - run: 
           name: run specs
           environment:
@@ -430,17 +426,14 @@ commands:
             - RACK_ENV: test
           command: |
             mkdir -p /tmp/rspec
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=filesize)"
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
             bundle exec rspec --profile 10 \
-                              --format RspecJunitFormatter \
-                              --out /tmp/rspec/rspec.xml \
                               --format progress \
                               --profile \
                               --fail-fast \
                               -- \
                               $TEST_FILES
-      - store_test_results:
-          path: /tmp/rspec
+
       - attach_workspace:
           at: .      
       - run:
@@ -459,8 +452,6 @@ commands:
     steps:
       - attach_workspace:
           at: .
-      - restore_cache:
-          key: v2-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
           name: Merge and check coverage
           command: |
