@@ -1,7 +1,7 @@
 require 'simplecov'
 require 'json'
 class SimpleCovHelper
-  def self.report_coverage(base_dir: './coverage_results')
+  def self.report_coverage(base_dir: './coverage_results') # rubocop:disable Metrics/MethodLength
     SimpleCov.start 'rails' do
       skip_check_coverage = ENV.fetch('SKIP_COVERAGE_CHECK') { false }
       add_filter '/spec/'
@@ -22,7 +22,7 @@ class SimpleCovHelper
   end
 
   def all_results
-    Dir["#{base_dir}/resultset*.json"]
+    Dir["#{base_dir}/.resultset*.json"]
   end
 
   def merge_results
@@ -33,24 +33,4 @@ class SimpleCovHelper
       SimpleCov::ResultMerger.store_result(result)
     end
   end
-#   def merge_results
-#     # results = all_results.map do |file|
-#     #   SimpleCov::Result.from_hash(JSON.parse(File.read(file)))
-#     # end
-#     # binding.pry
-#     # SimpleCov::ResultMerger.merge_results(*results).tap do |result|
-#     #   SimpleCov::ResultMerger.store_result(result)
-#     # end
-#     # merged_result = SimpleCov::ResultMerger.merge_results(*results)
-#     # merged_result.format!
-#       results = []
-#     all_results = Dir["#{base_dir}/resultset*.json"]
-#     all_results.each do |result_file_name|
-#       Rails.logger.info "Processing #{result_file_name}"
-#       results << SimpleCov::Result.from_hash(JSON.parse(File.read(result_file_name)))
-#       binding.pry
-#     end
-#     merged_result = SimpleCov::ResultMerger.merge_results(*results)
-#     merged_result.format!
-#   end
 end

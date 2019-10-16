@@ -451,6 +451,9 @@ commands:
           root: .
           paths:
             - coverage_results
+      - store_artifacts:
+          path: ~/repo/coverage
+          destination: coverage
 
   merge_and_check_coverage:
     steps:
