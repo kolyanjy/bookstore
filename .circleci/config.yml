@@ -385,6 +385,7 @@ version: 2.1
 
 orbs:
   heroku: circleci/heroku@0.0.8
+  slack: circleci/slack@3.4.0
 
 caches: 
   - &bundle_cache v1-repo-{{ checksum "Gemfile.lock"  }}
@@ -459,6 +460,8 @@ commands:
       - store_artifacts:
           path: ~/repo/coverage
           destination: coverage
+      - slack/status:
+          only_for_branches: check_ci
 
   defaults:
     steps:
@@ -517,9 +520,9 @@ workflows:
       - check_coverage:
           requires:
             - run_specs
-      - deploy_prod_heroku:
-          requires:
-            - run_specs
+      # - deploy_prod_heroku:
+      #     requires:
+      #       - run_specs
 
 # defaults: &defaults
 #   working_directory: ~/repo
