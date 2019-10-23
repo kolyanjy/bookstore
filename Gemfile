@@ -56,7 +56,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker', '~> 1.9'
   gem 'lol_dba'
-  gem 'pry-byebug'
+  gem 'pry'
   gem 'rails_best_practices'
   gem 'rspec-rails', '~> 3.8'
   gem 'rubocop'

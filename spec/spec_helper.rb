@@ -1,4 +1,3 @@
-require 'rails_helper'
 require 'simplecov'
 
 SimpleCov.start do
@@ -7,6 +6,7 @@ SimpleCov.start do
   add_filter '/vendor/'
   add_filter '/app/admin/'
 end
+require 'rails_helper'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
