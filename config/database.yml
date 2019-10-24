@@ -9,6 +9,7 @@ default: &default
 
 development:
   <<: *default
+  host: localhost
   database: bookstore_develop
 
 production:
