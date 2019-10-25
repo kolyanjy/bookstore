@@ -9,6 +9,7 @@ require 'capybara/rspec'
 require 'shoulda/matchers'
 require 'webdrivers/chromedriver'
 require 'rack_session_access/capybara'
+require 'site_prism'
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
@@ -20,6 +21,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
+  config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 

@@ -126,7 +126,6 @@ GEM
       countries (~> 3.0)
       sort_alphabetical (~> 1.0)
     crass (1.0.5)
-    database_cleaner (1.7.0)
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -403,6 +402,11 @@ GEM
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
+    site_prism (3.4.1)
+      addressable (~> 2.5)
+      capybara (~> 3.3)
+      site_prism-all_there (~> 0.3)
+    site_prism-all_there (0.3)
     sixarm_ruby_unaccent (1.2.0)
     sort_alphabetical (1.1.0)
       unicode_utils (>= 1.2.2)
@@ -468,7 +472,6 @@ DEPENDENCIES
   client_side_validations
   client_side_validations-simple_form
   country_select
-  database_cleaner
   devise (~> 4.7.1)
   draper
   factory_bot_rails
@@ -502,6 +505,7 @@ DEPENDENCIES
   shoulda-matchers
   simple_form
   simplecov
+  site_prism
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks

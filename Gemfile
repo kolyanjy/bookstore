@@ -64,6 +64,7 @@ group :development, :test do
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
   gem 'simplecov'
+  gem 'site_prism'
 end
 
 group :development do
@@ -77,7 +78,6 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
-  gem 'database_cleaner'
   gem 'rack_session_access'
   gem 'rails-controller-testing'
   gem 'rspec', '~> 3.8'

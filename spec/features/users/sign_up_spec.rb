@@ -2,7 +2,19 @@ RSpec.describe 'Sign up', type: :feature do
   let(:user_attrs) { attributes_for(:user) }
   let(:invalid_email) { '0@gmail.com' }
   let(:invalid_password) { '123' }
+  # let(:sign_up_page) { SignUpPage.new }
 
+
+  # before do
+  #   sign_up_page.load
+  # end
+  
+  # scenario 'succsessful sign up' do
+  #   expect(sign_up_page).to have_user_email_field
+  #   sign_up_page.sign_up(user_attrs[:email], user_attrs[:password])
+  #   expect(User.count).to eq(1)
+  # end
+  
   before { visit root_path }
 
   it 'User try to sign up with valid data' do
@@ -33,4 +45,6 @@ RSpec.describe 'Sign up', type: :feature do
     expect(page).not_to have_content I18n.t('devise.registration.signed_up')
     expect(User.count).to eq(0)
   end
+  
+
 end
