@@ -2,14 +2,13 @@ default: &default
   adapter: postgresql
   encoding: unicode
   host: db
-  username: <%= Rails.application.credentials[:db][:username] %>
+  username: <%= Rails.application.credentials[:db][:username] || rails_dev %>
   password: <%= Rails.application.credentials[:db][:password] %>
   port: 5432
   pool: 5
 
 development:
   <<: *default
-  host: localhost
   database: bookstore_develop
 
 production:
@@ -18,6 +17,6 @@ production:
 
 test:
   <<: *default
-  host: localhost
+  host: <%= ENV['CIRCLECI'] ? 'localhost' : 'db' %>
   username: rails_dev
   database: bookstore_test

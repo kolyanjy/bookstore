@@ -8,16 +8,18 @@ services:
     image: postgres:11
     ports:
       - 5432:5432
+    expose:
+      - 5432
     environment:
-      POSTGRES_USER: 'kolya'
-      POSTGRES_PASSWORD: 'qwerty123'
-      # POSTGRES_DB: bookstore_develop
+      POSTGRES_USER: kolya
+      POSTGRES_PASSWORD: qwerty123
+      POSTGRES_DB: bookstore_develop
     volumes:
       - postgres:/var/lib/postgresql/data 
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
 
-  server_app: &server_app
+  server_app:
     build: . 
     command: bundle exec rails server -b 0.0.0.0 
     entrypoint: "./docker-entrypoint.sh" 
