@@ -1,0 +1,56 @@
+version: '3.1'
+
+volumes:
+  postgres:
+  assets:
+
+services:
+  db:
+    image: postgres:11
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    environment:
+      POSTGRES_USER: kolya
+      POSTGRES_PASSWORD: qwerty123
+      POSTGRES_DB: bookstore_develop
+    volumes:
+      - postgres:/var/lib/postgresql/data 
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+
+  server_app:
+    build: . 
+    command: bundle exec rails server -b 0.0.0.0 
+    entrypoint: "./docker-entrypoint.sh" 
+    volumes:
+      - .:/Users/kolyanjy/projects/bookstore 
+      - /Users/kolyanjy/projects/bookstore/vendor/bundle 
+    tty: true
+    stdin_open: true
+    restart: on-failure 
+    environment:
+      RAILS_ENV: development
+      SECRET_KEY_BASE: STUB
+      DEVISE_SECRET_KEY: STUB
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+
+  web_server:
+    build: ./deploy/configs/nginx
+    volumes:
+      - assets:/home/www/spreedemo/public/assets
+    environment:
+      CUSTOM_APP_VHOST: server_app
+      STATIC_PATH: /home/www/spreedemo/public
+    ports:
+      - 80:8080
+    depends_on:
+      - server_app
+    healthcheck:
+      test: ["CMD-SHELL", "service nginx status || exit 1"]
