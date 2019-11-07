@@ -11,6 +11,10 @@ development:
   <<: *default
   database: bookstore_develop
 
+staging:
+  <<: *default
+  database: bookstore_staging
+
 production:
   <<: *default
   database: bookstore_production
