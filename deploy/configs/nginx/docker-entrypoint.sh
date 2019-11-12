@@ -1,3 +1,4 @@
+#!/bin/bash
 set -e
 
 APP_NAME=${CUSTOM_APP_NAME:="server_app"} # имя контейнера с запущенным приложением Spree

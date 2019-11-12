@@ -31,7 +31,7 @@ services:
     stdin_open: true
     restart: on-failure 
     environment:
-      RAILS_ENV: development
+      RAILS_ENV: staging
       SECRET_KEY_BASE: STUB
       DEVISE_SECRET_KEY: STUB
     depends_on:
@@ -44,10 +44,10 @@ services:
   web_server:
     build: ./deploy/configs/nginx
     volumes:
-      - assets:/home/www/spreedemo/public/assets
+      - assets:/home/www/bookstore/public/assets
     environment:
       CUSTOM_APP_VHOST: server_app
-      STATIC_PATH: /home/www/spreedemo/public
+      STATIC_PATH: /home/www/bookstore/public
     ports:
       - 80:8080
     depends_on:

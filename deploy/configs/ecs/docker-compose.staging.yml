@@ -7,9 +7,9 @@ services:
   web_server:
     image: 046546929238.dkr.ecr.us-east-1.amazonaws.com/bookstore/web_server:staging
     volumes:
-      - assets:/home/www/spreedemo/public/assets
+      - assets:/home/www/bookstore/public/assets
     environment:
-      STATIC_PATH: /home/www/spreedemo/public
+      STATIC_PATH: /home/www/bookstore/public
     ports:
       - 80:8080
     links:
@@ -31,6 +31,7 @@ services:
       - 3000
     environment:
       RAILS_ENV: staging
+      RAILS_LOG_TO_STDOUT: 1
       RAILS_MASTER_KEY: 464b85ba33f01424e77b37e07dc900a6
       DB_HOST: db
       DB_PORT: 5432
@@ -52,8 +53,8 @@ services:
     image: postgres:10
     environment:
       POSTGRES_DB: bookstore_staging
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: kolya
+      POSTGRES_PASSWORD: qwerty123
     ports:
       - 5432
     volumes:
