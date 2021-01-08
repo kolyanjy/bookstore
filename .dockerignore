@@ -7,7 +7,6 @@
 !/tmp/cache/.keep
 /vendor/bundle
 /public/assets
-/config/master.key
 /config/credentials.local.yml
 /.bundle
 /venv
